@@ -21,6 +21,16 @@ public class Price implements Serializable{
 		this._3D=_3D;
 	}
 	
+	public Price() {
+		this.student = 0;
+		this.adult = 0;
+		this.senior = 0;
+		this.weekend = 0;
+		this.after6 = 0;
+		this._3D = 0;
+		
+	}
+	
 	public void setStudent(double price) {
 		this.student=price;
 	}
