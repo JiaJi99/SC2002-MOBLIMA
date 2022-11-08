@@ -29,7 +29,7 @@ public class MainMenuUI {
 		System.out.println("1. Login");//done
 		System.out.println("2. Register New Account");//done
 		System.out.println("3. View Movies");
-		System.out.println("4. List Top 5 movies");
+		System.out.println("4. List Top 5 movies");//done
 		System.out.println("4. Search Movies");
 		System.out.println("5. Book ticket");
 		System.out.println("6. Exit");//done
@@ -39,7 +39,7 @@ public class MainMenuUI {
 		System.out.println("==============================");
 		System.out.println("1. Log Out");//done
 		System.out.println("2. Account Setting");//done
-		System.out.println("3. List Top Five Movies");
+		System.out.println("3. List Top Five Movies");//done
 		System.out.println("4. Update/Remove/Create Movie");
 		System.out.println("4. Update/Remove/Create Showtime");
 		System.out.println("5. ??");// left if need later
@@ -52,7 +52,7 @@ public class MainMenuUI {
 		System.out.println("1. Log Out");//done
 		System.out.println("2. Account Setting");//done
 		System.out.println("3. View History");
-		System.out.println("4. List Top 5 Movies");
+		System.out.println("4. List Top 5 Movies");//done
 		System.out.println("4. Add Rating and Review");
 		System.out.println("5. Book Movie Ticket");
 		System.out.println("6. Exit");//done
@@ -81,8 +81,8 @@ public class MainMenuUI {
 					break;
 			case 3: //to be implemented
 					 break;
-			case 4: //to be implemented
-                    listTop5(accountMgr);
+			case 4: ViewMovieTop5UI tempNew = new ViewMovieTop5UI();
+                    tempNew.listTop5(accountMgr);
 					break;
 			case 5:	//to be implemented
 					break;
@@ -111,7 +111,8 @@ public class MainMenuUI {
 				break;
 		case 3: //to be implemented
 				 break;
-		case 4: //to be implemented
+		case 4: ViewMovieTop5UI tempNew = new ViewMovieTop5UI();
+                tempNew.listTop5(accountMgr);
 				break;
 		case 5:	//to be implemented
 				break;
@@ -139,7 +140,8 @@ public class MainMenuUI {
 				break;
 		case 2: updateAccountSetting(accountMgr);
 				break;
-		case 3: //to be implemented
+		case 3: ViewMovieTop5UI tempNew = new ViewMovieTop5UI();
+                 tempNew.listTop5(accountMgr);
 				 break;
 		case 4: //to be implemented
 				break;
