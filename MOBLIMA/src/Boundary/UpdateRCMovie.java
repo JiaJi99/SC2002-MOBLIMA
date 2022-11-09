@@ -2,6 +2,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import moblima.Manager.MoviesCtrl;
@@ -12,7 +13,7 @@ import moblima.Model.MovieType;
 public class UpdateRCMovie {
     private static MoviesCtrl moviesCtrl = new MoviesCtrl();
     public static Scanner sc = new Scanner(System.in);
-    public void main(){
+    public void updateMovieFunction(){
         boolean returnMainMenu = false;
         while (returnMainMenu!=true){
             System.out.print("\n\nCreate/Update/Remove Movie: \n\n" +
@@ -110,7 +111,7 @@ public class UpdateRCMovie {
                 "6. Movie Release date\n" +
                 "7. Last Day of Showing \n" +
                 "8. Cast Names List \n\n" +
-                "9. Language"+
+                "9. ID"+
                 "10. Movie Age Category"
 
                 );
@@ -181,12 +182,56 @@ public class UpdateRCMovie {
                             }
                             moviesCtrl.updateMovie(MoviesCtrl.MOVIE_END_DATE,movieId,newEDate);
                             break;
-                    case 8: //cast names
+                    case 8: ArrayList<String> castNew = new ArrayList<String>();
+                            System.out.println("How many new cast members to be added ");
+                            int i = getIntFromUser();
+                            if (i < 2) {
+                                System.out.println("Less than minimum threshold of cast required, terminating update, going back");
+                                return;
+                            }
+                            else {
+                                for (int k =0;k<i;k++){
+                                System.out.println("Enter new cast member name :");
+                                    String tempName = getStringFromUser();
+                                    castNew.add(tempName);
+
+                                }
+                                moviesCtrl.updateMovie(MoviesCtrl.CAST,movieId,castNew);
+
+                            }
                             break;
-                    case 9: //lang
+                    case 9: System.out.println("Enter new id for movies :");
+                            int newMovieID ;
+                            newMovieID = sc.nextInt();
+                            if (newMovieID<0){
+                                System.out.println("Movie ID cannot be negative, terminating update, going back");
+                                return;
+                            }
+
+                            moviesCtrl.updateMovie(MoviesCtrl.ID,movieId,newMovieID);
+
                             break;
                     case 10: //movie age cat
+                            System.out.println("Enter movie age category (  2 .PG /3.  NC /4 . M /5.  R/ 6. E) :");
+                            System.out.println("choose option");
+                            int option2temp =-1;
+                            option2temp = sc.nextInt();
+                            MovieAgeCategory ageCat2;
                             break;
+                            switch(option2temp){
+                                case 2 : ageCat2 = MovieAgeCategory.PG; break;
+                                case 3 : ageCat2 = MovieAgeCategory.NC; break;
+                                case 4 : ageCat2 = MovieAgeCategory.M; break;
+                                case 5 : ageCat2 = MovieAgeCategory.R; break;
+                                case 6 : ageCat2 = MovieAgeCategory.E; break;
+                                default:
+                                System.out.println("Wrong input, terminating update, going back");
+                                return;
+                                
+                            }
+                            moviesCtrl.updateMovie(MoviesCtrl.AGECATEGORY,movieId,ageCat2);
+                            break;
+            
                     
                     default :
                     System.out.println("Wrong input, terminating update, back to main menu");
@@ -233,7 +278,7 @@ public class UpdateRCMovie {
 
                 System.out.println("Enter movie synopsis: ");
                 String synopsis = getStringFromUser();
-                System.out.println("Enter movie rating (  2 .PG /3.  NC /4 . M /5.  R/ 6. E) :");
+                System.out.println("Enter movie age category (  2 .PG /3.  NC /4 . M /5.  R/ 6. E) :");
                 System.out.println("choose option");
                  option = sc.nextInt();
                 MovieAgeCategory ageCat;
@@ -356,3 +401,16 @@ public class UpdateRCMovie {
     }
 
 }
+// //lang
+// Language lang ;
+// System.out.println("Enter updated movie language 1 : English \n 2 Chinese \n 3: Japanese: \n Enter option");
+// int tempVar2;
+// tempVar2 = sc.nextInt();
+// switch (tempVar2) {
+//     case 1:lang = Language.ENGLISH; break;
+//     case 2:lang = Language.CHINESE; break;
+//     case 3 :lang = Language.JAPANESE;    break;
+//     default : System.out.println("wrong input, terminating update, going back");return ;
+// }
+
+// moviesCtrl.updateMovie(MoviesCtrl.)
