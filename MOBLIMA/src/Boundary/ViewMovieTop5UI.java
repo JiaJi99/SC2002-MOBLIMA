@@ -23,7 +23,7 @@ public class ViewMovieTop5UI {
         for (int i =0;i<movieList.size()&&i<5;i++ ){
             System.out.println("Title: " + movieList.get(i).getTitle());
             System.out.println("Rating: " + movieList.get(i).avgRating());
-            if (accountMgr.getAdminLoggedIn()){
+            if (accountMgr.getAdminLoggedIn()==true){
                 TransactionsController transCtrl = new TransactionsController();
                 ArrayList<Transaction> transList = transCtrl.read();
                 int sales = 0;
