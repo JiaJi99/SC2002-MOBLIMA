@@ -20,16 +20,20 @@ public class SeatPlan implements Serializable {
     }
     
     public void printFloorPlan( ) {
-		System.out.print("\nX means occupied, O means not occupied.\n");
+		System.out.print("Seating Plan :: Choose unoccpuied seat ");
+		System.out.print("---------------exit------------- ");
+
 		for (int i = 0; i < row; i++) {
 			System.out.print("Seats " + (i * column) + " - " + ((i + 1) * column - 1) + ":\t");
 			for (int j = 0; j < column; j++) {
 				if(floorPlanSeats[i][j].isTaken()) System.out.print("X ");
-				else System.out.print("0 ");
+				else System.out.print("~");
 				if(j == column/2 - 1) System.out.print("\t");
 			}
-			System.out.print("\n");
+			System.out.println();
 		}
+		System.out.print("---------------SCREEN------------- ");
+
 	}
     
     public int getRow() {
