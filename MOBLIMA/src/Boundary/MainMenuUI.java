@@ -49,7 +49,7 @@ public class MainMenuUI {
 		System.out.println("1. Log Out");//done
 		System.out.println("2. Account Setting");//done
 		System.out.println("3. List Top Five Movies");//done
-		System.out.println("4. Update/Remove/Create Movie");
+		System.out.println("4. Update/Remove/Create Movie");//done
 		System.out.println("5. Update/Remove/Create Showtime");
 		System.out.println("6. Exit");//done
 		System.out.println("==============================");	
@@ -158,7 +158,7 @@ public class MainMenuUI {
 		case 3: ViewMovieTop5UI tempNew = new ViewMovieTop5UI();
                  tempNew.listTop5(accountMgr);
 				 break;
-		case 4: //to be implemented
+		case 4: updateRCMovie();
 				break;
 		case 5:	//to be implemented
 				break;
@@ -246,6 +246,12 @@ public class MainMenuUI {
 
         sc.close();
     }
+
+    public void updateRCMovie(){
+        UpdateRCMovie newUpdate  = new UpdateRCMovie();
+        newUpdate.main();
+    }
+
 
     public void addReview(AccountManager accountMgr){
         Scanner sc = new Scanner(System.in);
