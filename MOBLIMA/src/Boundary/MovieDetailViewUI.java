@@ -101,16 +101,10 @@ public class MovieDetailViewUI {
 	public void displayAttributesChoices_MovieDetail()
 	{
 		System.out.println("==========================================");
-		System.out.println("|| 1.  Search Movie via Title Name		||");
-		System.out.println("|| 2.  Search Movie via Type			||");
-		System.out.println("|| 3.  Search Movie via Age Category	||");
-		System.out.println("|| 4.  Search Movie via Synopsis		||");
-		System.out.println("|| 5.  Search Movie via DIRECTOR 		||");
-		System.out.println("|| 6.  Search Movie via DURATION		||");
-		System.out.println("|| 7.  Search Movie via CAST			||");
-		System.out.println("|| 8.  Search Movie via REVIEWS			||");
-		System.out.println("|| 9.  Search Movie via MOVIE START DATE||");
-		System.out.println("|| 10. Search Movie via MOVIE END DATE	||");
+		System.out.println("|| 1. Search Movie via Title Name		||");
+		System.out.println("|| 2. Search Movie via Age Category	Type||");
+		System.out.println("|| 3. Search Movie via MOVIE START DATE	||");
+		System.out.println("|| 4. Search Movie via MOVIE END DATE	||");
 		System.out.println("==========================================");
 		
 	}
@@ -146,7 +140,7 @@ public class MovieDetailViewUI {
         while(!isMovieIDValid)
         {
         	input = sc.nextInt();
-        	if(input>0 && input<11)
+        	if(input>0 && input<5)
         	{
         		isMovieIDValid = true;
         		System.out.println("\nValue inputted Correctly...\n");
@@ -158,6 +152,11 @@ public class MovieDetailViewUI {
         		System.out.println("Re-Enter Value(in int form):");
         	}
         }
+        
+        if(input == 3) //movie start date so need to return 9 as  public final static int MOVIE_START_DATE = 9;
+        { input = 9; }
+        else if(input == 4) //movie end date so need to return 10 as public final static int MOVIE_END_DATE = 10;
+        { input = 10; }
         
         return input;
 	}
