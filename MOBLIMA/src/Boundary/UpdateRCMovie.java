@@ -181,15 +181,13 @@ public class UpdateRCMovie {
                             }
                             moviesCtrl.updateMovie(MoviesCtrl.MOVIE_END_DATE,movieId,newEDate);
                             break;
-                    case 8: 
+                    case 8: //cast names
                             break;
-                    case 9: 
+                    case 9: //lang
                             break;
-                    case 10: 
+                    case 10: //movie age cat
                             break;
-                    case 11: 
-                            break;
-
+                    
                     default :
                     System.out.println("Wrong input, terminating update, back to main menu");
                     return;
