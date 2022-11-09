@@ -1,14 +1,18 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 import moblima.Manager.MoviesCtrl;
+import moblima.Model.Language;
 import moblima.Model.MovieAgeCategory;
 import moblima.Model.MovieType;
 
 public class UpdateRCMovie {
     private static MoviesCtrl moviesCtrl = new MoviesCtrl();
-
+    public static Scanner sc = new Scanner(System.in);
     public void main(){
-        Scanner sc = new Scanner(System.in);
         boolean returnMainMenu = false;
         while (returnMainMenu!=true){
             System.out.print("\n\nCreate/Update/Remove Movie: \n\n" +
@@ -39,10 +43,10 @@ public class UpdateRCMovie {
     }
 
     public void createMovie(){
-        Scanner scTemp = new Scanner( System.in);
-        scTemp.nextLine();
+
+        sc.nextLine();
         System.out.println("Enter movie title ");
-        String title = scTemp.nextLine();
+        String title = sc.nextLine();
 
         System.out.println("Select movie types: \n" +
                                         "	1. 2D\n" +
@@ -70,10 +74,10 @@ public class UpdateRCMovie {
 
 
                 System.out.println("Enter movie synopsis: ");
-                String synopsis = InputController.getStringFromUser();
+                String synopsis = getStringFromUser();
                 System.out.println("Enter movie rating (  2 .PG /3.  NC /4 . M /5.  R/ 6. E) :");
                 System.out.println("choose option");
-                int option = sc.nextInt();
+                 option = sc.nextInt();
                 MovieAgeCategory ageCat;
                 switch(option){
                     case 2 : ageCat = PG; break;
@@ -84,13 +88,13 @@ public class UpdateRCMovie {
                     
                 }
                 System.out.println("Enter movie duration: integer in mins ");
-                int duration = InputController.getIntFromUser();
+                int duration = getIntFromUser();
         
                 System.out.println("Enter movie release date (DD/MM/YYYY) : ");
-                LocalDate movieReleaseDate = InputController.getDateFromUser();
+                LocalDate movieReleaseDate =getDateFromUser();
         
                 System.out.println("Enter movie end date (DD/MM/YYYY) : ");
-                LocalDate movieEndDate = InputController.getDateFromUser();
+                LocalDate movieEndDate = getDateFromUser();
                 
 
 
@@ -100,10 +104,9 @@ public class UpdateRCMovie {
                         return;
                     }
                 System.out.println("Enter movie director: ");
-                String director = InputController.getStringFromUser();
-
+                String director = getStringFromUser
                 System.out.println("Enter number of casts (at least 2): ");
-                int numCast = InputController.getIntFromUser();
+                int numCast = getIntFromUser();
                 if (numCast < 2) {
                     System.out.println("Invalid number of casts!\n" +
                                        "Returning to menu");
@@ -112,12 +115,23 @@ public class UpdateRCMovie {
                 ArrayList<String> cast = new ArrayList<>();
                 for (int i = 0; i < numCast; i++) {
                     System.out.println("Enter name of cast " + (i+1) + ": ");
-                    cast.add(InputController.getStringFromUser());
+                    cast.add(getStringFromUser());
                     }
-        
-                moviesCtrl.create()
+                Language lang ;
+                System.out.println("Enter movie language 1 : English \n 2 Chinese \n 3: Japanese: \n Enter option");
+                    switch (option) {
+                        case 1:lang = ENGLISH; break;
+                        case 2:lang = CHINESE; break;
+                        case 3 :lang = JAPANESE;    break;
+                        default : System.out.println("wrong input, returning");return ;
+                    }
+
+                moviesCtrl.create(title,typeInput,lang,ageCat,synopsis,director,duration,cast,movieReleaseDate,movieEndDate);
                 
 
+		if (movieCtrl.read().isEmpty())
+			return;
+		System.out.println("\n New movie created....Returning");
 
 
         }
