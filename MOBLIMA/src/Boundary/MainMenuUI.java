@@ -1,6 +1,13 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.security.auth.login.AccountExpiredException;
+
+import moblima.Manager.AccountManager;
 import moblima.Manager.DataManager;
+import moblima.Manager.TransactionsCtrl;
+import moblima.Model.Movie;
+import moblima.Model.Transaction;
 
 import java.lang.System.*;
 
@@ -30,8 +37,7 @@ public class MainMenuUI {
 		System.out.println("2. Register New Account");//done
 		System.out.println("3. View Movies");
 		System.out.println("4. List Top 5 movies");//done
-		System.out.println("4. Search Movies");
-		System.out.println("5. Book ticket");
+		System.out.println("5. Search Movies");
 		System.out.println("6. Exit");//done
 		System.out.println("==============================");	
 	}
@@ -51,13 +57,13 @@ public class MainMenuUI {
 		System.out.println("==============================");
 		System.out.println("1. Log Out");//done
 		System.out.println("2. Account Setting");//done
-		System.out.println("3. View History");
+		System.out.println("3. View History");//done
 		System.out.println("4. List Top 5 Movies");//done
-		System.out.println("4. Add Rating and Review");
-		System.out.println("5. Book Movie Ticket");
-		System.out.println("6. Exit");//done
-		System.out.println("7. View Movies");
-		System.out.println("8. Search Movies");
+		System.out.println("5. Add Rating and Review");
+		System.out.println("6. Book Movie Ticket");
+		System.out.println("7. Exit");//done
+		System.out.println("8. View Movies");
+		System.out.println("9. Search Movies");
 		System.out.println("==============================");	
 	}
 	
@@ -109,15 +115,22 @@ public class MainMenuUI {
 				break;
 		case 2: updateAccountSetting(accountMgr);
 				break;
-		case 3: //to be implemented
+		case 3: viewHistory(accountMgr);
 				 break;
 		case 4: ViewMovieTop5UI tempNew = new ViewMovieTop5UI();
                 tempNew.listTop5(accountMgr);
 				break;
-		case 5:	//to be implemented
+        case 5:	//to be implemented
+				break;                
+        case 6:	//to be implemented
+				break;		
+        case 7:	exit(accountMgr);
 				break;
-		case 6: exit(accountMgr);
+		case 8: //to be implemented
 				break;	
+        case 9: //to be implemented
+				break;	
+                
 	}
 }
 
@@ -202,6 +215,33 @@ public class MainMenuUI {
          AdminAccount temp = new AdminAccount(firstuser,helloworld,anon@gmail.com, 1234,ADMIN);
          dataMgr.addAdminAccount(temp);
          dataMgr.save();
+    }
+
+    public void viewHistory(AccountManager accountMgr){
+    
+        Account viewAccount = accountMgr.getActiveAccount;
+        TransactionsCtrl transCtrl = new TransactionsCtrl();
+        String userEmail= viewAccount.getEmail();
+        System.out.println("Booking hisotry for account :\n");
+        ArrayList<Transaction> tList = transCtrl.readByMovieGoerUsername(userEmail);
+        if (tList.size()==0){
+            System.out.println("No history found for user :"+userEmail);
+        }   
+        else {
+            for (int i =0;i<tList.size();i++){
+                Transaction tempTransaction = tList.get(i);
+                System.out.print("\n");
+                tempTransaction.toString();
+            }
+        }    
+        int exitNum =-1;
+        Scanner sc = new Scanner(System.in);
+         do {
+            System.out.println("Press 0 to exit ");
+            exitNum = sc.nextInt();
+         }
+         while (exitNum!=0);
+
     }
 
 }
