@@ -52,6 +52,8 @@ public class MainMenuUI {
 		System.out.println("4. Update/Remove/Create Movie");//done
 		System.out.println("5. Update/Remove/Create Showtime");
 		System.out.println("6. Exit");//done
+		System.out.println("7. Configure Prices");//done
+
 		System.out.println("==============================");	
 	}
 	
@@ -62,7 +64,7 @@ public class MainMenuUI {
 		System.out.println("3. View History");//done
 		System.out.println("4. List Top 5 Movies");//done
 		System.out.println("5. Add Rating and Review");//done
-		System.out.println("6. Book Movie Ticket");
+		System.out.println("6. Book Movie Ticket");//done
 		System.out.println("7. Exit");//done
 		System.out.println("8. View Movies");
 		System.out.println("9. Search Movies");
@@ -106,11 +108,11 @@ public class MainMenuUI {
 		do {
 			System.out.println("Enter your choice.");
 			choice = sc.nextInt();
-			if (choice<1 || choice>6) {
+			if (choice<1 || choice>9) {
 				System.out.println(choice + " is not a valid choice.");
 				displayChoices_Main(accountMgr);					
 			} 
-		}	while (choice<1 || choice>6);
+		}	while (choice<1 || choice>9);
 		
 		switch(choice) {
 		case 1: logout(accountMgr);
@@ -125,6 +127,7 @@ public class MainMenuUI {
         case 5:	addReview(accountMgr);
 				break;                
         case 6:	//to be implemented
+                //book buy
 				break;		
         case 7:	exit(accountMgr);
 				break;
@@ -144,11 +147,11 @@ public class MainMenuUI {
 		do {
 			System.out.println("Enter your choice.");
 			choice = sc.nextInt();
-			if (choice<1 || choice>6) {
+			if (choice<1 || choice>7) {
 				System.out.println(choice + " is not a valid choice.");
 				displayChoices_Main(accountMgr);					
 			} 
-		}	while (choice<1 || choice>6);
+		}	while (choice<1 || choice>7);
 		
 		switch(choice) {
 		case 1: logout(accountMgr);
@@ -158,12 +161,17 @@ public class MainMenuUI {
 		case 3: ViewMovieTop5UI tempNew = new ViewMovieTop5UI();
                  tempNew.listTop5(accountMgr);
 				 break;
-		case 4: updateRCMovie();
+		case 4: UpdateRCMovie tempUpdateClass = new UpdateRCMovie();
+                tempUpdateClass.updateMovieFunction();
 				break;
 		case 5:	//to be implemented
 				break;
 		case 6: exit(accountMgr);
 				break;	
+
+        case 7: ChangePrice chnagePriceTemp = new ChangePrice();
+                chnagePriceTemp.changePriceMethod();
+                break;
 	}
 	}
 	
