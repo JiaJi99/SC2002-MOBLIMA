@@ -52,7 +52,20 @@ public class PriceCtrl {
     }
     
     
-    
+	public void replaceExistingFile(String filename, Price data){
+        File tempFile = new File(filename);
+        if (tempFile.exists()) 
+            tempFile.delete();
+        try {
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename));
+            out.writeObject(data);
+            out.flush();
+            out.close();
+        } catch (IOException e) {
+            //
+        }
+    }
+
     
     
     
@@ -79,6 +92,7 @@ public class PriceCtrl {
         		break;
         	}
     	}
+		replaceExistingFile(this.FILENAME, priceobj);
     }
     
     public double calPrice(Sessions session,int age,Price p) {
