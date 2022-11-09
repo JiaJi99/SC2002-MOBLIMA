@@ -101,7 +101,7 @@ public class MovieDetailViewUI {
 	public void displayAttributesChoices_MovieDetail()
 	{
 		System.out.println("==========================================");
-		System.out.println("|| 1.  Search Movie via Title			||");
+		System.out.println("|| 1.  Search Movie via Title Name		||");
 		System.out.println("|| 2.  Search Movie via Type			||");
 		System.out.println("|| 3.  Search Movie via Age Category	||");
 		System.out.println("|| 4.  Search Movie via Synopsis		||");
