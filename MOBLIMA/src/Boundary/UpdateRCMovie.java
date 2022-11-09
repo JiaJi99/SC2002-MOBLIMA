@@ -105,33 +105,81 @@ public class UpdateRCMovie {
                 System.out.printf("Choose option" + "1. Movie Name\n" +
                 "2. Movie Type (2D, 3D, Blockbuster)\n" +
                 "3. Synopsis/Summary\n" +
-                "4. Number of Rating\n" +
+                "4. Director Name \n" +
                 "5. Runtime Duration \n" +
                 "6. Movie Release date\n" +
                 "7. Last Day of Showing \n" +
-                "8. Director Name\n" +
-                "9. Cast Names List \n\n" +
-                "10. Language"+
-                "11. Movie Age Category"
+                "8. Cast Names List \n\n" +
+                "9. Language"+
+                "10. Movie Age Category"
 
                 );
 
                 int choice ;
                 choice = sc.nextInt();
+                sc.nextLine();//clearning buffer just in case new line character is taken in
                 switch(choice){
-                    case 1: 
+                    case 1: System.out.println("Enter new movie name");
+                            String newMovieName = "";
+                            newMovieName = getStringFromUser();
+                            moviesCtrl.updateMovie(1,movieId,newMovieName);
                             break;
-                    case 2: 
+                    case 2: int chooseMovieType =-1;
+                            System.out.println("Enter number to choose option");
+                            System.out.println("1. Blockbuster");
+                            System.out.println("2. 3D");
+                            System.out.println("3.  2D");
+                            chooseMovieType= sc.nextInt();
+
+                        switch(chooseMovieType){
+                            case 1: moviesCtrl.updateMovie(MoviesCtrl.TYPE,movieId,MovieType.BLOCKBUSTER);
+                                break;
+
+                            case 2 :moviesCtrl.updateMovie(MoviesCtrl.TYPE,movieId,MovieType.IN_2D);
+                                break;
+                            case 3:moviesCtrl.updateMovie(MoviesCtrl.TYPE,movieId,MovieType.IN_3D);
+                                break;
+                            default : System.out.println("invalid choice, terminating update");
+                            return;
+                        }
+
                             break;
-                    case 3: 
+                    case 3: System.out.println("Enter updated Synopsis:");
+                            String updatedSyn = "";
+                            updatedSyn = getStringFromUser();
+                            moviesCtrl.updateMovie(MoviesCtrl.SYNOPSIS,movieId,updatedSyn);
                             break;
-                    case 4: 
+                    case 4: System.out.println("Correct Director's Name:");
+                            String newName = "";
+                            newName = getStringFromUser();
+                            moviesCtrl.updateMovie(MoviesCtrl.DIRECTOR,movieId,newName);
                             break;
-                    case 5: 
+                    case 5: System.out.println("Enter updated runtime duration:");
+                            int runTimeNew = getIntFromUser();
+                            if (runTimeNew<0){
+                                System.out.println("Negative runtime not allowed, terminating update");
+                            }
+                            moviesCtrl.updateMovie(MoviesCtrl.DURATION,movieId,runTimeNew);
                             break;
-                    case 6: 
+                    case 6: System.out.println("Enter new  Release date ");
+                            System.out.println("Note: Enter date in (DD/MM/YYYY) format only:");
+                            LocalDate newRDate = getDateFromUser();
+                            if (newRDate.isAfter(moviesCtrl.readByID(movieId).getEndDate())){
+                                System.out.println("Movie date is after end date stored, fist edit end date");
+                                System.out.println("Terminating movie update, going back to menu");
+                                return ;
+                            }
+                            moviesCtrl.updateMovie(MoviesCtrl.MOVIE_START_DATE,movieId,newRDate);
                             break;
-                    case 7: 
+                    case 7: System.out.println("Enter new  end of showing date ");
+                            System.out.println("Note: Enter date in (DD/MM/YYYY) format only:");
+                            LocalDate newEDate = getDateFromUser();
+                            if (newEDate.isBefore(moviesCtrl.readByID(movieId).getEndDate())){
+                                System.out.println("Movie end date is before start date stored, fist edit start date");
+                                System.out.println("Terminating movie update, going back to menu");
+                                return ;
+                            }
+                            moviesCtrl.updateMovie(MoviesCtrl.MOVIE_END_DATE,movieId,newEDate);
                             break;
                     case 8: 
                             break;
@@ -144,6 +192,7 @@ public class UpdateRCMovie {
 
                     default :
                     System.out.println("Wrong input, terminating update, back to main menu");
+                    return;
                     break;
                             
                 }
@@ -155,7 +204,7 @@ public class UpdateRCMovie {
         }
 
 
-
+    }
         public void createMovie(){
         sc.nextLine();
         System.out.println("Enter movie title ");
@@ -170,7 +219,7 @@ public class UpdateRCMovie {
         switch (option){		
                 case 1:
                 typeInput = MovieType.TWO_D;
-                    break;f
+                    break;
                 case 2:
                 typeInput = MovieType.THREE_D;
                     break;
@@ -191,11 +240,11 @@ public class UpdateRCMovie {
                  option = sc.nextInt();
                 MovieAgeCategory ageCat;
                 switch(option){
-                    case 2 : ageCat = PG; break;
-                    case 3 : ageCat = NC; break;
-                    case 4 : ageCat = M; break;
-                    case 5 : ageCat = R; break;
-                    case 6 : ageCat = E; break;
+                    case 2 : ageCat = MovieAgeCategory.PG; break;
+                    case 3 : ageCat = MovieAgeCategory.NC; break;
+                    case 4 : ageCat = MovieAgeCategory.M; break;
+                    case 5 : ageCat = MovieAgeCategory.R; break;
+                    case 6 : ageCat = MovieAgeCategory.E; break;
                     
                 }
                 System.out.println("Enter movie duration: integer in mins ");
@@ -231,9 +280,9 @@ public class UpdateRCMovie {
                 Language lang ;
                 System.out.println("Enter movie language 1 : English \n 2 Chinese \n 3: Japanese: \n Enter option");
                     switch (option) {
-                        case 1:lang = ENGLISH; break;
-                        case 2:lang = CHINESE; break;
-                        case 3 :lang = JAPANESE;    break;
+                        case 1:lang = Language.ENGLISH; break;
+                        case 2:lang = Language.CHINESE; break;
+                        case 3 :lang = Language.JAPANESE;    break;
                         default : System.out.println("wrong input, returning");return ;
                     }
 
@@ -293,7 +342,7 @@ public class UpdateRCMovie {
     }
 
     public static int getIntFromUser(){
-        int input = -1;
+        int input = -5;
         boolean validInput = false;
         while(!validInput) {
             if(sc.hasNextInt()){
@@ -308,5 +357,4 @@ public class UpdateRCMovie {
         return input;
     }
 
-}
 }
