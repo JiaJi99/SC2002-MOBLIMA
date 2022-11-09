@@ -1,5 +1,6 @@
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import moblima.Model.Cinemas;
 import moblima.Model.Cineplex;
@@ -35,20 +36,35 @@ public class BookBuy {
         ArrayList<Cinemas> tempCinemasList= new ArrayList<Cinemas>();
         int option;
         printActiveMovies();
-
+        Scanner sc = new Scanner(System.in);
 
         ArrayList<Cineplex> cineplexList  = cinplexCtrl.read();
         System.out.println("=========AVAILABLE LOCATIONS=========== \n Enter choice :");
 
-
         for (int i =0;i<cineplexList.size();i++){
-
             String cinplexString = cineplexList.get(i).getCineplexName();
             System.out.println(i+1+")");
-            System.out.print(" "+cinplexString);
-
-
+            System.out.print(" "+cinplexString + "\n");
         } 
+        System.out.println("Enter 0 to return to main menu page");
+        int option = -1;
+        option= sc.nextInt();
+
+        switch(option){
+            case 0: System.out.print("Terminating book, retuning to main menu");
+                    return;
+                 break;
+
+        }
+
+        if (option<0 || option>cineplexList.size() ){
+            System.out.print("Terminating book, retuning to main menu");
+            return;
+        }
+        else if(Cin)
+
+
+
 
     }
 
