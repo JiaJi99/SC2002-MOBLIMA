@@ -17,15 +17,87 @@ public class ChangePrice {
             case 1 : 
             System.out.println("Enter new student price");
             double  newPrice ;
-            sc.nextDouble();
-            
+            newPrice = sc.nextDouble();
+            if (newPrice<0){
+                System.out.println("Sorry updated price cannot be negative, terminating update, returning to main menu");
+                return;
+            }
+            else {
+                priceCtrl.changePrice(oldPrice,PriceCtrl.STUDENT,newPrice);
+            }
             break;
 
+            case 2 : 
+            System.out.println("Enter new adult price");
+            double  newPrice ;
+            newPrice = sc.nextDouble();
+            if (newPrice<0){
+                System.out.println("Sorry updated price cannot be negative, terminating update, returning to main menu");
+                return;
+            }
+            else {
+                priceCtrl.changePrice(oldPrice,PriceCtrl.ADULT,newPrice);
+            }
+            break;
+
+            case 3 : 
+            System.out.println("Enter new senior price");
+            double  newPrice ;
+            newPrice = sc.nextDouble();
+            if (newPrice<0){
+                System.out.println("Sorry updated price cannot be negative, terminating update, returning to main menu");
+                return;
+            }
+            else {
+                priceCtrl.changePrice(oldPrice,PriceCtrl.SENIOR,newPrice);
+            }
+            break;
+
+            case 4 : 
+            System.out.println("Enter new weekend price");
+            double  newPrice ;
+            newPrice = sc.nextDouble();
+            if (newPrice<0){
+                System.out.println("Sorry updated price cannot be negative, terminating update, returning to main menu");
+                return;
+            }
+            else {
+                priceCtrl.changePrice(oldPrice,PriceCtrl.WEEKEND,newPrice);
+            }
+            break;
+
+            case 5 : 
+            System.out.println("Enter new after 6 price");
+            double  newPrice ;
+            newPrice = sc.nextDouble();
+            if (newPrice<0){
+                System.out.println("Sorry updated price cannot be negative, terminating update, returning to main menu");
+                return;
+            }
+            else {
+                priceCtrl.changePrice(oldPrice,PriceCtrl.AFTER6,newPrice);
+            }
+            break;
+
+
+            case 6 : 
+            System.out.println("Enter new 3D movie price");
+            double  newPrice ;
+            newPrice = sc.nextDouble();
+            if (newPrice<0){
+                System.out.println("Sorry updated price cannot be negative, terminating update, returning to main menu");
+                return;
+            }
+            else {
+                priceCtrl.changePrice(oldPrice,PriceCtrl._3D,newPrice);
+            }
+            break;
 
             default : 
             System.out.println("Wrong option , terminating update, returning ");
             return;
         }
 
+        sc.close();
     }
 }
