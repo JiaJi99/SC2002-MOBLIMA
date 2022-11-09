@@ -42,7 +42,46 @@ public class UpdateRCMovie {
     }
     }
 
-    public void createMovie(){
+        public void removeMovie(){
+            MoviesCtrl moviesCtrl = new MoviesCtrl();
+            ArrayList<Movie> moviesList =  moviesCtrl.read();
+            if (moviesList.size()==0){
+                System.out.println("Sorry no movies here yet ");
+            }else {
+                for (int i =0;i<moviesList.size();i++){
+                    System.out.println("\n\nTitle : "+moviesList.get(i).getTitle()+"\n ID : "+ moviesList.get(i).getID());
+                }
+                System.out.println("Enter movie id to remove");
+                int movieId ;
+                movieId = sc.nextInt();
+                Movie m  ;
+                boolean found = false;
+                for (int i =0;i<moviesList.size();i++){
+                    if (moviesList.get(i).getID()==movieId){
+                        m = moviesList.get(i);
+                        found = true;
+                    }
+                }
+
+                if (found == true){
+                    moviesCtrl.deleteById(m.getID());
+                    System.out.println("Movie"+ movieId+"deleted successfully");
+                }
+                else {
+                    System.out.println("Movie not found going back to menu");
+
+                }
+            }
+
+        }
+
+        public void updateMovie(){
+            
+        }
+
+
+
+        public void createMovie(){
 
         sc.nextLine();
         System.out.println("Enter movie title ");
@@ -59,7 +98,7 @@ public class UpdateRCMovie {
         switch (option){		
                 case 1:
                 typeInput = MovieType.TWO_D;
-                    break;
+                    break;f
                 case 2:
                 typeInput = MovieType.THREE_D;
                     break;
@@ -128,13 +167,11 @@ public class UpdateRCMovie {
 
                 moviesCtrl.create(title,typeInput,lang,ageCat,synopsis,director,duration,cast,movieReleaseDate,movieEndDate);
                 
-
-		if (movieCtrl.read().isEmpty())
-			return;
-		System.out.println("\n New movie created....Returning");
+		System.out.println("\n Returning");
 
 
         }
+        
         
 
 
