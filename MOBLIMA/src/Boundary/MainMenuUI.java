@@ -5,8 +5,11 @@ import javax.security.auth.login.AccountExpiredException;
 
 import moblima.Manager.AccountManager;
 import moblima.Manager.DataManager;
+import moblima.Manager.MoviesCtrl;
 import moblima.Manager.TransactionsCtrl;
+import moblima.Model.Account;
 import moblima.Model.Movie;
+import moblima.Model.Reviews;
 import moblima.Model.Transaction;
 
 import java.lang.System.*;
@@ -47,8 +50,7 @@ public class MainMenuUI {
 		System.out.println("2. Account Setting");//done
 		System.out.println("3. List Top Five Movies");//done
 		System.out.println("4. Update/Remove/Create Movie");
-		System.out.println("4. Update/Remove/Create Showtime");
-		System.out.println("5. ??");// left if need later
+		System.out.println("5. Update/Remove/Create Showtime");
 		System.out.println("6. Exit");//done
 		System.out.println("==============================");	
 	}
@@ -59,7 +61,7 @@ public class MainMenuUI {
 		System.out.println("2. Account Setting");//done
 		System.out.println("3. View History");//done
 		System.out.println("4. List Top 5 Movies");//done
-		System.out.println("5. Add Rating and Review");
+		System.out.println("5. Add Rating and Review");//done
 		System.out.println("6. Book Movie Ticket");
 		System.out.println("7. Exit");//done
 		System.out.println("8. View Movies");
@@ -120,7 +122,7 @@ public class MainMenuUI {
 		case 4: ViewMovieTop5UI tempNew = new ViewMovieTop5UI();
                 tempNew.listTop5(accountMgr);
 				break;
-        case 5:	//to be implemented
+        case 5:	addReview(accountMgr);
 				break;                
         case 6:	//to be implemented
 				break;		
@@ -240,8 +242,47 @@ public class MainMenuUI {
             System.out.println("Press 0 to exit ");
             exitNum = sc.nextInt();
          }
-         while (exitNum!=0);
+        while (exitNum!=0);
 
+        sc.close();
+    }
+
+    public void addReview(AccountManager accountMgr){
+        Scanner sc = new Scanner(System.in);
+        private MoviesCtrl moviesCtrl = new MoviesCtrl();
+        private SearchMovieUI searchMovieUI = new SearchMovieUI();
+        String movieTitle;
+        String userComment ;
+        Account tempMovieGoerAcc = accountMgr.getActiveAccount();
+        String username = tempMovieGoerAcc.getUserName();
+        // searchMovieUI.listAllMovies();
+
+        System.out.println("Search for movie to create review:\n Please enter title");
+        movieTitle = sc.next();
+        ArrayList<Movie> movie = moviesCtrl.readByAttribute(MoviesCtrl.TITLE,movieTitle);
+        if (movie.size()==0){
+            System.out.println("No movie with this title exits, exiting search");
+            return ;
+        }
+        int numStars = -1;
+        System.out.println("Input number of stars 0 to 5");
+        numStars = sc.nextInt();
+
+        if (numStars>5) numStars =5;
+        if (numStars<0) numStars =0;
+
+        sc.nextLine();//clear buffer discard input value;
+        System.out.println("Input additional comment");
+        userComment= sc.nextLine();
+        Reviews newReview = new Review(username,userComment,numStars);
+        Movie tempMovie = movie.get(0);
+        ArrayList<Reviews> oldArrayList = tempMovie.getReviews();
+        ArrayList<Reviews> newArrayList = new ArrayList<Reviews>();
+        for (int i =0;i<oldArrayList.size();i++){
+            newArrayList.add(oldArrayList.get(i));
+        }
+        newArrayList.add(newReview);
+        moviesCtrl.updateMovie(MoviesCtrl.REVIEWS,tempMovie.getID(),newArrayList);
     }
 
 }
