@@ -1,12 +1,15 @@
 import java.time.LocalDateTime;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import moblima.Manager.TransactionsCtrl;
 import moblima.Model.Cinemas;
 import moblima.Model.Cineplex;
 import moblima.Model.Movie;
 import moblima.Model.MovieStatus;
 import moblima.Model.Sessions;
+import moblima.Model.Transaction;
 
 public class BookBuy {
     private CineplexController cinplexCtrl;
@@ -73,7 +76,7 @@ public class BookBuy {
             }
             else{
                 choseDateTime(tempCinemasList);
-                calPrice();
+                calPriceUI();
             }
 
         }
@@ -83,7 +86,55 @@ public class BookBuy {
 
     }
 
+    public void createSeatStoreTrans(){
+        Scanner sc3 = new Scanner(System.in);
+        int id, amountLeft = numTickets;
+        boolean successSeat = false;
+        giveSeatPlan.printFloorPlan();
 
+        for (int i =1;i<=amountLeft;i++){
+            System.out.println("Choose seat id for " + i + " ticket: ");
+            id = sc3.nextInt();
+            successSeat = sessionsCtrl.assignSeat(giveSeatPlan,id,chosenSession.getId());
+            if(successSeat==false){
+                break;
+                System.out.println("Unsuccessful booking due to seat booking error");
+            }
+        }
+        // creating the transaction and saving it ;
+        String name , emial , mobileNumber;
+        System.out.println("Enter details to confirm and sotre stransaction\n Enter name");
+         name = getStringFromUser();
+        System.out.println("Enter email");
+        emial = getStringFromUser();
+        System.out.println("Enter phone number ");
+        mobileNumber = getStringFromUser();
+        TransactionsCtrl tempTransactionCtrl = new TransactionsCtrl();
+        tempTransactionCtrl.create(cinemaCode, name, emial,mobileNumber,chosenSession.getMovie());
+        System.out.println("Booking Complete, check confirmation via email or message");
+    }
+
+    public void calPriceUI(){
+        Scanner sc2 = new Scanner(System.in);
+        double price ;
+        price = 0;
+        System.out.println("number of Tickets");
+         numTickets =  sc2.nextInt();
+         while (numTickets<1){
+            System.out.println("atleast one ticket required");
+            numTickets =  sc2.nextInt();
+         }
+
+         for (int i =0;i<numTickets;i++){
+            System.out.println("Ticket number "+i+1);
+            boolean validInput = false;
+            while(validInput==false){
+                System.out.println()
+            }
+         }
+
+
+    }
 
 
     public void choseDateTime(ArrayList<Cinemas> mainCiList){
