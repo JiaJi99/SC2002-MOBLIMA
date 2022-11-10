@@ -36,4 +36,5 @@ public enum MovieType {
 	public String getType() {
 		return type;
 	}
+	
 }
