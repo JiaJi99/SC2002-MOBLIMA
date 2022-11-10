@@ -13,6 +13,10 @@ import moblima.Model.Sessions;
 import moblima.Model.Transaction;
 
 public class BookBuy {
+    
+    /**
+     * All the controllers that this UI will reference
+     */
     private CineplexController cinplexCtrl;
     private CinemasController cinemasController;
     private MoviesCtrl moviesCtrl;
@@ -28,7 +32,7 @@ public class BookBuy {
     private SeatingPlan giveSeatPlan;
     private int numTickets;
 
-
+    
     public BookBuy(){
         this.cinplexCtrl = new CineplexController();
         this.cinemasController = new CinemasController();
@@ -37,7 +41,9 @@ public class BookBuy {
         this.sessionsCtrl = new SessionsCtrl();
     }
 
-
+    /**
+     * To display and allow user to select the choices of available cineplex
+     */
     public void bookbuyMethod(){
         ArrayList<Cinemas> tempCinemasList;//= new ArrayList<Cinemas>();
         int option;
@@ -87,6 +93,10 @@ public class BookBuy {
 
     }
 
+    
+    /**
+     * To select seat id and save transcation 
+     */
     public void createSeatStoreTrans(){
         Scanner sc3 = new Scanner(System.in);
         int id, amountLeft = numTickets;
@@ -114,7 +124,10 @@ public class BookBuy {
         tempTransactionCtrl.create(cinemaCode, name, emial,mobileNumber,chosenSession.getMovie());
         System.out.println("Booking Complete, check confirmation via email or message");
     }
-
+    
+    /**
+     * To display total price of the transcation
+     */
     public void calPriceUI(){
         Scanner sc2 = new Scanner(System.in);
         double totalprice ;
@@ -157,7 +170,11 @@ public class BookBuy {
 
     }
 
-
+    
+    /**
+     * For admin to choose showtime for cinema and session timing.
+     * Create new sessions
+     */
     public void choseDateTime(ArrayList<Cinemas> mainCiList){
         Session tempSession ;
         Cinema curCinema ;
@@ -183,6 +200,9 @@ public class BookBuy {
 
     }
 
+    /**
+     * To return List of cinemas with active session for a given cineplex
+     */
     public ArrayList<Cinemas> cinmeasWithActiveSession(String nameCineplex){
         ArrayList<Cinemas> returnCinemasList= new ArrayList<Cinemas>();
         ArrayList<Cinemas> cinemaList  = cinemasController.readByCineplexName(nameCineplex);
@@ -219,7 +239,10 @@ public class BookBuy {
     }
 
 
-
+    /**
+     * To print all movies from movie databased that MovieStatus are coming soon, preview or now showing
+     * 
+     */
     public void printActiveMovies(){
         System.out.println("==============Active Movies================");
         ArrayList<Movie> tempMovieList= moviesCtrl.read();
@@ -234,7 +257,10 @@ public class BookBuy {
         }
     }
 
-
+    /**
+     * To get input from User 
+     * Loops until non empty input is given
+     */
     public static String getStringFromUser(){
         String input = "";
         while(input.equals("")){
@@ -246,6 +272,10 @@ public class BookBuy {
         return input;
     }
 
+    /**
+     * Get Date time input from user and validate input
+     *@return LocalDateTime  input of local date time is valid and return, else loop 
+     */
     public static LocalDateTime getDateTimeFromUser(){
         LocalDateTime result = null;
         String date;
