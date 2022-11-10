@@ -3,7 +3,14 @@ import java.util.Scanner;
 import moblima.Manager.PriceCtrl;
 
 public class ChangePrice {
-    public void changePriceMethod(){
+    
+    /**
+     * To display change price UI
+     * User to input agecategory to update
+     * User to input new price
+     * If input are vaild write new price to database
+     */
+        public void changePriceMethod(){
         Scanner sc= new Scanner(System.in);
         PriceCtrl priceCtrl = new PriceCtrl();
         Price oldPrice = priceCtrl.read();
