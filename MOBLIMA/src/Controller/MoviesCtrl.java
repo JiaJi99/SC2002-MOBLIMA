@@ -189,6 +189,9 @@ public class MoviesCtrl {
     
     /** 
      * UPDATE a Movie's attribute based on a given movie's id in Database file 
+     * Attributes are check for validity before updates
+     * If invalid throw error and do nothing
+     * else update and sae movie to database
      * @param col           Attribute of movie to update
      * @param id            ID of Movie to search for    
      * @param newValue      New value of Movie's attribute
@@ -287,7 +290,7 @@ public class MoviesCtrl {
     
     /**
      * Delete a Movie in the Database file, based on the ID attribute passed 
-     * @param id    ID of Movie which will be deleted
+     * @param id    ID of Movie for deletion
      */
     public void deleteById(int id) {
         ArrayList<Movie> allData = read();
@@ -324,7 +327,7 @@ public class MoviesCtrl {
 
     
     /** 
-     * Overwrite Database file with new data of list of Admin
+     * Overwrite Database file with new data of list of Movie
      * @param filename      Filename to check for
      * @param data          New ArrayList of Movies to be written to the file
      */
