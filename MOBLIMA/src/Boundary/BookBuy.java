@@ -83,6 +83,34 @@ public class BookBuy {
 
     }
 
+
+
+
+    public void choseDateTime(ArrayList<Cinemas> mainCiList){
+        Session tempSession ;
+        Cinema curCinema ;
+        System.out.println("Enter cinema code for choosing the showtime ");
+        cinemaCode  = getStringFromUser();
+        System.out.println("Choose showtime and date ");
+        System.out.println("Note, enter showtime in in format DD/MM/YYYY HH:MM");
+        localDateTime = getDateTimeFromUser();
+        for (int i =0;i<mainCiList.size();i++){
+            curCinema = mainCiList.get(i);
+            String tempCode = curCinema.getCinemaCode();
+            if (tempCode.equals(cinemaCode)){
+                for (int j = 0;j<curCinema.getShowtimes().size();j++){
+                    tempSession = curCinema.getShowtimes().get(j);
+                    if(tempSession.getSessionDateTime().equals(localDateTime));
+                    chosenSession = tempSession;
+                    chosenCinema = curCinema;
+                    giveSeatPlan = tempSession.getSeatsAvailability();
+                    return;
+                }
+            }
+        }
+
+    }
+
     public ArrayList<Cinemas> cinmeasWithActiveSession(String nameCineplex){
         ArrayList<Cinemas> returnCinemasList= new ArrayList<Cinemas>();
         ArrayList<Cinemas> cinemaList  = cinemasController.readByCineplexName(nameCineplex);
@@ -102,7 +130,7 @@ public class BookBuy {
                 String moiveNameTemp = tempSession.getMovie().getTitle();
                 if (moiveNameTemp.equals(movieName) && (printedCinemaCode==false)){
                     System.out.println(movieName+" shows available :");
-                    // System.out.println("Cinema code :" curCinema.get);
+                    System.out.println("Cinema code :" curCinema.getCinemaCode());
 
                 }
                 printedCinemaCode = true;
@@ -144,6 +172,23 @@ public class BookBuy {
             }
         }
         return input;
+    }
+
+    public static LocalDateTime getDateTimeFromUser(){
+        LocalDateTime result = null;
+        String date;
+        boolean validInput = false;
+        while(!validInput){
+            try{
+                date = sc.nextLine();
+                result = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+                validInput = true;
+            }
+            catch(DateTimeParseException e){
+                System.out.println("Must be of pattern DD/MM/YYYY HH:MM!");
+            }
+        }
+        return result;
     }
 
 }
