@@ -11,23 +11,28 @@ import moblima.Manager.*;
 
 public class MovieSearchUI {	
 	
-	
+	/**
+	 * parameters to allow for easy access to calling for functions
+	 */
 	private String typeMovie;
 	private String titleMovie;
 	
 	public final static int MOVIE_START_DATE = 9;
-    public final static int MOVIE_END_DATE = 10;
+    	public final static int MOVIE_END_DATE = 10;
 	
 	Scanner sc = new Scanner(System.in);
 	
-	//add controllers for movie
-	//private  _MOVIE_CONTROLER_ _MOVIE_CTRL_
-	 
-	 
+	/**
+	 * Controller that this UI will reference
+	 */
 	private MoviesCtrl moviesCtrl;
+
+	/**
+	 * to construct controller 
+	 */
 	public MovieSearchUI()
 	{
-		//default contructor
+		
 		moviesCtrl = new MoviesCtrl();
 	}
 	
@@ -37,7 +42,9 @@ public class MovieSearchUI {
 		this.moviesCtrl = moviesCtrl;
 	}
 	
-	
+	/**
+	 * To display the 3 UI for movie search
+	 */
 	public void main() {
 		
 		displayIntro_MovieSearch();
@@ -48,6 +55,9 @@ public class MovieSearchUI {
 		
 	}
 	
+	/**
+	 * Get user input to select search movie by attributes
+	 */
 	public void displayUI_MovieSearch() {
 		int choice;
 		displayChoices_MovieSearch();
@@ -104,6 +114,9 @@ public class MovieSearchUI {
 		
 	}
 	
+	/**
+	 * To search movies by pharse
+	 */
 	public String retrieveSearchTerm()
 	{
 		boolean isValid = false;
@@ -133,6 +146,12 @@ public class MovieSearchUI {
 		
 	}
 	
+	
+	
+	/**
+	 * Display list of movie in the given attribute
+	 *@param selectedMovies  list of movie to display
+	 */
 	public void displayAll_MovieDetails(ArrayList<Movie> selectedMovies){
 		
 		
@@ -162,7 +181,9 @@ public class MovieSearchUI {
 	
 	
 	
-	
+	/**
+	 * Display movie search header
+	 */
 	public void displayIntro_MovieSearch()
 	{
 		System.out.println("==========================");
@@ -172,6 +193,10 @@ public class MovieSearchUI {
 		System.out.println("==========================");
 	}
 	
+	
+	/**
+	 * Display movie search footer
+	 */
 	public void displayExit_MovieSearch() {
 		
 		System.out.println("\nThank you for using the Movie Search Section...\n");
@@ -184,7 +209,9 @@ public class MovieSearchUI {
 	
 	}
 	
-	
+	/**
+	 * Display movie search body
+	 */
 	public void displayChoices_MovieSearch()
 	{
 		System.out.println("==========================================");
@@ -199,12 +226,20 @@ public class MovieSearchUI {
 		
 	}
 	
+	/**
+	 * print statement for movie is found
+	 */
 	public void displaySuccess_MovieSearch()
 	{
 		System.out.println("\nMovie Has Been Found...");
 		System.out.println("Outputting the Search Results:\n");
 		
 	}
+	
+	
+	/**
+	 * Print statement when no movie is found
+	 */
 	public void displayFailure_MovieSearch()
 	{
 		System.out.println("\nMovie Could Not Be Found...");
