@@ -11,12 +11,12 @@ public class ReviewsLayer {
 	/** 
      * Check if review can be created based on parameters passed
      * @param movie                 Name of movie that this review will be added to
-     * @param username              Username of the movie's reviewer
+     * @param username              Username of the reviewer
      * @param numOfStars            Number of stars given by reviewer
-     * @param additionalComment     Addition remark given by reviewer (optional)
+     * @param review			    Addition remark given by reviewer (optional)
      * @return boolean
      */
-	public static boolean isReviewValid(Movie movie, String username, int numOfStars, String additionalComment) {
+	public static boolean isReviewValid(Movie movie, String username, int numOfStars, String review) {
 
         boolean isValid = true;
 
@@ -52,7 +52,7 @@ public class ReviewsLayer {
 
     
     /** 
-     * Check if the number of stars given by the reviewer is in the valid range
+     * Check if the number of stars given by the reviewer is in the valid range of 1-5
      * @param numOfStars    Number of stars given by reviewer
      * @return boolean      Return true if number of stars given is in invalid range, else false
      */
