@@ -11,9 +11,19 @@ import moblima.Model.MovieAgeCategory;
 import moblima.Model.MovieType;
 
 public class UpdateRCMovie {
+	
+	/**
+	 * Controller that this class will reference to
+	 */
     private static MoviesCtrl moviesCtrl = new MoviesCtrl();
-    public static Scanner sc = new Scanner(System.in);
-    public void updateMovieFunction(){
+    
+	
+	public static Scanner sc = new Scanner(System.in);
+
+	/**
+	 * To get user to select action for movie listing
+	 */
+	public void updateMovieFunction(){
         boolean returnMainMenu = false;
         while (returnMainMenu!=true){
             System.out.print("\n\nCreate/Update/Remove Movie: \n\n" +
@@ -43,6 +53,10 @@ public class UpdateRCMovie {
     }
     }
 
+	
+	/**
+	 * To remove movie
+	 */
         public void removeMovie(){
             MoviesCtrl moviesCtrl = new MoviesCtrl();
             ArrayList<Movie> moviesList =  moviesCtrl.read();
@@ -76,6 +90,10 @@ public class UpdateRCMovie {
 
         }
 
+	
+	/**
+	 * to update movie based on user input
+	 */ 
         public void updateMovie(){
             MoviesCtrl moviesCtrl = new MoviesCtrl();
             ArrayList<Movie> moviesList =  moviesCtrl.read();
@@ -248,6 +266,10 @@ public class UpdateRCMovie {
 
 
     }
+	
+	/**
+	 * To create movie based on user input
+	 */
         public void createMovie(){
         sc.nextLine();
         System.out.println("Enter movie title ");
@@ -338,7 +360,11 @@ public class UpdateRCMovie {
         
         
 
-
+	
+	/**
+	 * To get non empty string from user and return input if non empty string
+	 *@return String  Return string input if not empty, else loop
+	 */
         public static String getStringFromUser(){
             String input = "";
             while(input.equals("")){
@@ -350,6 +376,11 @@ public class UpdateRCMovie {
             return input;
         }
 
+	
+	/**
+	 * To get valid LocalDateTime user input and return input
+	 *@return LocalDateTime   Return localdatetime if valid input from user, else loop
+	 */
         public static LocalDateTime getDateTimeFromUser(){
         LocalDateTime result = null;
         String date;
@@ -367,6 +398,11 @@ public class UpdateRCMovie {
         return result;
     }
 
+	
+	/**
+	 * To get date form user and return if valid date
+	 *@return LocalDate  return localdate if valid, else loop 
+	 */
     public static LocalDate getDateFromUser(){
         LocalDate result = null;
         String date;
@@ -384,6 +420,11 @@ public class UpdateRCMovie {
         return result;
     }
 
+	
+	/**
+	 * Get user input and return input if valid
+	 *@return int  	Return user input if valid, else loop
+	 */
     public static int getIntFromUser(){
         int input = -5;
         boolean validInput = false;
