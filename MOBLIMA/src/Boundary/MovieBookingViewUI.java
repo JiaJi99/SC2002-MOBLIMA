@@ -15,21 +15,33 @@ public class MovieBookingViewUI {
 
 	
 	
-	//add controllers for transactions
+	/**
+	 * Controller that UI references to
+	 */
 	private TransactionsCtrl transactionCtrl;
 	
 	
+	/**
+	 * Controller that UI references to
+	 */
 	public MovieBookingViewUI()
 	{
 		this.transactionCtrl= new TransactionsCtrl();
 	}
 	
+	
+	/**
+	 * Controller that UI references to
+	 */
 	public MovieBookingViewUI(TransactionsCtrl transactionCtrl)
 	{
 		this.transactionCtrl= transactionCtrl;
 	}
 	
 	
+	/**
+	 * Display the 3 menus one after another 
+	 */
 	public void main() {
 		
 		displayIntro_MovieBooking();
@@ -39,13 +51,19 @@ public class MovieBookingViewUI {
 		displayExit_MovieBooking();
 	}
 	
+	
+	/**
+	 * To call controller that this UI references to
+	 */
 	public void settingTransactionCtrl(TransactionsCtrl transactionCtrl) {
 		
 		this.transactionCtrl= transactionCtrl;
 	
 	}
 	
-	
+	/**
+	 * To display and get user input for booking a movie
+	 */ 
 	public void displayUI_MovieBooking() {
 		int choice;
 		String userEmail;
@@ -76,6 +94,10 @@ public class MovieBookingViewUI {
 		
 	}
 	
+	
+	/**
+	 * Display header for movie booking
+	 */
 	public void displayIntro_MovieBooking(){
 		System.out.println("==========================");
 		System.out.println("||	    Welcome to 		||");
@@ -84,6 +106,10 @@ public class MovieBookingViewUI {
 		System.out.println("==========================");
 	}
 	
+	
+	/**
+	 * Display footer for movie booking
+	 */
 	public void displayExit_MovieBooking() {
 		
 		System.out.println("Thank you for using the Movie Booking View Section...");
@@ -96,6 +122,10 @@ public class MovieBookingViewUI {
 		
 	}
 	
+	
+	/**
+	 * Display menu for viewing booking history
+	 */
 	public void displayChoices_MovieBooking()
 	{
 		System.out.println("======================================");
@@ -104,6 +134,11 @@ public class MovieBookingViewUI {
 		System.out.println("======================================");
 	}
 	
+	
+	/**
+	 * Display transaction history for given attributes
+	 *@param userEmail   Useremail's transaction to display
+	 */
 	public void displayAllTransactions_MovieBooking(String userEmail) {
 		
 		System.out.println("\n\nRetrieving all the Transactions for the Email "+ userEmail +":\n");
