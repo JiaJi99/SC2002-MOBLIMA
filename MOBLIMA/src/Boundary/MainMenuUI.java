@@ -16,10 +16,18 @@ import java.lang.System.*;
 
 public class MainMenuUI {
 	
+	/**
+	 * Main function to start the moblima program
+	 */
 	public MainMenuUI() {
         start();
     }
-
+	
+	/**
+	 * To display the account type menu based on account logged in status 
+	 * Display admin interface
+	 * Display moviegoer interface
+	 */
 	public void main() {
          AccountManager accountMgr = new AccountManager();
         //  DataManager dataMgr = new DataManager();
@@ -34,6 +42,9 @@ public class MainMenuUI {
 		} while (true);
 	}
 	
+	/**
+	 * Display available actions for movie goer before login
+	 */
 	public void displayChoices_Main(AccountManager accountMgr){
 		System.out.println("==============================");
 		System.out.println("1. Login");//done
@@ -44,6 +55,11 @@ public class MainMenuUI {
 		System.out.println("6. Exit");//done
 		System.out.println("==============================");	
 	}
+	
+	
+	/**
+	 * Display availble actions for admin
+	 */
 	public void displayChoices_Admin(AccountManager accountMgr){
 		System.out.println("==============================");
 		System.out.println("1. Log Out");//done
@@ -57,6 +73,10 @@ public class MainMenuUI {
 		System.out.println("==============================");	
 	}
 	
+	
+	/**
+	 * Display available actions for movie goer after login
+	 */
 	public void displayChoices_MovieGoer(AccountManager accountMgr){
 		System.out.println("==============================");
 		System.out.println("1. Log Out");//done
@@ -71,6 +91,10 @@ public class MainMenuUI {
 		System.out.println("==============================");	
 	}
 	
+	
+	/**
+	 * Display and get user input for main UI (before login)
+	 */
     public void displayUI_Main(AccountManager accountMgr) {
 		int choice;
 		Scanner sc = new Scanner(System.in);
@@ -101,6 +125,9 @@ public class MainMenuUI {
 		}
 	}
 	
+	/**
+	 * To display and get user input for moviegoer action after login
+	 */
 	public void displayUI_MovieGoer(AccountManager accountMgr) {
 		int choice;
 		Scanner sc = new Scanner(System.in);
@@ -139,7 +166,9 @@ public class MainMenuUI {
 	}
 }
 
-	
+	/**
+	 * Displays and get user input for admin menu
+	 */
 	public void displayUI_Admin(AccountManager accountMgr) {
 		int choice;
 		Scanner sc = new Scanner(System.in);
@@ -175,6 +204,9 @@ public class MainMenuUI {
 	}
 	}
 	
+	/**
+	 * To login
+	 */
 	public void login(AccountManager accountMgr) {
 
         DataManager dataMgr = new DataManager();
@@ -183,6 +215,9 @@ public class MainMenuUI {
 		log_manager.loginUser();
 	}
 	
+	/**
+	 * Add new moviegoer account to database
+	 */
 	public void register(AccountManager accountMgr) {
 
         DataManager dataMgr = new DataManager();
@@ -193,6 +228,9 @@ public class MainMenuUI {
 
 	}
 	
+	/**
+	 * To logout
+	 */
 	public void logout(AccountManager accountMgr) {
         DataManager dataMgr = new DataManager();
 		accountMgr.setActiveAccount(null);
@@ -203,6 +241,9 @@ public class MainMenuUI {
 
 	}
 	
+	/**
+	 * To update account setting 
+	 */ 
 	public void updateAccountSetting(AccountManager accountMgr) {
         DataManager dataMgr = new DataManager();
 		AccountSettingUI ac_ui= new AccountSettingUI(accountMgr, dataMgr);
@@ -210,6 +251,9 @@ public class MainMenuUI {
         dataMgr.save();
 	}
 	
+	/**
+	 * To exit and end moblima 
+	 */
 	public void exit() {
         DataManager dataMgr = new DataManager();
 		System.out.println("Thank you for using MOBLIMA!");
@@ -218,7 +262,9 @@ public class MainMenuUI {
 	}
 
 
-
+	/**
+	 * To start moblima
+	 */
     private void start(){
          AccountManager accountMgr = new AccountManager();
 		 DataManager dataMgr = new DataManager();
@@ -227,6 +273,10 @@ public class MainMenuUI {
          dataMgr.save();
     }
 
+	
+	/**
+	 * To view movie goer history of transcation
+	 */
     public void viewHistory(AccountManager accountMgr){
     
         Account viewAccount = accountMgr.getActiveAccount;
@@ -254,13 +304,19 @@ public class MainMenuUI {
 
         sc.close();
     }
-
+	
+	/**
+	 * Calls update interface
+	 */
     public void updateRCMovie(){
         UpdateRCMovie newUpdate  = new UpdateRCMovie();
         newUpdate.main();
     }
 
 
+	/**
+	 * Allow users to give their review and adds to reviews database
+	 */
     public void addReview(AccountManager accountMgr){
         Scanner sc = new Scanner(System.in);
         private MoviesCtrl moviesCtrl = new MoviesCtrl();
