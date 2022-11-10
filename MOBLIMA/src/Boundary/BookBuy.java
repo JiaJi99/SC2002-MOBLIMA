@@ -87,18 +87,35 @@ public class BookBuy {
         ArrayList<Cinemas> returnCinemasList= new ArrayList<Cinemas>();
         ArrayList<Cinemas> cinemaList  = cinemasController.readByCineplexName(nameCineplex);
         movieName ="";
-        System.out.println("\n\nSearch using movie name for active shows");
+        System.out.println("\n\nSearch using movie name for active shows\n Enter movie name");
+        movieName = getStringFromUser();
+        
         Sessions tempSession;
         Cinemas curCinema;        
         boolean printedCinemaCode = false;
-        boolean printeSep = false;
+
         for (int i = 0;i<cinemaList.size();i++){
             printedCinemaCode = false;
             curCinema = cinemaList.get(i);
             for (int j = 0;j<curCinema.getShowtimes().size();j++){
-                tempSession
+                tempSession = curCinema.getShowtimes().get(i);
+                String moiveNameTemp = tempSession.getMovie().getTitle();
+                if (moiveNameTemp.equals(movieName) && (printedCinemaCode==false)){
+                    System.out.println(movieName+" shows available :");
+                    // System.out.println("Cinema code :" curCinema.get);
+
+                }
+                printedCinemaCode = true;
+                System.out.println("\nShow timing : "+tempSession.getSessionDateTime());
+                
+
             }
+
+            returnCinemasList.add(curCinema);
         }
+
+        System.out.println("====All shows listed =====");
+        return returnCinemasList;
     }
 
 
@@ -112,7 +129,21 @@ public class BookBuy {
             if (tempMovieStatus== MovieStatus.COMING_SOON || tempMovieStatus==MovieStatus.PREVIEW|| tempMovieStatus == MovieStatus.NOW_SHOWING){
                 System.out.println("Title : "+ tempMovie.getTitle());
 
+
             }
         }
     }
+
+
+    public static String getStringFromUser(){
+        String input = "";
+        while(input.equals("")){
+            input = sc.nextLine();
+            if(input.equals("")){
+                System.out.println("Cannot be empty, try again!");
+            }
+        }
+        return input;
+    }
+
 }
