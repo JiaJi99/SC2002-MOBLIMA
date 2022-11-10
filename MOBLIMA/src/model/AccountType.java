@@ -10,7 +10,7 @@ public enum AccountType {
 	ADMIN,
 	
 	/**
-	 * Moviergoer Account Type
+	 * Moviergoer AccountType
 	 */
 	MOVIEGOER;
 }
