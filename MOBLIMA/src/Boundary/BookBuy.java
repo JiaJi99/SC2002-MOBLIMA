@@ -8,6 +8,7 @@ import moblima.Model.Cinemas;
 import moblima.Model.Cineplex;
 import moblima.Model.Movie;
 import moblima.Model.MovieStatus;
+import moblima.Model.Price;
 import moblima.Model.Sessions;
 import moblima.Model.Transaction;
 
@@ -116,22 +117,42 @@ public class BookBuy {
 
     public void calPriceUI(){
         Scanner sc2 = new Scanner(System.in);
-        double price ;
-        price = 0;
+        double totalprice ;
+        totalprice = 0;
         System.out.println("number of Tickets");
          numTickets =  sc2.nextInt();
          while (numTickets<1){
             System.out.println("atleast one ticket required");
             numTickets =  sc2.nextInt();
          }
-
-         for (int i =0;i<numTickets;i++){
-            System.out.println("Ticket number "+i+1);
+         int age;
+         Price priceCurrent = priceCtrl.read();
+         int individualPrice;
+         for (int i =1;i<=numTickets;i++){
+            System.out.println("Ticket number "+i);
             boolean validInput = false;
             while(validInput==false){
-                System.out.println()
+                System.out.println("Enter age  :");
+                age = sc2.nextInt();
+                
+                individualPrice = priceCtrl.calPrice(chosenSession,age,priceCurrent);
+                totalprice+=individualPrice;
+                System.out.println("Price of this ticket is :"+individualPrice);
             }
          }
+         System.out.println("Total Price of tickets is :"+totalprice);
+         int chooseOption = -1;
+
+         System.out.println("Enter 1 to procced to transaction");
+         chooseOption = sc2.nextInt();
+         if (chooseOption ==1){
+            createSeatStoreTrans();
+         }
+         else {
+            System.out.println("Terminating purchase, going back");
+            return;
+         }
+
 
 
     }
