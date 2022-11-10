@@ -13,7 +13,9 @@ import java.time.format.DateTimeFormatter;
 
 public class UpdateRCShowtimeUI {
 
-	
+	/**
+	 * Display main body of Update showitime UI
+	 */
 	public void displayChoices_UpdateRCSession(){
 		System.out.println("==============================");
 		System.out.println("1. Create Movie Session");
@@ -23,6 +25,10 @@ public class UpdateRCShowtimeUI {
 		System.out.println("==============================");
 	}
 	
+	
+	/**
+	 * Get user input to select action create, update or delete session
+	 */
 	public void displayUI_UpdateRCSession() {
 		int choice;
 		displayChoices_UpdateRCSession();
@@ -37,6 +43,12 @@ public class UpdateRCShowtimeUI {
 		}
 	}
 	
+	
+	/**
+	 * Get user to input choice and see if choice is valid by passing a value
+	 *@param i  the max input allowed
+	 *@return int  return user input, if input is within valid range, else loop
+	 */
 	public int getInput(int i) {
 		Scanner sc = new Scanner(System.in);
 		int choice = 0;
@@ -50,7 +62,9 @@ public class UpdateRCShowtimeUI {
 		return choice;
 	}
 	
-	
+	/**
+	 * Create new session 
+	 */
 	public void createSession() {
 		SessionsCtrl sessionsCtrl = new SessionsCtrl();
 		Scanner sc = new Scanner(System.in);
@@ -67,6 +81,9 @@ public class UpdateRCShowtimeUI {
 		sc.close();
 	}
 	
+	/**
+	 * Update session
+	 */
 	public void updateSession() {
 		SessionsCtrl sessionsCtrl = new SessionsCtrl();
 		Scanner sc = new Scanner(System.in);
@@ -131,6 +148,9 @@ public class UpdateRCShowtimeUI {
 	}
 	
 	
+	/**
+	 * Delete session
+	 */
 	public void deleteSession() {
 		SessionsCtrl sessionsCtrl = new SessionsCtrl();
 		Scanner sc = new Scanner(System.in);
