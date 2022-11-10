@@ -26,7 +26,10 @@ public class CinemasController {
     public final static int SEATING_PLAN = 2;
     public final static int SESSIONS = 3;
 
- 
+    
+    /**
+     * Default constructor 
+     */
     @SuppressWarnings("static-access")
     public CinemasController() {
         this.cineplexesCtrl = new CineplexController();
@@ -34,7 +37,10 @@ public class CinemasController {
     }
 
     
-
+    /**
+     * a
+     * @param cineplexesCtrl
+     */
     @SuppressWarnings("static-access")
     public CinemasController(CineplexController cineplexesCtrl) {
         this.cineplexesCtrl = cineplexesCtrl;
@@ -42,7 +48,7 @@ public class CinemasController {
     }
 
     
-
+    
     public CineplexController getCineplexesController(){
         return this.cineplexesCtrl;
     }
@@ -52,7 +58,16 @@ public class CinemasController {
         this.cineplexesCtrl = cineplexesCtrl;
     }
 
-    
+    /**
+     * Create a new Cinema and appends it to cineplex arraylist
+     * Attributes are validated before creation
+     * If invalid attributes are thrown, throws error and do nothing
+     * If database file does not exist, a new data file is create and saved
+     * else new cinema is added to the database under the cineplex choosen
+     * @param cineplexName  	Name of cineplex that the new cinemas is to be added
+     * @param code				New cinemas' code
+     * @param seatingPlan		New cinemas' seat plan
+     */
     public void create(
             String cineplexName, String code, SeatPlan seatingPlan 
     ) {
@@ -75,7 +90,10 @@ public class CinemasController {
         }
     } 
 
-    
+    /**
+     * Read and return every cinemax that exist under all the cineplex
+     * @return Model.{@link cinemas} Return list of all cinemas if found, else empty list
+     */
     public ArrayList<Cinemas> read() {
         ArrayList<Cinemas> returnData = new ArrayList<Cinemas>();
         ArrayList<Cineplex> cineplexListing = this.cineplexesCtrl.read(); 
@@ -89,7 +107,12 @@ public class CinemasController {
     }
 
     
- 
+    
+    /**
+     * Read and return a list of cinemas under a given cineplex in the database
+     * @param name		Name of cineplex to search for
+     * @return			Model.(@link Cinemas}  Return list of Cinemas if found,else empty list
+     */
     public ArrayList<Cinemas> readByCineplexName(String name){
         ArrayList<Cinemas> returnData = new ArrayList<Cinemas>();
         ArrayList<Cineplex> cineplexListing = this.cineplexesCtrl.read();
@@ -105,7 +128,13 @@ public class CinemasController {
     }
 
     
-
+    
+    /**
+     * Read and return a list of cinema based on given attribute in the data based
+     * @param col    			Given attribute based on constant	
+     * @param valueToSearch		Value of given attributed to searh for
+     * @return model.{@link Cinemas}	Return list of cinemas if any,else empty list
+     */
     public ArrayList<Cinemas> readByAttribute(int col, Object valueToSearch) {
         ArrayList<Cinemas> returnData = new ArrayList<Cinemas>();
         ArrayList<Cinemas> cinemaListing = read();
@@ -167,7 +196,7 @@ public class CinemasController {
 
     
     /** 
-     * Delete a Cinema in the Database file, based on the cinema code attribute passed
+     * Delete a Cinema in the Database file, based on given cinema code
      * @param code  Code of cinema which will be deleted
      */
     public void delete(String code) {
