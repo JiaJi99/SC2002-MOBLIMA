@@ -6,6 +6,7 @@ import moblima.Model.Cinemas;
 import moblima.Model.Cineplex;
 import moblima.Model.Movie;
 import moblima.Model.MovieStatus;
+import moblima.Model.Sessions;
 
 public class BookBuy {
     private CineplexController cinplexCtrl;
@@ -23,6 +24,7 @@ public class BookBuy {
     private SeatingPlan giveSeatPlan;
     private int numTickets;
 
+
     public BookBuy(){
         this.cinplexCtrl = new CineplexController();
         this.cinemasController = new CinemasController();
@@ -33,7 +35,7 @@ public class BookBuy {
 
 
     public void bookbuyMethod(){
-        ArrayList<Cinemas> tempCinemasList= new ArrayList<Cinemas>();
+        ArrayList<Cinemas> tempCinemasList;//= new ArrayList<Cinemas>();
         int option;
         printActiveMovies();
         Scanner sc = new Scanner(System.in);
@@ -61,11 +63,42 @@ public class BookBuy {
             System.out.print("Terminating book, retuning to main menu");
             return;
         }
-        else if(Cin)
+        else{
+            Cineplex chosenCineplex = cineplexList.get(option-1);
+            tempCinemasList = cinmeasWithActiveSession(chosenCineplex.getCineplexName());
+            if (tempCinemasList.size()==0){
+                System.out.println("Sorry no shows running or planned in the chosen cinplex\n Please choose another option  ");
+                bookbuyMethod();
+                return;
+            }
+            else{
+                choseDateTime(tempCinemasList);
+                calPrice();
+            }
+
+        }
 
 
 
 
+    }
+
+    public ArrayList<Cinemas> cinmeasWithActiveSession(String nameCineplex){
+        ArrayList<Cinemas> returnCinemasList= new ArrayList<Cinemas>();
+        ArrayList<Cinemas> cinemaList  = cinemasController.readByCineplexName(nameCineplex);
+        movieName ="";
+        System.out.println("\n\nSearch using movie name for active shows");
+        Sessions tempSession;
+        Cinemas curCinema;        
+        boolean printedCinemaCode = false;
+        boolean printeSep = false;
+        for (int i = 0;i<cinemaList.size();i++){
+            printedCinemaCode = false;
+            curCinema = cinemaList.get(i);
+            for (int j = 0;j<curCinema.getShowtimes().size();j++){
+                tempSession
+            }
+        }
     }
 
 
