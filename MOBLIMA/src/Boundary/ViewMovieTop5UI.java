@@ -5,8 +5,22 @@ import moblima.Manager.MoviesCtrl;
 import moblima.Model.Movie;
 
 public class ViewMovieTop5UI {
+	
+	/**
+	 * Controller that this UI will reference
+	 */
     private MoviesCtrl moviesCtrl = new MoviesCtrl();
+	
+	/**
+	 * list of movie from database
+	 */
     ArrayList<Movie> movieList = moviesCtrl.read();
+	
+	
+	/**
+	 *List the top 5 movies by sales 
+	 *@param accountMgr
+	 */
     public void listTop5(AccountManager accountMgr){
         System.out.println("----------Top By Rating-----------");
         Collections.sort(movieList, new SortByRating());
@@ -45,7 +59,16 @@ public class ViewMovieTop5UI {
 
 
 }
+
 class SortByRating implements Comparator<Movie> {
+
+	
+	/**
+	 * To compare two movie by rating and return int 
+	 *@param a  	movie object
+	 *@param b	movie to compare to
+	 *@return int  	Return -1 if a has bigger rating, 1 if a has a smaller rating, else 0 if a and b have equal rating
+	 */
 	public int compare(Movie a, Movie b) {
 		String ratingA = a.avg_rating();
 		String ratingB = b.avg_rating();
@@ -59,6 +82,9 @@ class SortByRating implements Comparator<Movie> {
 	}
 }
 
+/**
+ * To sort by sales
+ */
 class SortBySales implements Comparator<Movie> {
 	public int compare(Movie a, Movie b) {
 		TransactionsController transCtrl = new TransactionsController();
