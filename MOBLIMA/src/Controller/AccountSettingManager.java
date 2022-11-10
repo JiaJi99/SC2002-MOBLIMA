@@ -5,14 +5,32 @@ import java.util.Scanner;
 import moblima.Model.*;
 
 public class AccountSettingManager {
+	
+	/**
+	 * Manager that this manager will reference
+	 */
 	private AccountManager accountMgr;
+	
+	/**
+	 * Manager that this manager will reference
+	 */
 	private DataManager dataMgr;
 	
+	
+	/**
+	 * Create a manager for easy access to it manager reference
+	 * @param accountMgr
+	 * @param dataMgr
+	 */
 	public AccountSettingManager(AccountManager accountMgr, DataManager dataMgr) {
 		this.accountMgr = accountMgr;
 		this.dataMgr = dataMgr;
 	}
 	 
+	
+	/**
+	 * Update user name by getting input from user
+	 */
 	public void updateUserName() {
 		Account currentAccount = accountMgr.getActiveAccount();
 		String existingUserName = currentAccount.getUserName();
@@ -31,6 +49,11 @@ public class AccountSettingManager {
 		}
 	}
 	
+	
+
+	/**
+	 * Update password by gettting input from user
+	 */
 	public void updatePassword() {
 		Account currentAccount = accountMgr.getActiveAccount();
 		String existingPassword = currentAccount.getPassword();
@@ -61,6 +84,9 @@ public class AccountSettingManager {
 		}	
 	}
 	
+	/**
+	 * update email by getting update from user
+	 */
 	public void updateEmail() {
 		Account currentAccount = accountMgr.getActiveAccount();
 		String existingEmail = currentAccount.getEmail();
@@ -79,6 +105,10 @@ public class AccountSettingManager {
 		}
 	}
 	
+	
+	/**
+	 * update mobile number by getting input from user
+	 */
 	public void updateMobileNumber() {
 		Account currentAccount = accountMgr.getActiveAccount();
 		int existingMobileNumber = currentAccount.getMobileNumber();
@@ -97,6 +127,10 @@ public class AccountSettingManager {
 		}
 	}
 	
+	
+	/**
+	 * update age by getting input from user
+	 */
 	public void updateAge() {
 		MovieGoerAccount currentAccount = (MovieGoerAccount) accountMgr.getActiveAccount();
 		int existingAge = currentAccount.getMobileNumber();
@@ -115,6 +149,12 @@ public class AccountSettingManager {
 		}
 	}
 	
+	/**
+	 * Check if both instance of password is equal to each other
+	 * @param password     	first input of password
+	 * @param re_password	second input of password
+	 * @return
+	 */
 	public boolean isValidPassword(String password, String re_password) {
 		if (password.equals(re_password))
 			return true;
@@ -122,6 +162,10 @@ public class AccountSettingManager {
 			return false;
 	}
 	
+	
+	/**
+	 * Delete Account
+	 */
 	public void deleteAccount(){
 		Account currentAccount = accountMgr.getActiveAccount();
 		if (currentAccount.getAccountType() == AccountType.ADMIN)
@@ -135,7 +179,11 @@ public class AccountSettingManager {
 	}
 	
 	
-	
+	/**
+	 * Get enum of account Typpe
+	 * @param accountTypeStr
+	 * @return enum string of account type
+	 */
 	public AccountType AccountType_StringToEnum(String accountTypeStr) {
 		String tempString = accountTypeStr.toLowerCase();
 		if (tempString.equals("admin")) 
