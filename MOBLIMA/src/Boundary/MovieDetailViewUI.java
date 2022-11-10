@@ -8,9 +8,11 @@ import moblima.Manager.*;
 //import moblima.Manager.MoviesCtrl;
 
 public class MovieDetailViewUI {
-	
+	 
 	Scanner sc = new Scanner(System.in);
-	
+	/**
+	 * Controller that this UI will reference
+	 */
 	private MoviesCtrl moviesCtrl;
 	
 	public MovieDetailViewUI() {
@@ -25,6 +27,10 @@ public class MovieDetailViewUI {
 		
 	}
 	
+	
+	/**
+	 * To display movie detail UI
+	 */
 	public void main() {
 		
 		displayIntro_MovieDetail();
@@ -35,7 +41,9 @@ public class MovieDetailViewUI {
 		
 	}
 	
-	
+	/**
+	 * Displays header for movie details UI
+	 */
 	public void displayIntro_MovieDetail()
 	{
 		System.out.println("==========================");
@@ -46,6 +54,10 @@ public class MovieDetailViewUI {
 		
 	}
 	
+	
+	/**
+	 * Display footer for movie detail UI
+	 */
 	public void displayExit_MovieDetail()
 	{
 		System.out.println("\nThank you for using the Movie Details Section...\n");
@@ -57,6 +69,9 @@ public class MovieDetailViewUI {
 		System.out.println("==========================");
 	}
 
+	/**
+	 * Display and get user input to select actions for movie detail UI
+	 */
 	public void displayUI_MovieDetail(){
 		int choice;
 		
@@ -98,6 +113,9 @@ public class MovieDetailViewUI {
 
 	}
 	
+	/**
+	 * Display menu for selection of searching movie
+	 */
 	public void displayAttributesChoices_MovieDetail()
 	{
 		System.out.println("==========================================");
@@ -110,6 +128,10 @@ public class MovieDetailViewUI {
 	}
 	
 	
+	/**
+	 * To display all movie details in given list of movie
+	 *@param selectedMovies  	list of movies's detail to be display
+	 */
 	public void displayAll_MovieDetails(ArrayList<Movie> selectedMovies){
 		
 		
@@ -131,6 +153,11 @@ public class MovieDetailViewUI {
 		}
 	}
 	
+	
+	/**
+	 * To get user to select movie attributes return a constant that represent the attributes for access
+	 *@return int  Return constant for selection of movie attributes
+	 */
 	public int retrieveMovieAttr()
 	{
 		boolean isMovieIDValid = false;
@@ -186,6 +213,12 @@ public class MovieDetailViewUI {
         return input;
 	}
 	
+	
+	
+	/**
+	 * Display detail of given movie
+	 *@param selectedMovie  	movie to be printed
+	 */
 	public void displayAll_MovieDetail(Movie selectedMovie)
 	{
 		
@@ -205,11 +238,15 @@ public class MovieDetailViewUI {
 		}
 	}
 	
+	
+	/**
+	 * Display movie detail UI
+	 */
 	public void displayChoices_MovieDetail() {
 		System.out.println("==========================================");
-		System.out.println("|| 1. Search Movie via Movie ID			||");
+		System.out.println("|| 1. Search Movie via Movie ID		||");
 		System.out.println("|| 2. Search Movie via Movie Attribute	||");
-		System.out.println("|| 3. Back								||");
+		System.out.println("|| 3. Back					||");
 		System.out.println("==========================================");
 	}
 
