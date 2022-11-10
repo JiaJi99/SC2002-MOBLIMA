@@ -11,9 +11,15 @@ import moblima.customException.MovieException.EmptyStringException;
 
 public class CinemasLayer {
 
+    /**
+     * Controller this layer will reference
+     */
     static CinemasController cinemasCtrl = new CinemasController();
 
-    
+    /**
+     * Check if cinema is valid based on given attributes
+     *@return boolean  Return true if valid, else false
+     */
     public static boolean isCinemaValid(String cineplexName, String code, SeatPlan seatingPlan){
         
         boolean isValid = true;
@@ -35,6 +41,13 @@ public class CinemasLayer {
         return isValid;
     }
 
+    
+    /**
+     * Checks if Cinema code exists in data base
+     *@param code      Code to check for in data base
+     *@return boolean  Return true if code exists in database, else false
+     */
+     
     public static boolean isExistingCinema(String code) {
 
         ArrayList<Cinemas> allCinemas = cinemasCtrl.read();
