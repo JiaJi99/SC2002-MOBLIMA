@@ -18,6 +18,20 @@ import moblima.customException.MovieException.OutofRangeException;
 
 public class MoviesLayer {
 	
+    /**
+     * Check if given attributes are valid 
+     *@param title          This movie's title
+     *@param type           This movie's type
+     *@param lang           This movie's language
+     *@param ageCat         This movie's age category
+     *@param synopsis       This movie's synopsis
+     *@param director       This movie's director
+     *@param runTimeMins    This movie's run time in minutes
+     *@param cast           This movie's list of cast
+     *@param startDate      This movie's start date
+     *@param endDate        This movie's end date
+     *@return boolean  Return true if all attributes are valid, else false
+     */
 	public static boolean isMovieValid(String title, MovieType type, Language lang, 
 			     MovieAgeCategory ageCat, String synopsis, String director,
 			     int runTimeMins, ArrayList<String> cast,
@@ -45,7 +59,8 @@ public class MoviesLayer {
         return isValid;
     }
 	
-	 /** Check if movie exist based on movieList
+	 /** 
+    * Check if movie exist based on movieList
      * @param title     Movie's object to check for
      * @return boolean  Return true if movie already exist, else false
      */
@@ -63,7 +78,8 @@ public class MoviesLayer {
         return false;
     }
     
-    /** Check if movie's title is empty
+    /** 
+     * Check if movie's title is empty
      * @param title     Movie's title to check for
      * @return boolean  Return true if movie's title is empty, else false
      */
@@ -82,7 +98,8 @@ public class MoviesLayer {
     
 
     
-    /** Check if movie's synopsis is empty
+    /** 
+     * Check if movie's synopsis is empty
      * @param synopsis  Movie's synopsis to check for
      * @return boolean  Return true if movie's synopsis is empty, else false
      */
@@ -100,7 +117,8 @@ public class MoviesLayer {
     }
 
     
-    /** Check if movie's review is empty
+    /** 
+     * Check if movie's review is empty
      * @param rating    Movie's review to check for
      * @return boolean  Return true if movie's review is empty, else false
      */
@@ -118,7 +136,8 @@ public class MoviesLayer {
     }
 
     
-    /** Check if movie's duration is negative
+    /** 
+     * Check if movie's duration is negative
      * @param duration  Movie's duration to check for
      * @return boolean  Return true if movie's duration is negative, else false
      */
@@ -135,7 +154,8 @@ public class MoviesLayer {
         }
     }
     
-    /** Check if input integer is negative
+    /** 
+     * Check if input integer is negative
      * @param duration  input to check for
      * @return boolean  Return true if input is negative, else false
      */
@@ -153,7 +173,8 @@ public class MoviesLayer {
     }
 
     
-    /** Check if movie's end date is before the release date
+    /** 
+     * Check if movie's end date is before the release date
      * @param movieReleaseDate  Movie's release date to check for
      * @param movieEndDate      Movie's end date to check for
      * @return boolean          Return true if end date is before release date, else false
@@ -172,7 +193,8 @@ public class MoviesLayer {
     }
 
     
-    /** Check if movie's director is empty
+    /** 
+     * Check if movie's director is empty
      * @param director  Movie's director to check for
      * @return boolean  Return true if movie's director is empty, else false
      */
@@ -189,7 +211,8 @@ public class MoviesLayer {
         }
     }
     
-    /** Check if movie's cast is empty
+    /** 
+     * Check if movie's cast is empty
      * @param cast Movie's cast to check for
      * @return boolean Return true if movie's cast is empty, else false
      */
@@ -206,7 +229,8 @@ public class MoviesLayer {
     	}
     }
     
-    /** Check if movie's list of cast is empty
+    /** 
+     * Check if movie's list of cast is empty
      * @param cast      Movie's list of cast to check for
      * @return boolean  Return true if movie's list of cast is empty, else false
      */
@@ -224,7 +248,11 @@ public class MoviesLayer {
     }
     
  
-    
+    /**
+     *Check if intial cast size is at least 2
+     *@param size       size of cast list passed
+     *@return boolean   Return True if size less than 2,else false
+     */
     public static boolean isCastSmall(int size) {
     	if(size<2) {
     		try {
@@ -267,9 +295,5 @@ public class MoviesLayer {
 		return false;
 		}
     }
-
-	
-    	
-  
 	
 }
