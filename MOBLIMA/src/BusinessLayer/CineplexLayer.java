@@ -11,6 +11,9 @@ import moblima.customException.CineplexExceptions.LessThan3CinemasException;
 
 public class CineplexLayer {
 	
+	/**
+	 * Cineplex controller that this layer will reference
+	 */
 	 static CineplexController cineplexesCtrl = new CineplexController();
 
 	    
