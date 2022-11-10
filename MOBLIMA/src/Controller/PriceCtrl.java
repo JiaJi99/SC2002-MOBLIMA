@@ -11,17 +11,30 @@ import java.time.LocalDateTime;
 
 public class PriceCtrl {
 	
-	public final static String FILENAME = "MOBLIMA/database/price.txt";
-
+   public final static String FILENAME = "MOBLIMA/database/price.txt";
 	
-	public final static int STUDENT = 0;
+	/**
+	 * Assigning constants to attributes for easy readability
+	 */
+    public final static int STUDENT = 0;
     public final static int ADULT = 1;
     public final static int SENIOR = 2;
     public final static int WEEKEND = 3;
     public final static int AFTER6 = 4;
     public final static int _3D = 5;
     
-    
+    /**
+     * Create new price based on given attributes
+     * attributes are valided before creation
+     * If invalid, error is thrown and do nothing
+     * else price list is created and save to data file
+     * @param student
+     * @param adult
+     * @param senior
+     * @param weekend
+     * @param after6
+     * @param _3D
+     */
     public void create(double student,double adult,double senior,double weekend,double after6,double _3D) {
     	if (PriceLayer.isPriceValid(student,adult,senior,weekend,after6,_3D)) {
     		Price p = new Price(student, adult, senior, weekend, after6, _3D);
@@ -38,6 +51,10 @@ public class PriceCtrl {
         }
     }
     
+    /**
+     * Read and return price list from database
+     * @return Model.{@link Price} 
+     */
     public Price read() {
     	try {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FILENAME));
@@ -52,23 +69,15 @@ public class PriceCtrl {
     }
     
     
-	public void replaceExistingFile(String filename, Price data){
-        File tempFile = new File(filename);
-        if (tempFile.exists()) 
-            tempFile.delete();
-        try {
-            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename));
-            out.writeObject(data);
-            out.flush();
-            out.close();
-        } catch (IOException e) {
-            //
-        }
-    }
-
     
     
     
+    /**
+     * Update price of paramter based on given attribute code
+     * @param priceobj 	price object to be updated
+     * @param modify	Attributes to be updated based on constants
+     * @param price		new price of given attribute
+     */
     public void changePrice(Price priceobj, int modify, double price) {
     	if (PriceLayer.isPriceValid(price)) {
     		switch(modify) {
@@ -92,9 +101,16 @@ public class PriceCtrl {
         		break;
         	}
     	}
-		replaceExistingFile(this.FILENAME, priceobj);
     }
     
+    
+    /**
+     * Cal and return the ticket price based on Movie type, age of movie goer and session time
+     * @param session  Session that is booked
+     * @param age	   Age of movie goer
+     * @param p		   price list to use for calculated final price
+     * @return double  Final calculated price
+     */
     public double calPrice(Sessions session,int age,Price p) {
     	double finalprice=0;
     	if (session.getMovie().getType().equals(MovieType.IN_3D)) {
@@ -114,6 +130,13 @@ public class PriceCtrl {
     	}
     }
     
+    
+    /**
+     * Get price based on age of movie goer and price list to read from
+     * @param age  age of movie goer
+     * @param p		price list to read
+     * @return double  Price based on age
+     */
     public double getAgePrice(int age,Price p) {
     	if (age <=16) {
     		return p.getStudent();}
