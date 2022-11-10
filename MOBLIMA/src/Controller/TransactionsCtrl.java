@@ -13,8 +13,20 @@ import moblima.Model.*;
 
 public class TransactionsCtrl {
 	
+	/**
+	 * File path to database of transaction that this controller will access
+	 */
 	public final static String FILENAME = "MOBLIMA/database/transactions.txt";
-
+	
+	/**
+	 * Create a new transaction and add it into database
+	 * Attributes are validated before adding to database
+	 * @param cinemaCode 	This transaction cinemas code
+	 * @param name			Name of movie goer
+	 * @param email			Email of Movie goer
+	 * @param mobileNumber	Mobile number of movie goer
+	 * @param movie			Movie in this transaction
+	 */
 	public void create(String cinemaCode, String name, String email, String mobileNumber, Movie movie) {
             ArrayList<Transaction> allData = new ArrayList<Transaction>();
             File tempFile = new File(FILENAME);
@@ -32,6 +44,12 @@ public class TransactionsCtrl {
             }
 	}
     
+	
+	/**
+	 * READ and return every transaction in database
+	 * If datebase not found, ignore error and return empty list
+	 * @return Model{@link Transaction}  Return list of transaction if any, else empty list
+	 */
 	 public ArrayList<Transaction> read() {
 	        try {
 	            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FILENAME));
@@ -43,6 +61,13 @@ public class TransactionsCtrl {
 	        }
 	        return new ArrayList<Transaction>();
 	    }
+	 
+	 
+	 /**
+	  * READ and return every transaction with given TID in database
+	  * @param TID		ID of transaction 
+	  * @return Model{@link Transaction}  Return list of transaction if any, else empty list
+	  */
 	 public ArrayList<Transaction> readByTID(String TID) {
 	        ArrayList<Transaction> allData = read();
 	        Transaction transaction = null;
@@ -55,6 +80,13 @@ public class TransactionsCtrl {
 	        }
 	        return returnData;
 	    }
+	 
+	 
+	 /**
+	  * READ and return every transaction with given moviegoer name in database
+	  * @param movieGoerUsername  name of moviergoer to search for
+	  * @return Model{@link Transaction}  Return list of transaction under movier goer name if any, else empty list
+	  */
 	 public ArrayList<Transaction> readByMovieGoerUsername(String movieGoerUsername) {
 	        ArrayList<Transaction> allData = read();
 	        Transaction transaction = null;
@@ -70,6 +102,12 @@ public class TransactionsCtrl {
 	        return returnData;
 	    }
 	 
+	 
+	 /**
+	  * Save and overwrite database with new transaction list
+	  * @param filename  filename to check for
+	  * @param returnData New arraylist of transaction to be written
+	  */
 	 public void replaceExistingFile(String filename, ArrayList<Transaction> returnData) {
 	        File tempFile = new File(filename);
 	        if (tempFile.exists())
