@@ -1,12 +1,15 @@
-package sc2002ProjUI;
+package moblima.Boundary;
 
 import moblima.Manager.SessionsCtrl;
-import moblima.Manager.MovieCtrl;
+import moblima.Manager.MoviesCtrl;
 import moblima.Model.SeatPlan;
+import moblima.Model.Sessions;
 import moblima.Model.Movie;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 
 public class UpdateRCShowtimeUI {
 
@@ -55,8 +58,8 @@ public class UpdateRCShowtimeUI {
 		String cinemaCode = sc.nextLine();
 		System.out.println("Enter Movie ID ");
 		int movieID = sc.nextInt();
-		MovieCtrl movieCtrl = new MovieCtrl();
-		Movie movie = movieCtrl.readbyID(movieID);
+		MoviesCtrl movieCtrl = new MoviesCtrl();
+		Movie movie = movieCtrl.readByID(movieID);
 		System.out.println("Enter Session Start Date and Time  EEEE, dd/MM/yyyy HH:mm");
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, dd/MM/yyyy HH:mm");
 		LocalDateTime sessionDateTime = LocalDateTime.parse(sc.nextLine(), formatter);	
@@ -67,7 +70,7 @@ public class UpdateRCShowtimeUI {
 	public void updateSession() {
 		SessionsCtrl sessionsCtrl = new SessionsCtrl();
 		Scanner sc = new Scanner(System.in);
-		ArrayList<Sessions> sessionsList =  SessionsCtrl.read();
+		ArrayList<Sessions> sessionsList =  sessionsCtrl.read();
 		if (sessionsList.size()==0)
 			System.out.println("Sorry, no sessions have been created yet.");
 		else {
@@ -77,7 +80,7 @@ public class UpdateRCShowtimeUI {
 								  +"\n Date and Time : "+sessionsList.get(i).getSessionDateTimeToString());
 			System.out.println("Enter session ID to update/edit");
 			int sessionID = sc.nextInt();
-			Session s;
+			Sessions s;
 			boolean found = false;
 			for (int i=0; i<sessionsList.size();i++){
                 if (sessionsList.get(i).getId()==sessionID){
@@ -98,14 +101,14 @@ public class UpdateRCShowtimeUI {
             switch(choice) {
             	case 1: System.out.println("Enter name of new movie");
             			String movieName = sc.nextLine();
-            			MovieCtrl movieCtrl = new MovieCtrl();
-            			Movie newMovie = movieCtrl.readbyAttribute(1, movieName);
-            			sessionsCtrl.updateById(0, newMovie);
+            			MoviesCtrl movieCtrl = new MoviesCtrl();
+            			ArrayList<Movie> newMovie = movieCtrl.readByAttribute(1, movieName);
+            			sessionsCtrl.updateById(0,sessionID, newMovie);
             			break;
             	case 2: System.out.println("Enter new date and time EEEE, dd/MM/yyyy HH:mm");
         				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, dd/MM/yyyy HH:mm");
         				LocalDateTime sessionDateTime = LocalDateTime.parse(sc.nextLine(), formatter);	
-        				sessionsCtrl.updateById(1, sessionDateTime);
+        				sessionsCtrl.updateById(1,sessionID, sessionDateTime);
         				break;
             	case 3: int row, col;
             			do {
@@ -121,7 +124,7 @@ public class UpdateRCShowtimeUI {
             					System.out.println("Please enter a positive number.");
             			} while (col <= 0);
             			SeatPlan seats = new SeatPlan(row, col);
-            			sessionsCtrl.updateById(2, sessionDateTime);
+            			sessionsCtrl.updateById(2,sessionID, seats);
             			break;
             	}   
 		}
@@ -131,7 +134,7 @@ public class UpdateRCShowtimeUI {
 	public void deleteSession() {
 		SessionsCtrl sessionsCtrl = new SessionsCtrl();
 		Scanner sc = new Scanner(System.in);
-		ArrayList<Sessions> sessionsList =  SessionsCtrl.read();
+		ArrayList<Sessions> sessionsList =  sessionsCtrl.read();
 		if (sessionsList.size()==0)
 			System.out.println("Sorry, no sessions have been created yet.");
 		else {
@@ -149,7 +152,7 @@ public class UpdateRCShowtimeUI {
 						sessionsCtrl.delete(sessionID);
 						break;
 				case 2: int movieID = sc.nextInt();
-						sessionsCtrl.deletebyMovie(movieID);
+						sessionsCtrl.deleteByMovie(movieID);
 						break;		
 			}
 		}
