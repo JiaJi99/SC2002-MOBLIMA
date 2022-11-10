@@ -30,7 +30,7 @@ public class CineplexController {
      * CREATE a new Cineplex and add it into the database file
      * Attributes are validated before creation
      * If attributes are not allowed, throw error and do nothing
-     * If Database file exist, existing records are read and new Cineplex object is aopended before saving
+     * If Database file exist, new Cineplex object is appended to data before saving
      * If Database file does not exist, Cineplex object will be written to a new file and saved
      * @param name      This cineplex's name
      * @param cinemas   This cineplex's list of cinemas
@@ -77,7 +77,7 @@ public class CineplexController {
 
     
     /** 
-     * READ and return Cineplex based on name passed in the Database file
+     * READ and return Cineplex based on cineplex name in Database file
      * @param name          Name of cineplex to search for
      * @return Cineplex     Return Cineplex if found, else null object
      */
@@ -117,8 +117,8 @@ public class CineplexController {
 
     
     /** 
-     * Delete an Cineplex in the Database file, based on the name attribute passed
-     * @param name  Name of Cineplex which will be deleted
+     * Delete an Cineplex in the Database file, based on given cineplex name 
+     * @param name  Name of Cineplex to be deleted
      */
     public void deleteByName(String name){
         ArrayList<Cineplex> allData = read();
@@ -135,9 +135,9 @@ public class CineplexController {
 
     
     /** 
-     * Overwrite Database file with new data of list of Admin
+     * Save Database file with new data of list of Admin
      * @param filename      Filename to check for
-     * @param data    New ArrayList of Cineplex to be written to the file
+     * @param data    	    New ArrayList of Cineplex to be saved
      */
     public void replaceExistingFile(String filename, ArrayList<Cineplex> data){
         File tempFile = new File(filename);
