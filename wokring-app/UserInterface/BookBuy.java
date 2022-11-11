@@ -3,7 +3,6 @@ package UserInterface;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -62,7 +61,7 @@ public class BookBuy {
         switch(option){
             case 0: System.out.print("Terminating book, retuning to main menu");
                     return;
-                 break;
+
 
         }
 
@@ -105,8 +104,9 @@ public class BookBuy {
             id = sc3.nextInt();
             successSeat = sessionsCtrl.assignSeat(giveSeatPlan,id,chosenSession.getId());
             if(successSeat==false){
-                break;
                 System.out.println("Unsuccessful booking due to seat booking error");
+                break;
+
             }
         }
         // creating the transaction and saving it ;

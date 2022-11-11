@@ -5,6 +5,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import BaseClasses.Movie;
 import ManagerClasses.*;
 //import moblima.Manager.MoviesCtrl;
 
@@ -106,7 +107,7 @@ public class MovieDetailViewUI {
 					System.out.println("Enter Pharse to search: ");
 					String searchTerm = sc.nextLine(); 
 					
-					ArrayList<Movie> selectedMovies = moviesCtrl.readByID(movieID1, searchTerm);
+					ArrayList<Movie> selectedMovies = moviesCtrl.readByAttribute(movieID1, searchTerm);
 					displayAll_MovieDetails(selectedMovies);
 				
 			case 3: break;
@@ -141,7 +142,7 @@ public class MovieDetailViewUI {
 			System.out.println("======================================");
 			System.out.println("|| 	 ||Found All Movie Details||    ||");
 			
-			for(int i=0; i<selectedMovies.Size(); i++)
+			for(int i=0; i<selectedMovies.size(); i++)
 			{
 				System.out.printf("|| Movie %d: 	%s	\n", (i+1), selectedMovies.get(i).toString());
 			}
@@ -162,7 +163,7 @@ public class MovieDetailViewUI {
 	public int retrieveMovieAttr()
 	{
 		boolean isMovieIDValid = false;
-		int input;
+		int input =-1;
 		
         
         while(!isMovieIDValid)
@@ -192,7 +193,7 @@ public class MovieDetailViewUI {
 	public int retrieveMovieID()
 	{
 		boolean isMovieIDValid = false;
-		int input;
+		int input=-1;
 		
         
         while(!isMovieIDValid)

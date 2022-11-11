@@ -5,9 +5,8 @@ import java.util.*;
 import java.util.regex.*;
 
 
-import moblima.Manager.*;
-//import moblima.Manager.MoviesCtrl;
-//import moblima.Manager.TransactionsCtrl;
+import ManagerClasses.*;
+import BaseClasses.Transaction;
 
 
 public class MovieBookingViewUI {
@@ -152,7 +151,7 @@ public class MovieBookingViewUI {
 			System.out.println("======================================");
 			System.out.println("|| 	||Found All Booking Details||	||");
 			
-			for(int i=0; i<transactionCtrlList.Size(); i++)
+			for(int i=0; i<transactionCtrlList.size(); i++)
 			{
 				System.out.printf("|| Transaction %d: 	%s	\n", (i+1), transactionCtrlList.get(i).toString());
 			}

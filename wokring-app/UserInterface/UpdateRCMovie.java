@@ -71,7 +71,7 @@ public class UpdateRCMovie {
                 System.out.println("Enter movie id to remove");
                 int movieId ;
                 movieId = sc.nextInt();
-                Movie m  ;
+                Movie m = null ;
                 boolean found = false;
                 for (int i =0;i<moviesList.size();i++){
                     if (moviesList.get(i).getID()==movieId){
@@ -147,18 +147,14 @@ public class UpdateRCMovie {
                             break;
                     case 2: int chooseMovieType =-1;
                             System.out.println("Enter number to choose option");
-                            System.out.println("1. Blockbuster");
-                            System.out.println("2. 3D");
-                            System.out.println("3.  2D");
+                            // System.out.println("1. Blockbuster");
+                            System.out.println("1. 3D");
+                            System.out.println("2.  2D");
                             chooseMovieType= sc.nextInt();
-
-                        switch(chooseMovieType){
-                            case 1: moviesCtrl.updateMovie(MoviesCtrl.TYPE,movieId,MovieType.BLOCKBUSTER);
+                            switch(chooseMovieType){
+                            case 1 :moviesCtrl.updateMovie(MoviesCtrl.TYPE,movieId,MovieType.IN_2D);
                                 break;
-
-                            case 2 :moviesCtrl.updateMovie(MoviesCtrl.TYPE,movieId,MovieType.IN_2D);
-                                break;
-                            case 3:moviesCtrl.updateMovie(MoviesCtrl.TYPE,movieId,MovieType.IN_3D);
+                            case 2:moviesCtrl.updateMovie(MoviesCtrl.TYPE,movieId,MovieType.IN_3D);
                                 break;
                             default : System.out.println("invalid choice, terminating update");
                             return;
@@ -237,15 +233,14 @@ public class UpdateRCMovie {
                             int option2temp =-1;
                             option2temp = sc.nextInt();
                             MovieAgeCategory ageCat2;
-                            break;
+                            // break;
                             switch(option2temp){
                                 case 2 : ageCat2 = MovieAgeCategory.PG; break;
                                 case 3 : ageCat2 = MovieAgeCategory.NC; break;
                                 case 4 : ageCat2 = MovieAgeCategory.M; break;
                                 case 5 : ageCat2 = MovieAgeCategory.R; break;
                                 case 6 : ageCat2 = MovieAgeCategory.E; break;
-                                default:
-                                System.out.println("Wrong input, terminating update, going back");
+                                default: System.out.println("Wrong input, terminating update, going back");
                                 return;
                                 
                             }
@@ -256,7 +251,7 @@ public class UpdateRCMovie {
                     default :
                     System.out.println("Wrong input, terminating update, back to main menu");
                     return;
-                    break;
+
                             
                 }
 
@@ -279,7 +274,7 @@ public class UpdateRCMovie {
         System.out.println("Select movie types: \n" +
                                         "	1. 2D\n" +
                                         "	2. 3D\n" +
-                                        "	3. Blockbuster\n\n" +
+                                        // "	3. Blockbuster\n\n" +
                                         "Enter option: ");
         int option = sc.nextInt();
         MovieType typeInput;
@@ -290,9 +285,9 @@ public class UpdateRCMovie {
                 case 2:
                 typeInput = MovieType.IN_3D;
                     break;
-                case 3:
-                typeInput = MovieType.BLOCKBUSTER;
-                    break;
+                // case 3:
+                // typeInput = MovieType.BLOCKBUSTER;
+                //     break;
                 default:
                     System.out.println("Wrong input!\n" +
                                     "Going back");
@@ -305,7 +300,7 @@ public class UpdateRCMovie {
                 System.out.println("Enter movie age category (  2 .PG /3.  NC /4 . M /5.  R/ 6. E) :");
                 System.out.println("choose option");
                  option = sc.nextInt();
-                MovieAgeCategory ageCat;
+                MovieAgeCategory ageCat = MovieAgeCategory.PG;
                 switch(option){
                     case 2 : ageCat = MovieAgeCategory.PG; break;
                     case 3 : ageCat = MovieAgeCategory.NC; break;

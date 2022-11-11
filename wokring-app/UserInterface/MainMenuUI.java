@@ -262,7 +262,7 @@ public class MainMenuUI {
     private void start(){
          AccountManager accountMgr = new AccountManager();
 		 DataManager dataMgr = new DataManager();
-         AdminAccount temp = new AdminAccount(firstuser,helloworld,anon@gmail.com, 1234,ADMIN);
+         AdminAccount temp = new AdminAccount("firstuser","helloworld","anon@gmail.com", 1234,AccountType.ADMIN);
          dataMgr.addAdminAccount(temp);
          dataMgr.save();
     }
@@ -273,7 +273,7 @@ public class MainMenuUI {
 	 */
     public void viewHistory(AccountManager accountMgr){
     
-        Account viewAccount = accountMgr.getActiveAccount;
+        Account viewAccount = accountMgr.getActiveAccount();
         TransactionsCtrl transCtrl = new TransactionsCtrl();
         String userEmail= viewAccount.getEmail();
         System.out.println("Booking hisotry for account :\n");
@@ -304,7 +304,7 @@ public class MainMenuUI {
 	 */
     public void updateRCMovie(){
         UpdateRCMovie newUpdate  = new UpdateRCMovie();
-        newUpdate.main();
+        newUpdate.updateMovieFunction();
     }
 
 
@@ -314,7 +314,9 @@ public class MainMenuUI {
     public void addReview(AccountManager accountMgr){
         Scanner sc = new Scanner(System.in);
         MoviesCtrl moviesCtrl = new MoviesCtrl();
-        private SearchMovieUI searchMovieUI = new SearchMovieUI();
+
+		///////////////
+        // private SearchMovieUI searchMovieUI = new SearchMovieUI();
         String movieTitle;
         String userComment ;
         Account tempMovieGoerAcc = accountMgr.getActiveAccount();
@@ -338,7 +340,7 @@ public class MainMenuUI {
         sc.nextLine();//clear buffer discard input value;
         System.out.println("Input additional comment");
         userComment= sc.nextLine();
-        Reviews newReview = new Review(username,userComment,numStars);
+        Reviews newReview = new Reviews(username,userComment,numStars);
         Movie tempMovie = movie.get(0);
         ArrayList<Reviews> oldArrayList = tempMovie.getReviews();
         ArrayList<Reviews> newArrayList = new ArrayList<Reviews>();

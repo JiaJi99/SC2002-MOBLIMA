@@ -1,15 +1,8 @@
 package UserInterface;
 
-
-
 import java.util.*;
-
-
+import BaseClasses.Movie;
 import ManagerClasses.*;
-//import moblima.Manager.MoviesCtrl;
-
-
-
 
 public class MovieSearchUI {	
 	
@@ -76,7 +69,7 @@ public class MovieSearchUI {
 			case 1:
 					String searchTerm1 = retrieveSearchTerm(); 
 				
-					ArrayList<Movie> selectedMovies1 = moviesCtrl.readByID(choice, searchTerm1);
+					ArrayList<Movie> selectedMovies1 = moviesCtrl.readByAttribute(choice, searchTerm1);
 					displayAll_MovieDetails(selectedMovies1);
 	        
 					break;
@@ -84,19 +77,19 @@ public class MovieSearchUI {
 			case 2: 
 					String searchTerm2 = retrieveSearchTerm(); 
 				
-					ArrayList<Movie> selectedMovies2 = moviesCtrl.readByID(choice, searchTerm2);
+					ArrayList<Movie> selectedMovies2 = moviesCtrl.readByAttribute(choice, searchTerm2);
 					displayAll_MovieDetails(selectedMovies2);
 					break;
 			case 3: 
 					String searchTerm3 = retrieveSearchTerm(); 
 				
-					ArrayList<Movie> selectedMovies3 = moviesCtrl.readByID(MOVIE_START_DATE, searchTerm3);
+					ArrayList<Movie> selectedMovies3 = moviesCtrl.readByAttribute(MOVIE_START_DATE, searchTerm3);
 					displayAll_MovieDetails(selectedMovies3);
 					break;
 			case 4:
 					String searchTerm4 = retrieveSearchTerm(); 
 					
-					ArrayList<Movie> selectedMovies4 = moviesCtrl.readByID(MOVIE_END_DATE, searchTerm4);
+					ArrayList<Movie> selectedMovies4 = moviesCtrl.readByAttribute(MOVIE_END_DATE, searchTerm4);
 					displayAll_MovieDetails(selectedMovies4);
 		        
 					break;
@@ -165,7 +158,7 @@ public class MovieSearchUI {
 			System.out.println("======================================");
 			System.out.println("|| 	 ||Found All Movie Details||    ||");
 			
-			for(int i=0; i<selectedMovies.Size(); i++)
+			for(int i=0; i<selectedMovies.size(); i++)
 			{
 				System.out.printf("|| Movie %d: 	%s	\n", (i+1), selectedMovies.get(i).toString());
 			}
