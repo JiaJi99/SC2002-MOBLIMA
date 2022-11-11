@@ -12,12 +12,12 @@ public class Account implements Serializable{
 	protected String userName;
 	
 	/**
-	 * This Account's email
+	 * This Account's password
 	 */
 	protected String password;
 	
 	/**
-	 * This Account's password 
+	 * This Account's email 
 	 */
 	protected String email;
 	
