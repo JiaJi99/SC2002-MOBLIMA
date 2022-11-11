@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import BaseClasses.*;
 
 public class DataManager implements Serializable{
-	private static final String FILENAME_ADMIN = "C:\\Users\\kenny\\OneDrive\\Documents\\MOBLIMA\\AdminData.txt";
-	private static final String FILENAME_MOVIEGOER = "C:\\Users\\kenny\\OneDrive\\Documents\\MOBLIMA\\MovieGoerData.txt";
-	private static final String [] FILES = {FILENAME_ADMIN, FILENAME_MOVIEGOER};
+	public static final String FILENAME_ADMIN = "C:\\Users\\kenny\\OneDrive\\Documents\\MOBLIMA\\AdminData.txt";
+	public static final String FILENAME_MOVIEGOER = "C:\\Users\\kenny\\OneDrive\\Documents\\MOBLIMA\\MovieGoerData.txt";
+	public static final String [] FILES = {FILENAME_ADMIN, FILENAME_MOVIEGOER};
 	private ArrayList<AdminAccount> adminAccounts;
-	private ArrayList<MovieGoerAccount> movieGoerAccounts;
+	public ArrayList<MovieGoerAccount> movieGoerAccounts;
 	
 	public DataManager() {
 		adminAccounts = new ArrayList<AdminAccount>();
