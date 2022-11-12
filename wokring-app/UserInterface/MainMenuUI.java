@@ -98,11 +98,11 @@ public class MainMenuUI {
 		do {
 			System.out.println("Enter your choice.");
 			choice = sc.nextInt();
-			if (choice<1 || choice>6) {
+			if (choice<1 || choice>7) {
 				System.out.println(choice + " is not a valid choice.");
 				displayChoices_Main(accountMgr);					
 			} 
-		}	while (choice<1 || choice>6);
+		}	while (choice<1 || choice>7);
 			
 		switch(choice) {
 			case 1: login(accountMgr);
