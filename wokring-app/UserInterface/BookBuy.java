@@ -27,6 +27,7 @@ public class BookBuy {
     private Sessions chosenSession;
     private SeatPlan giveSeatPlan;
     private int numTickets;
+    private Scanner sc = new Scanner(System.in);
 
     
     public BookBuy(){
@@ -44,7 +45,6 @@ public class BookBuy {
         ArrayList<Cinemas> tempCinemasList;//= new ArrayList<Cinemas>();
         int option;
         printActiveMovies();
-        Scanner sc = new Scanner(System.in);
 
         ArrayList<Cineplex> cineplexList  = cinplexCtrl.read();
         System.out.println("=========AVAILABLE LOCATIONS=========== \n Enter choice :");
@@ -94,14 +94,14 @@ public class BookBuy {
      * To select seat id and save transcation 
      */
     public void createSeatStoreTrans(){
-        Scanner sc3 = new Scanner(System.in);
+        // Scanner sc3 = new Scanner(System.in);
         int id, amountLeft = numTickets;
         boolean successSeat = false;
         giveSeatPlan.printFloorPlan();
 
         for (int i =1;i<=amountLeft;i++){
             System.out.println("Choose seat id for " + i + " ticket: ");
-            id = sc3.nextInt();
+            id = sc.nextInt();
             successSeat = sessionsCtrl.assignSeat(giveSeatPlan,id,chosenSession.getId());
             if(successSeat==false){
                 System.out.println("Unsuccessful booking due to seat booking error");
@@ -126,14 +126,14 @@ public class BookBuy {
      * To display total price of the transcation
      */
     public void calPriceUI(){
-        Scanner sc2 = new Scanner(System.in);
+        // Scanner sc2 = new Scanner(System.in);
         double totalprice ;
         totalprice = 0;
         System.out.println("number of Tickets");
-         numTickets =  sc2.nextInt();
+         numTickets =  sc.nextInt();
          while (numTickets<1){
             System.out.println("atleast one ticket required");
-            numTickets =  sc2.nextInt();
+            numTickets =  sc.nextInt();
          }
          int age;
          Price priceCurrent = priceCtrl.read();
@@ -143,7 +143,7 @@ public class BookBuy {
             boolean validInput = false;
             while(validInput==false){
                 System.out.println("Enter age  :");
-                age = sc2.nextInt();
+                age = sc.nextInt();
                 
                 individualPrice = priceCtrl.calPrice(chosenSession,age,priceCurrent);
                 totalprice+=individualPrice;
@@ -154,7 +154,7 @@ public class BookBuy {
          int chooseOption = -1;
 
          System.out.println("Enter 1 to procced to transaction");
-         chooseOption = sc2.nextInt();
+         chooseOption = sc.nextInt();
          if (chooseOption ==1){
             createSeatStoreTrans();
          }

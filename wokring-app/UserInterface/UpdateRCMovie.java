@@ -28,15 +28,15 @@ public class UpdateRCMovie {
 	public void updateMovieFunction(){
         boolean returnMainMenu = false;
         while (returnMainMenu!=true){
-            System.out.print("\n\nCreate/Update/Remove Movie: \n\n" +
+            System.out.print("\n===================\nCreate/Update/Remove Movie: \n\n" +
             "1. Create Movie Listing\n" +
             "2. Update Movie Listing\n" +
             "3. Remove Movie Listing\n" +
-            "4. Return to Main Menu\n\n" +
+            "4. Return to Main Menu\n-----------------\n" +
             "Select : ");
         
         int option = -1;
-        option = sc.nextInt();
+        option = getIntFromUser();
         switch(option){
             case 1:
                 createMovie();
@@ -64,13 +64,17 @@ public class UpdateRCMovie {
             ArrayList<Movie> moviesList =  moviesCtrl.read();
             if (moviesList.size()==0){
                 System.out.println("Sorry no movies here yet ");
+                System.out.println("-------------------");
+
             }else {
                 for (int i =0;i<moviesList.size();i++){
                     System.out.println("\n\nTitle : "+moviesList.get(i).getTitle()+"\n ID : "+ moviesList.get(i).getID());
                 }
+                System.out.println("-------------------");
+
                 System.out.println("Enter movie id to remove");
                 int movieId ;
-                movieId = sc.nextInt();
+                movieId = getIntFromUser();
                 Movie m = null ;
                 boolean found = false;
                 for (int i =0;i<moviesList.size();i++){
@@ -79,6 +83,7 @@ public class UpdateRCMovie {
                         found = true;
                     }
                 }
+                System.out.println("-------------------");
 
                 if (found == true){
                     moviesCtrl.deleteById(m.getID());
@@ -86,8 +91,11 @@ public class UpdateRCMovie {
                 }
                 else {
                     System.out.println("Movie not found going back to menu");
+                    System.out.println("-------------------");
 
                 }
+                System.out.println("-------------------");
+
             }
 
         }
@@ -100,14 +108,22 @@ public class UpdateRCMovie {
             MoviesCtrl moviesCtrl = new MoviesCtrl();
             ArrayList<Movie> moviesList =  moviesCtrl.read();
             if (moviesList.size()==0){
+                System.out.println("-------------------");
+
                 System.out.println("Sorry no movies here yet ");
             }else {
                 for (int i =0;i<moviesList.size();i++){
-                    System.out.println("\n\nTitle : "+moviesList.get(i).getTitle()+"\n ID : "+ moviesList.get(i).getID());
+                    System.out.println("-------------------");
+
+                    System.out.println("Title : "+moviesList.get(i).getTitle()+"\nID : "+ moviesList.get(i).getID());
                 }
+                System.out.println("-------------------");
+
                 System.out.println("Enter movie id to update/edit");
                 int movieId ;
-                movieId = sc.nextInt();
+                System.out.println("-------------------");
+
+                movieId = getIntFromUser();
                 Movie m  ;
                 boolean found = false;
 
@@ -122,23 +138,24 @@ public class UpdateRCMovie {
                     System.out.println("sorry not found going back to main menu");
                     return ;
                 }
+                System.out.println("-------------------");
 
-                System.out.printf("Choose option" + "1. Movie Name\n" +
+                System.out.printf("Choose option :" + "\n1. Movie Name\n" +
                 "2. Movie Type (2D, 3D, Blockbuster)\n" +
                 "3. Synopsis/Summary\n" +
                 "4. Director Name \n" +
                 "5. Runtime Duration \n" +
                 "6. Movie Release date\n" +
                 "7. Last Day of Showing \n" +
-                "8. Cast Names List \n\n" +
-                "9. ID"+
-                "10. Movie Age Category"
+                "8. Cast Names List \n" +
+                "9. ID\n"+
+                "10. Movie Age Category\n");
+                System.out.println("-------------------");
 
-                );
 
                 int choice ;
-                choice = sc.nextInt();
-                sc.nextLine();//clearning buffer just in case new line character is taken in
+                choice = getIntFromUser();
+                // sc.nextLine();//clearning buffer just in case new line character is taken in
                 switch(choice){
                     case 1: System.out.println("Enter new movie name");
                             String newMovieName = "";
@@ -149,8 +166,8 @@ public class UpdateRCMovie {
                             System.out.println("Enter number to choose option");
                             // System.out.println("1. Blockbuster");
                             System.out.println("1. 3D");
-                            System.out.println("2.  2D");
-                            chooseMovieType= sc.nextInt();
+                            System.out.println("2. 2D");
+                            chooseMovieType= getIntFromUser();
                             switch(chooseMovieType){
                             case 1 :moviesCtrl.updateMovie(MoviesCtrl.TYPE,movieId,MovieType.IN_2D);
                                 break;
@@ -213,12 +230,14 @@ public class UpdateRCMovie {
 
                                 }
                                 moviesCtrl.updateMovie(MoviesCtrl.CAST,movieId,castNew);
+                                System.out.println("Update successful");
+                                 System.out.println("-------------------");
 
                             }
                             break;
                     case 9: System.out.println("Enter new id for movies :");
                             int newMovieID ;
-                            newMovieID = sc.nextInt();
+                            newMovieID = getIntFromUser();
                             if (newMovieID<0){
                                 System.out.println("Movie ID cannot be negative, terminating update, going back");
                                 return;
@@ -228,13 +247,14 @@ public class UpdateRCMovie {
 
                             break;
                     case 10: //movie age cat
-                            System.out.println("Enter movie age category (  2 .PG /3.  NC /4 . M /5.  R/ 6. E) :");
+                             System.out.println("Enter movie age category ( 1.PG    2.NC   3.M   4.R   5.E ) :");
+
                             System.out.println("choose option");
                             int option2temp =-1;
-                            option2temp = sc.nextInt();
+                            option2temp = getIntFromUser();
                             MovieAgeCategory ageCat2;
                             // break;
-                            switch(option2temp){
+                            switch(option2temp+1){
                                 case 2 : ageCat2 = MovieAgeCategory.PG; break;
                                 case 3 : ageCat2 = MovieAgeCategory.NC; break;
                                 case 4 : ageCat2 = MovieAgeCategory.M; break;
@@ -245,11 +265,15 @@ public class UpdateRCMovie {
                                 
                             }
                             moviesCtrl.updateMovie(MoviesCtrl.AGECATEGORY,movieId,ageCat2);
+                            System.out.println("-------------------");
+
                             break;
             
                     
                     default :
                     System.out.println("Wrong input, terminating update, back to main menu");
+                    System.out.println("-------------------");
+
                     return;
 
                             
@@ -268,15 +292,21 @@ public class UpdateRCMovie {
 	 * To create movie based on user input
 	 */
         public void createMovie(){
-        sc.nextLine();
+        // sc.nextLine();
+        System.out.println("-------------------");
+
         System.out.println("Enter movie title ");
-        String title = sc.nextLine();
+        String title = getStringFromUser();
+        System.out.println("-------------------");
+
         System.out.println("Select movie types: \n" +
                                         "	1. 2D\n" +
                                         "	2. 3D\n" +
                                         // "	3. Blockbuster\n\n" +
                                         "Enter option: ");
-        int option = sc.nextInt();
+        System.out.println("-------------------");
+
+        int option = getIntFromUser();
         MovieType typeInput;
         switch (option){		
                 case 1:
@@ -295,13 +325,16 @@ public class UpdateRCMovie {
                 }
 
 
+                System.out.println("-------------------");
                 System.out.println("Enter movie synopsis: ");
                 String synopsis = getStringFromUser();
-                System.out.println("Enter movie age category (  2 .PG /3.  NC /4 . M /5.  R/ 6. E) :");
+                System.out.println("-------------------");
+
+                System.out.println("Enter movie age category ( 1.PG    2.NC  3.M   4.R   5.E ) :");
                 System.out.println("choose option");
-                 option = sc.nextInt();
+                 option = getIntFromUser();
                 MovieAgeCategory ageCat = MovieAgeCategory.PG;
-                switch(option){
+                switch(option+1){
                     case 2 : ageCat = MovieAgeCategory.PG; break;
                     case 3 : ageCat = MovieAgeCategory.NC; break;
                     case 4 : ageCat = MovieAgeCategory.M; break;
@@ -309,11 +342,15 @@ public class UpdateRCMovie {
                     case 6 : ageCat = MovieAgeCategory.E; break;
                     
                 }
+                System.out.println("-------------------");
+
                 System.out.println("Enter movie duration: integer in mins ");
                 int duration = getIntFromUser();
+                System.out.println("-------------------");
         
                 System.out.println("Enter movie release date (DD/MM/YYYY) : ");
                 LocalDate movieReleaseDate =getDateFromUser();
+                System.out.println("-------------------");
         
                 System.out.println("Enter movie end date (DD/MM/YYYY) : ");
                 LocalDate movieEndDate = getDateFromUser();
@@ -325,8 +362,12 @@ public class UpdateRCMovie {
                                         "Returning to menu");
                         return;
                     }
+                System.out.println("-------------------");
+                
                 System.out.println("Enter movie director: ");
                 String director = getStringFromUser();
+                System.out.println("-------------------");
+
                 System.out.println("Enter number of casts (at least 2): ");
                 int numCast = getIntFromUser();
                 if (numCast < 2) {
@@ -340,17 +381,22 @@ public class UpdateRCMovie {
                     cast.add(getStringFromUser());
                     }
                 Language lang ;
-                System.out.println("Enter movie language 1 : English \n 2 Chinese \n 3: Japanese: \n Enter option");
-                    switch (option) {
+                 System.out.println("-------------------");
+
+                System.out.println("Enter movie language \n1: English \n2: Chinese \n3: Japanese: \nEnter option");
+                option = getIntFromUser();   
+                switch (option) {
                         case 1:lang = Language.ENGLISH; break;
                         case 2:lang = Language.CHINESE; break;
                         case 3 :lang = Language.JAPANESE;    break;
                         default : System.out.println("wrong input, returning");return ;
                     }
+                    moviesCtrl.create(title,typeInput,lang,ageCat,synopsis,director,duration,cast,movieReleaseDate,movieEndDate);
+                    System.out.println("-------------------");
+		            
+                    System.out.println("\nSuccess, Movie listing Created Returning");
+                    System.out.println("---------------------------------");
 
-                moviesCtrl.create(title,typeInput,lang,ageCat,synopsis,director,duration,cast,movieReleaseDate,movieEndDate);
-                
-		System.out.println("\n Returning");
 
 
         }
@@ -439,16 +485,3 @@ public class UpdateRCMovie {
     }
 
 }
-// //lang
-// Language lang ;
-// System.out.println("Enter updated movie language 1 : English \n 2 Chinese \n 3: Japanese: \n Enter option");
-// int tempVar2;
-// tempVar2 = sc.nextInt();
-// switch (tempVar2) {
-//     case 1:lang = Language.ENGLISH; break;
-//     case 2:lang = Language.CHINESE; break;
-//     case 3 :lang = Language.JAPANESE;    break;
-//     default : System.out.println("wrong input, terminating update, going back");return ;
-// }
-
-// moviesCtrl.updateMovie(MoviesCtrl.)

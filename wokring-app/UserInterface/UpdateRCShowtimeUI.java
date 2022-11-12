@@ -11,9 +11,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class UpdateRCShowtimeUI {
+	 static Scanner sc = new Scanner(System.in);
 
+	
 	/**
 	 * Display main body of Update showitime UI
 	 */
@@ -51,15 +54,15 @@ public class UpdateRCShowtimeUI {
 	 *@return int  return user input, if input is within valid range, else loop
 	 */
 	public int getInput(int i) {
-		Scanner sc = new Scanner(System.in);
 		int choice = 0;
 		do {
 			System.out.println("Enter your choice: ");
 			choice = sc.nextInt();
 			if (choice < 1 || choice > i)
 				System.out.println("Please enter a valid choice");
+			sc.nextLine();
 		} while (choice < 1 || choice > i);
-		sc.close();
+
 		return choice;
 	}
 	
@@ -68,7 +71,7 @@ public class UpdateRCShowtimeUI {
 	 */
 	public void createSession() {
 		SessionsCtrl sessionsCtrl = new SessionsCtrl();
-		Scanner sc = new Scanner(System.in);
+
 		System.out.println("Enter Cinema Code ");
 		String cinemaCode = sc.nextLine();
 		System.out.println("Enter Movie ID ");
@@ -77,9 +80,10 @@ public class UpdateRCShowtimeUI {
 		Movie movie = movieCtrl.readByID(movieID);
 		System.out.println("Enter Session Start Date and Time  EEEE, dd/MM/yyyy HH:mm");
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, dd/MM/yyyy HH:mm");
+		sc.nextLine();
 		LocalDateTime sessionDateTime = LocalDateTime.parse(sc.nextLine(), formatter);	
 		sessionsCtrl.create(cinemaCode, movie, sessionDateTime);
-		sc.close();
+
 	}
 	
 	/**
@@ -87,7 +91,7 @@ public class UpdateRCShowtimeUI {
 	 */
 	public void updateSession() {
 		SessionsCtrl sessionsCtrl = new SessionsCtrl();
-		Scanner sc = new Scanner(System.in);
+		// Scanner sc = new Scanner(System.in);
 		ArrayList<Sessions> sessionsList =  sessionsCtrl.read();
 		if (sessionsList.size()==0)
 			System.out.println("Sorry, no sessions have been created yet.");
@@ -118,6 +122,7 @@ public class UpdateRCShowtimeUI {
             int choice = getInput(3);
             switch(choice) {
             	case 1: System.out.println("Enter name of new movie");
+						sc.nextLine();//clear buffer
             			String movieName = sc.nextLine();
             			MoviesCtrl movieCtrl = new MoviesCtrl();
             			ArrayList<Movie> newMovie = movieCtrl.readByAttribute(1, movieName);
@@ -154,7 +159,7 @@ public class UpdateRCShowtimeUI {
 	 */
 	public void deleteSession() {
 		SessionsCtrl sessionsCtrl = new SessionsCtrl();
-		Scanner sc = new Scanner(System.in);
+		// Scanner sc = new Scanner(System.in);
 		ArrayList<Sessions> sessionsList =  sessionsCtrl.read();
 		if (sessionsList.size()==0)
 			System.out.println("Sorry, no sessions have been created yet.");
@@ -179,6 +184,86 @@ public class UpdateRCShowtimeUI {
 		}
 	}
 	
+//////////////
+	/**
+	 * To get non empty string from user and return input if non empty string
+	 *@return String  Return string input if not empty, else loop
+	 */
+	public static String getStringFromUser(){
+		String input = "";
+		while(input.equals("")){
+			input = sc.nextLine();
+			if(input.equals("")){
+				System.out.println("Cannot be empty, try again!");
+			}
+		}
+		return input;
+	}
+
+
+/**
+ * To get valid LocalDateTime user input and return input
+ *@return LocalDateTime   Return localdatetime if valid input from user, else loop
+ */
+	public static LocalDateTime getDateTimeFromUser(){
+	LocalDateTime result = null;
+	String date;
+	boolean validInput = false;
+	while(!validInput){
+		try{
+			date = sc.nextLine();
+			result = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+			validInput = true;
+		}
+		catch(DateTimeParseException e){
+			System.out.println("Must be of pattern DD/MM/YYYY HH:MM!");
+		}
+	}
+	return result;
+}
+
+
+/**
+ * To get date form user and return if valid date
+ *@return LocalDate  return localdate if valid, else loop 
+ */
+public static LocalDate getDateFromUser(){
+	LocalDate result = null;
+	String date;
+	boolean validInput = false;
+	while(!validInput){
+		try{
+			date = sc.nextLine();
+			result = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+			validInput = true;
+		}
+		catch(DateTimeParseException e){
+			System.out.println("Must be of pattern DD/MM/YYYY!");
+		}
+	}
+	return result;
+}
+
+
+/**
+ * Get user input and return input if valid
+ *@return int  	Return user input if valid, else loop
+ */
+public static int getIntFromUser(){
+	int input = -5;
+	boolean validInput = false;
+	while(!validInput) {
+		if(sc.hasNextInt()){
+			input = sc.nextInt();
+			validInput = true;
+		}
+		else{
+			System.out.println("Wrong input!");
+		}
+		sc.nextLine();
+	}
+	return input;
+}
 
 		
 }

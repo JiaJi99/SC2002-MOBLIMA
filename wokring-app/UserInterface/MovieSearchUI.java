@@ -1,7 +1,9 @@
 package UserInterface;
 
+import java.time.LocalDate;
 import java.util.*;
 import BaseClasses.Movie;
+import BaseClasses.MovieAgeCategory;
 import ManagerClasses.*;
 
 public class MovieSearchUI {	
@@ -74,22 +76,36 @@ public class MovieSearchUI {
 	        
 					break;
 				
-			case 2: 
-					String searchTerm2 = retrieveSearchTerm(); 
-				
-					ArrayList<Movie> selectedMovies2 = moviesCtrl.readByAttribute(choice, searchTerm2);
+			case 2: System.out.println(" Age Cateogires : 1.E , 2.PG , 3.NC , 4.M , 5.R \nEnter Option Number :");
+					int optionNew =-1;
+					MovieAgeCategory tempAgeCategory= MovieAgeCategory.PG;
+					optionNew = sc.nextInt();sc.nextLine();//clearing buffer
+					switch(optionNew){
+						case 1 : tempAgeCategory =MovieAgeCategory.E;break;
+						case 2: tempAgeCategory =MovieAgeCategory.PG;break;
+						case 3: tempAgeCategory=MovieAgeCategory.NC;break;
+						case 4: tempAgeCategory =MovieAgeCategory.M;break;
+						case 5: tempAgeCategory =MovieAgeCategory.R;break;
+					}
+					
+
+					ArrayList<Movie> selectedMovies2 = moviesCtrl.readByAttribute(MoviesCtrl.AGECATEGORY, tempAgeCategory);
 					displayAll_MovieDetails(selectedMovies2);
 					break;
 			case 3: 
+					System.out.println("Enter date in form only YYYY-MM-DD ");
 					String searchTerm3 = retrieveSearchTerm(); 
-				
-					ArrayList<Movie> selectedMovies3 = moviesCtrl.readByAttribute(MOVIE_START_DATE, searchTerm3);
+					LocalDate dLocalDate = LocalDate.parse(searchTerm3);
+					ArrayList<Movie> selectedMovies3 = moviesCtrl.readByAttribute(MOVIE_START_DATE, dLocalDate);
 					displayAll_MovieDetails(selectedMovies3);
 					break;
 			case 4:
+					System.out.println("Enter date in form only YYYY-MM-DD ");
+
 					String searchTerm4 = retrieveSearchTerm(); 
+					LocalDate dLocalDate2Date = LocalDate.parse(searchTerm4);
 					
-					ArrayList<Movie> selectedMovies4 = moviesCtrl.readByAttribute(MOVIE_END_DATE, searchTerm4);
+					ArrayList<Movie> selectedMovies4 = moviesCtrl.readByAttribute(MOVIE_END_DATE, dLocalDate2Date);
 					displayAll_MovieDetails(selectedMovies4);
 		        
 					break;
@@ -116,7 +132,7 @@ public class MovieSearchUI {
 	{
 		boolean isValid = false;
 		String input = "";
-		
+		sc.nextLine();
 		System.out.println("By providing a Attribute Phrase, all the Movie Details will be searched & retrieved: ");
 		System.out.println("Enter Pharse to search: ");
 		
@@ -156,10 +172,12 @@ public class MovieSearchUI {
 			displaySuccess_MovieSearch();
 			
 			System.out.println("======================================");
-			System.out.println("|| 	 ||Found All Movie Details||    ||");
+			System.out.println(" 	||Found All Movie Details||    ");
 			
 			for(int i=0; i<selectedMovies.size(); i++)
 			{
+				System.out.println("---------------------");
+				
 				System.out.printf("|| Movie %d: 	%s	\n", (i+1), selectedMovies.get(i).toString());
 			}
 			System.out.println("======================================");
@@ -182,9 +200,9 @@ public class MovieSearchUI {
 	public void displayIntro_MovieSearch()
 	{
 		System.out.println("==========================");
-		System.out.println("||	    Welcome to 		||");
-		System.out.println("||	   Movie Search 	||");
-		System.out.println("|| 		  Section 		||");
+		System.out.println("||       Welcome to      ||");
+		System.out.println("||      Movie Search     ||");
+		System.out.println("||         Section       ||");
 		System.out.println("==========================");
 	}
 	
@@ -197,9 +215,9 @@ public class MovieSearchUI {
 		System.out.println("\nThank you for using the Movie Search Section...\n");
 
 		System.out.println("==========================");
-		System.out.println("||	    Exiting the 	||");
-		System.out.println("||	   Movie Search 	||");
-		System.out.println("|| 		  Section 		||");
+		System.out.println("||        Exiting the     ||");
+		System.out.println("||       Movie Search     ||");
+		System.out.println("||         Section        ||");
 		System.out.println("==========================");
 	
 	}
@@ -210,13 +228,13 @@ public class MovieSearchUI {
 	public void displayChoices_MovieSearch()
 	{
 		System.out.println("==========================================");
-		System.out.println("|| 1. Search Movie via Title Name		||");
-		System.out.println("|| 2. Search Movie via Age Category	Type||");
+		System.out.println("|| 1. Search Movie via Title Name        ||");
+		System.out.println("|| 2. Search Movie via Age Category Type ||");
 		System.out.println("|| 3. Search Movie via MOVIE START DATE	||");
 		System.out.println("|| 4. Search Movie via MOVIE END DATE	||");
 		System.out.println("==========================================");
-		System.out.println("|| 5. Get the List of all Movies		||");
-		System.out.println("|| 6. Back								||");
+		System.out.println("|| 5. Get the List of all current Movies ||");
+		System.out.println("|| 6. Back                               ||");
 		System.out.println("==========================================");
 		
 	}

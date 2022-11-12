@@ -83,7 +83,7 @@ public class MovieBookingViewUI {
 		}while (choice<1 || choice>2);
 		
 		switch(choice) {
-			case 1: System.out.println("Enter your Email-ID: ");
+			case 1: 
 					userEmail =retrieveUserEmail();
 					displayAllTransactions_MovieBooking(userEmail);
 		        	break;
@@ -100,9 +100,9 @@ public class MovieBookingViewUI {
 	 */
 	public void displayIntro_MovieBooking(){
 		System.out.println("==========================");
-		System.out.println("||	    Welcome to 		||");
-		System.out.println("||  Movie Booking View 	||");
-		System.out.println("|| 		  Section 		||");
+		System.out.println("||       Welcome to      ||");
+		System.out.println("||  Movie Booking View   ||");
+		System.out.println("||         Section       ||");
 		System.out.println("==========================");
 	}
 	
@@ -115,9 +115,9 @@ public class MovieBookingViewUI {
 		System.out.println("Thank you for using the Movie Booking View Section...");
 
 		System.out.println("==========================");
-		System.out.println("||	    Exiting the 	||");
-		System.out.println("||  Movie Booking View 	||");
-		System.out.println("|| 		  Section 		||");
+		System.out.println("||       Exiting the     ||");
+		System.out.println("||  Movie Booking View   ||");
+		System.out.println("||        Section        ||");
 		System.out.println("==========================");
 		
 	}
@@ -129,8 +129,8 @@ public class MovieBookingViewUI {
 	public void displayChoices_MovieBooking()
 	{
 		System.out.println("======================================");
-		System.out.println("|| 1. View Movie Booking via Email	||");
-		System.out.println("|| 2. Back							||");
+		System.out.println("|| 1. View Movie Booking via Email   ||");
+		System.out.println("|| 2. Back                           ||");
 		System.out.println("======================================");
 	}
 	
@@ -149,7 +149,7 @@ public class MovieBookingViewUI {
 		if(!transactionCtrlList.isEmpty())
 		{
 			System.out.println("======================================");
-			System.out.println("|| 	||Found All Booking Details||	||");
+			System.out.println("||      ||Found All Booking Details||   ||");
 			
 			for(int i=0; i<transactionCtrlList.size(); i++)
 			{
@@ -178,7 +178,8 @@ public class MovieBookingViewUI {
         String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}";
         //Compile regular expression to get the pattern  
         Pattern pattern = Pattern.compile(regex);
-        
+        sc.nextLine();
+		System.out.println("Enter your Email-ID: ");
         while(!isEmailValid)
         {
         	email = sc.nextLine();

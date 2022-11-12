@@ -9,6 +9,7 @@ import BaseClasses.*;
 import java.lang.System.*;
 
 public class MainMenuUI {
+	public static Scanner sc = new Scanner(System.in);
 	
 	/**
 	 * Main function to start the moblima program
@@ -40,8 +41,8 @@ public class MainMenuUI {
 	/**
 	 * Display available actions for movie goer before login
 	 */
-	public void displayChoices_Main(AccountManager accountMgr){
-		System.out.println("==============================");
+	public void displayChoices_Main(){
+		System.out.println("\n==============MAIN MENU================");
 		System.out.println("1. Login");//done
 		System.out.println("2. Register New Account");//done
 		System.out.println("3. View Currently Showing/Preview  Movies");
@@ -57,7 +58,7 @@ public class MainMenuUI {
 	 * Display availble actions for admin
 	 */
 	public void displayChoices_Admin(AccountManager accountMgr){
-		System.out.println("==============================");
+		System.out.println("\n==============ADMIN MENU================");
 		System.out.println("1. Log Out");//done
 		System.out.println("2. Account Setting");//done
 		System.out.println("3. List Top Five Movies");//done
@@ -65,6 +66,8 @@ public class MainMenuUI {
 		System.out.println("5. Update/Remove/Create Showtime");
 		System.out.println("6. Exit");//one
 		System.out.println("7. Configure Prices and Holidays");//done
+		System.out.println("8. Search Movies");
+		System.out.println("9. List All Movies In Database");
 
 		System.out.println("==============================");	
 	}
@@ -74,7 +77,7 @@ public class MainMenuUI {
 	 * Display available actions for movie goer after login
 	 */
 	public void displayChoices_MovieGoer(AccountManager accountMgr){
-		System.out.println("==============================");
+		System.out.println("\n===============USER MENU===============");
 		System.out.println("1. Log Out");//done
 		System.out.println("2. Account Setting");//done
 		System.out.println("3. View Account History");//done
@@ -93,14 +96,14 @@ public class MainMenuUI {
 	 */
     public void displayUI_Main(AccountManager accountMgr) {
 		int choice;
-		Scanner sc = new Scanner(System.in);
-		displayChoices_Main(accountMgr);
+		// Scanner sc = new Scanner(System.in);
+		displayChoices_Main();
 		do {
 			System.out.println("Enter your choice.");
-			choice = sc.nextInt();
+			choice = getIntFromUser();
 			if (choice<1 || choice>7) {
 				System.out.println(choice + " is not a valid choice.");
-				displayChoices_Main(accountMgr);					
+				displayChoices_Main();					
 			} 
 		}	while (choice<1 || choice>7);
 			
@@ -136,14 +139,14 @@ public class MainMenuUI {
 	 */
 	public void displayUI_MovieGoer(AccountManager accountMgr) {
 		int choice;
-		Scanner sc = new Scanner(System.in);
+		// Scanner sc = new Scanner(System.in);
 		displayChoices_MovieGoer(accountMgr);
 		do {
 			System.out.println("Enter your choice.");
-			choice = sc.nextInt();
+			choice = getIntFromUser();
 			if (choice<1 || choice>9) {
 				System.out.println(choice + " is not a valid choice.");
-				displayChoices_Main(accountMgr);					
+				displayChoices_Main();					
 			} 
 		}	while (choice<1 || choice>9);
 		
@@ -179,16 +182,16 @@ public class MainMenuUI {
 	 */
 	public void displayUI_Admin(AccountManager accountMgr) {
 		int choice;
-		Scanner sc = new Scanner(System.in);
+		// Scanner sc = new Scanner(System.in);
 		displayChoices_Admin(accountMgr);
 		do {
 			System.out.println("Enter your choice.");
-			choice = sc.nextInt();
-			if (choice<1 || choice>7) {
+			choice = getIntFromUser();
+			if (choice<1 || choice>9) {
 				System.out.println(choice + " is not a valid choice.");
-				displayChoices_Main(accountMgr);					
+				displayChoices_Main();					
 			} 
-		}	while (choice<1 || choice>7);
+		}	while (choice<1 || choice>9);
 		
 		switch(choice) {
 		case 1: logout(accountMgr);
@@ -210,9 +213,35 @@ public class MainMenuUI {
         case 7: ChangePrice chnagePriceTemp = new ChangePrice();
                 chnagePriceTemp.changePriceMethod();
                 break;
+
+		case 8: MovieSearchUI movieSearchUI = new MovieSearchUI();
+				movieSearchUI.main();
+				break;	
+		case 9: displayall();
+				break;	
+
+
 	}
 	}
-	
+
+
+	/**
+	 * To list all movies in database irrepsitve of current or old
+	 */
+	public void displayall(){
+		System.out.println("-----------------------------------");
+
+		MoviesCtrl moviesCtrlTemp = new MoviesCtrl();
+		ArrayList<Movie> tempMList = moviesCtrlTemp.read();
+		for (int i =0;i<tempMList.size();i++){
+		System.out.println("TITLE: "+tempMList.get(i).getTitle());
+		System.out.println("ID : "+tempMList.get(i).getID());
+		System.out.println("-------------");
+
+			
+		}
+	}
+
 	/**
 	 * To login
 	 */
@@ -310,14 +339,14 @@ public class MainMenuUI {
             }
         }    
         int exitNum =-1;
-        Scanner sc = new Scanner(System.in);
+        // Scanner sc = new Scanner(System.in);
          do {
             System.out.println("Press 0 to exit ");
-            exitNum = sc.nextInt();
+            exitNum = getIntFromUser();
          }
         while (exitNum!=0);
 
-        sc.close();
+
     }
 	
 	/**
@@ -333,7 +362,7 @@ public class MainMenuUI {
 	 * Allow users to give their review and adds to reviews database
 	 */
     public void addReview(AccountManager accountMgr){
-        Scanner sc = new Scanner(System.in);
+        // Scanner sc = new Scanner(System.in);
         MoviesCtrl moviesCtrl = new MoviesCtrl();
 
         String movieTitle;
@@ -342,7 +371,7 @@ public class MainMenuUI {
         String username = tempMovieGoerAcc.getUserName();
 
         System.out.println("Search for movie to create review:\n Please enter title");
-        movieTitle = sc.next();
+        movieTitle = sc.nextLine();
         ArrayList<Movie> movie = moviesCtrl.readByAttribute(MoviesCtrl.TITLE,movieTitle);
         if (movie.size()==0){
             System.out.println("No movie with this title exits, exiting search");
@@ -350,7 +379,7 @@ public class MainMenuUI {
         }
         int numStars = -1;
         System.out.println("Input number of stars 0 to 5");
-        numStars = sc.nextInt();
+        numStars = getIntFromUser();
 
         if (numStars>5) numStars =5;
         if (numStars<0) numStars =0;
@@ -368,5 +397,25 @@ public class MainMenuUI {
         newArrayList.add(newReview);
         moviesCtrl.updateMovie(MoviesCtrl.REVIEWS,tempMovie.getID(),newArrayList);
     }
+	/**
+	 * Get user input and return input if valid
+	 *@return int  	Return user input if valid, else loop
+	 */
+    public static int getIntFromUser(){
+        int input = -5;
+        boolean validInput = false;
+        while(!validInput) {
+            if(sc.hasNextInt()){
+                input = sc.nextInt();
+                validInput = true;
+            }
+            else{
+                System.out.println("Wrong input!");
+            }
+            sc.nextLine();
+        }
+        return input;
+    }
+
 
 }

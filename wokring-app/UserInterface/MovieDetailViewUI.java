@@ -18,7 +18,6 @@ public class MovieDetailViewUI {
 	private MoviesCtrl moviesCtrl;
 	
 	public MovieDetailViewUI() {
-		
 		this.moviesCtrl = new MoviesCtrl();
 		
 	}
@@ -49,9 +48,9 @@ public class MovieDetailViewUI {
 	public void displayIntro_MovieDetail()
 	{
 		System.out.println("==========================");
-		System.out.println("||	    Welcome to 		||");
-		System.out.println("||	 Movie Detail View 	||");
-		System.out.println("|| 		  Section 		||");
+		System.out.println("||       Welcome to      ||");
+		System.out.println("||    Movie Detail View  ||");
+		System.out.println("||         Section       ||");
 		System.out.println("==========================");
 		
 	}
@@ -65,9 +64,9 @@ public class MovieDetailViewUI {
 		System.out.println("\nThank you for using the Movie Details Section...\n");
 
 		System.out.println("==========================");
-		System.out.println("||	    Exiting the 	||");
-		System.out.println("||	 Movie Detail View 	||");
-		System.out.println("|| 		  Section 		||");
+		System.out.println("||       Exiting the     ||");
+		System.out.println("||    Movie Detail View  ||");
+		System.out.println("||         Section       ||");
 		System.out.println("==========================");
 	}
 
@@ -121,10 +120,10 @@ public class MovieDetailViewUI {
 	public void displayAttributesChoices_MovieDetail()
 	{
 		System.out.println("==========================================");
-		System.out.println("|| 1. Search Movie via Title Name		||");
-		System.out.println("|| 2. Search Movie via Age Category	Type||");
-		System.out.println("|| 3. Search Movie via MOVIE START DATE	||");
-		System.out.println("|| 4. Search Movie via MOVIE END DATE	||");
+		System.out.println("|| 1. Search Movie via Title Name        ||");
+		System.out.println("|| 2. Search Movie via Age Category  Type||");
+		System.out.println("|| 3. Search Movie via MOVIE START DATE  ||");
+		System.out.println("|| 4. Search Movie via MOVIE END DATE    ||");
 		System.out.println("==========================================");
 		
 	}
@@ -190,12 +189,11 @@ public class MovieDetailViewUI {
         return input;
 	}
 	
-	
-	
 	/**
 	 * To get and return MovieID
 	 *@return int  Return Movie'sID if valid, else loop
 	 */
+
 	public int retrieveMovieID()
 	{
 		boolean isMovieIDValid = false;
@@ -234,7 +232,7 @@ public class MovieDetailViewUI {
 		{
 			String movieDetails = selectedMovie.toString();
 			System.out.println("======================================");
-			System.out.println("|| 	   ||Found Movie Details||	    ||");
+			System.out.println("||      ||Found Movie Details||      ||");
 			System.out.printf("|| Movie:	%s  ", movieDetails);
 			System.out.println("======================================");
 			
@@ -252,9 +250,9 @@ public class MovieDetailViewUI {
 	 */
 	public void displayChoices_MovieDetail() {
 		System.out.println("==========================================");
-		System.out.println("|| 1. Search Movie via Movie ID		||");
-		System.out.println("|| 2. Search Movie via Movie Attribute	||");
-		System.out.println("|| 3. Back					||");
+		System.out.println("|| 1. Search Movie via Movie ID          ||");
+		System.out.println("|| 2. Search Movie via Movie Attribute   ||");
+		System.out.println("|| 3. Back                               ||");
 		System.out.println("==========================================");
 	}
 
