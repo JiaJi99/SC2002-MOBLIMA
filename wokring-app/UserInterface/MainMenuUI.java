@@ -119,7 +119,7 @@ public class MainMenuUI {
 					break;	
 		}
 
-		sc.close();
+// 		sc.close();
 	}
 	
 	/**
