@@ -54,7 +54,7 @@ public class Holiday implements Serializable {
 
     
     /** 
-     * String to return when this Movie_Goer is being called
+     * String to return when this Holiday is being called
      * @return String
      */
     public String toString() {
