@@ -112,7 +112,7 @@ public class PriceCtrl {
      */
     public double calPrice(Sessions session,int age,Price p) {
     	double finalprice=0;
-        HolidaysController holidaysController = new HolidaysController();
+        HolidaysCtrl holidaysController = new HolidaysCtrl();
         
     	if (session.getMovie().getType().equals(MovieType.IN_3D)) {
     		finalprice+= p.get3D();
