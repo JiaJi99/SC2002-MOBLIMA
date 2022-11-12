@@ -14,6 +14,7 @@ public class MainMenuUI {
 	 * Main function to start the moblima program
 	 */
 	public MainMenuUI() {
+		start();
         
     }
 	
@@ -23,7 +24,6 @@ public class MainMenuUI {
 	 * Display moviegoer interface
 	 */
 	public void main() {
-		start();
          AccountManager accountMgr = new AccountManager();
         //  DataManager dataMgr = new DataManager();
 
@@ -44,10 +44,11 @@ public class MainMenuUI {
 		System.out.println("==============================");
 		System.out.println("1. Login");//done
 		System.out.println("2. Register New Account");//done
-		System.out.println("3. View Movies");
+		System.out.println("3. View Currently Showing/Preview  Movies");
 		System.out.println("4. List Top 5 movies");//done
 		System.out.println("5. Search Movies");
 		System.out.println("6. Exit");//done
+		System.out.println("7. View History (email required)");
 		System.out.println("==============================");	
 	}
 	
@@ -62,7 +63,7 @@ public class MainMenuUI {
 		System.out.println("3. List Top Five Movies");//done
 		System.out.println("4. Update/Remove/Create Movie");//done
 		System.out.println("5. Update/Remove/Create Showtime");
-		System.out.println("6. Exit");//done
+		System.out.println("6. Exit");//one
 		System.out.println("7. Configure Prices");//done
 
 		System.out.println("==============================");	
@@ -76,7 +77,7 @@ public class MainMenuUI {
 		System.out.println("==============================");
 		System.out.println("1. Log Out");//done
 		System.out.println("2. Account Setting");//done
-		System.out.println("3. View History");//done
+		System.out.println("3. View Account History");//done
 		System.out.println("4. List Top 5 Movies");//done
 		System.out.println("5. Add Rating and Review");//done
 		System.out.println("6. Book Movie Ticket");//done
@@ -108,18 +109,26 @@ public class MainMenuUI {
 					break;
 			case 2: register(accountMgr);
 					break;
-			case 3: //to be implemented
+			case 3: MoviesCtrl moviesCtrlTemp = new MoviesCtrl();
+					ArrayList<Movie> availableMovies = moviesCtrlTemp.readAvailableMovies();
+					for (int mo = 0;mo<availableMovies.size();mo++){
+						System.out.println("Title : "+ availableMovies.get(mo).getTitle());
+					}
+					System.out.println("------------------------");
 					 break;
 			case 4: ViewMovieTop5UI tempNew = new ViewMovieTop5UI();
                     tempNew.listTop5(accountMgr);
 					break;
-			case 5:	//to be implemented
+			case 5:	MovieSearchUI movieSearchUI = new MovieSearchUI();
+					movieSearchUI.main();
 					break;
 			case 6: exit(accountMgr);
 					break;	
+			case 7 : MovieBookingViewUI movieBookingViewUI = new MovieBookingViewUI();
+						movieBookingViewUI.main();
 		}
 
-// 		sc.close();
+		// sc.close();
 	}
 	
 	/**
@@ -150,14 +159,16 @@ public class MainMenuUI {
 				break;
         case 5:	addReview(accountMgr);
 				break;                
-        case 6:	//to be implemented
-                //book buy
+        case 6: BookBuy tempBookBuy = new BookBuy();
+				tempBookBuy.bookbuyMethod();
 				break;		
         case 7:	exit(accountMgr);
 				break;
-		case 8: //to be implemented
+		case 8: MovieDetailViewUI movieDetailViewUI = new MovieDetailViewUI();
+				movieDetailViewUI.main();
 				break;	
-        case 9: //to be implemented
+        case 9: MovieSearchUI movieSearchUI = new MovieSearchUI();
+				movieSearchUI.main();
 				break;	
                 
 	}
@@ -190,7 +201,8 @@ public class MainMenuUI {
 		case 4: UpdateRCMovie tempUpdateClass = new UpdateRCMovie();
                 tempUpdateClass.updateMovieFunction();
 				break;
-		case 5:	//to be implemented
+		case 5:	UpdateRCShowtimeUI updateRCShowtimeUI = new UpdateRCShowtimeUI();
+				updateRCShowtimeUI.displayUI_UpdateRCSession();
 				break;
 		case 6: exit(accountMgr);
 				break;	
@@ -324,13 +336,10 @@ public class MainMenuUI {
         Scanner sc = new Scanner(System.in);
         MoviesCtrl moviesCtrl = new MoviesCtrl();
 
-		///////////////
-        // private SearchMovieUI searchMovieUI = new SearchMovieUI();
         String movieTitle;
         String userComment ;
         Account tempMovieGoerAcc = accountMgr.getActiveAccount();
         String username = tempMovieGoerAcc.getUserName();
-        // searchMovieUI.listAllMovies();
 
         System.out.println("Search for movie to create review:\n Please enter title");
         movieTitle = sc.next();
