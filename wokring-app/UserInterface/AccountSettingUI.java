@@ -12,14 +12,30 @@ import ManagerClasses.DataManager;
 
 
 public class AccountSettingUI {
+	
+	/**
+	 * Controller that this UI will reference
+	 */ 
 	private AccountSettingManager accountSettingMgr;
+	
+	
+	/**
+	 * Controller that this UI will reference
+	 */ 
 	private AccountManager accountMgr;
 	
+	/**
+	 * Paramasize Constructor 
+	 */
 	public AccountSettingUI(AccountManager accountMgr, DataManager dataMgr) {
 		this.accountSettingMgr = new AccountSettingManager(accountMgr, dataMgr);
 		this.accountMgr = accountMgr;
 	}
 	
+	
+	/**
+	 * Initalise account database to read and write
+	 */
 	public void main() {
 		Account tempAccount = accountMgr.getActiveAccount();
 		if (tempAccount.getAccountType() == AccountType.ADMIN) {
@@ -32,6 +48,10 @@ public class AccountSettingUI {
 		}
 	}
 	
+	
+	/**
+	 * Display and get user input for selection of user setting configuration
+	 */
 	public void displayUI_Admin() {
 		int choice;
 		Scanner sc = new Scanner(System.in);
@@ -64,6 +84,10 @@ public class AccountSettingUI {
 		}	
 	}
 	
+	
+	/**
+	 * Display and get user input for update movie goer UI
+	 */
 	public void displayUI_MovieGoer() {
 		int choice;
 		Scanner sc = new Scanner(System.in);
@@ -99,6 +123,10 @@ public class AccountSettingUI {
 		}	
 	}
 	
+	
+	/**
+	 * display admin UI
+	 */
 	public void displayChoices_Admin() {
 		System.out.println("==============================");
 		System.out.println("1. Update username");
@@ -110,6 +138,10 @@ public class AccountSettingUI {
 		System.out.println("==============================");	
 	}
 	
+	
+	/**
+	 * Display MovieGoer UI
+	 */
 	public void displayChoices_MovieGoer() {
 		System.out.println("==============================");
 		System.out.println("1. Update username");
@@ -122,6 +154,10 @@ public class AccountSettingUI {
 		System.out.println("==============================");	
 	}
 	
+	
+	/**
+	 * Calls and display account detail of this account
+	 */
 	public void displayAccountDetail(){
 		Account tempAccount = accountMgr.getActiveAccount();
 		if (tempAccount.getAccountType() == AccountType.ADMIN)
@@ -130,6 +166,10 @@ public class AccountSettingUI {
 			displayMovieGoerAccountDetail((MovieGoerAccount) tempAccount);		
 	}
 	
+	
+	/**
+	 * Display Movie goer account detail in a string format
+	 */
 	public void displayMovieGoerAccountDetail(MovieGoerAccount acc){
 		System.out.println("==============================");
 		System.out.println("        ACCOUNT DETAIL        ");
@@ -140,6 +180,12 @@ public class AccountSettingUI {
 		System.out.println("==============================");	
 	}
 	
+	
+	
+	
+	/**
+	 * Display Admin account detail in a string format
+	 */
 	public void displayAdminAccountDetail(AdminAccount acc){
 		System.out.println("==============================");
 		System.out.println("        ACCOUNT DETAIL        ");
