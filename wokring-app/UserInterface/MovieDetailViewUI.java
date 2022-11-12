@@ -190,6 +190,12 @@ public class MovieDetailViewUI {
         return input;
 	}
 	
+	
+	
+	/**
+	 * To get and return MovieID
+	 *@return int  Return Movie'sID if valid, else loop
+	 */
 	public int retrieveMovieID()
 	{
 		boolean isMovieIDValid = false;
