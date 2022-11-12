@@ -11,11 +11,14 @@ import java.lang.System.*;
 public class MainMenuUI {
 	public static Scanner sc = new Scanner(System.in);
 	
+
 	/**
 	 * Main function to start the moblima program
 	 */
 	public MainMenuUI() {
 		start();
+		firstRunDataInput();
+		
         
     }
 	
@@ -357,6 +360,33 @@ public class MainMenuUI {
         newUpdate.updateMovieFunction();
     }
 
+	/**
+	 * For creating the Cineplexes and Cinemas the first time the code is run and saving it to txt files
+	 */
+	public  void firstRunDataInput(){
+		ArrayList<Cinemas> inputCinemasList1 = new ArrayList<Cinemas>();
+		ArrayList<Cinemas> inputCinemasList2 = new ArrayList<Cinemas>();
+		ArrayList<Cinemas> inputCinemasList3 = new ArrayList<Cinemas>();
+
+		CineplexController cineplexController = new CineplexController();
+		MoviesCtrl moviesCtrl = new MoviesCtrl();
+		inputCinemasList1.add(new Cinemas("CR", new SeatPlan(8, 8)));
+		inputCinemasList1.add(new Cinemas("KV", new SeatPlan(8, 8)));
+		inputCinemasList1.add(new Cinemas("LW", new SeatPlan(8, 8)));
+		inputCinemasList3.add(new Cinemas("DR", new SeatPlan(8, 8)));
+		inputCinemasList3.add(new Cinemas("PV", new SeatPlan(8, 8)));
+		inputCinemasList3.add(new Cinemas("OT", new SeatPlan(8, 8)));
+		inputCinemasList2.add(new Cinemas("EZ", new SeatPlan(8, 8)));
+		inputCinemasList2.add(new Cinemas("ID", new SeatPlan(8, 8)));
+		inputCinemasList2.add(new Cinemas("TI", new SeatPlan(8, 8)));
+
+		if(cineplexController.read().size()==0){
+			cineplexController.create("Jurong East Cineplex", inputCinemasList1);
+			cineplexController.create("Marina Bay Cineplex ", inputCinemasList2);
+			cineplexController.create("Bouna Vista Cineplex", inputCinemasList3);
+
+		}
+	}
 
 	/**
 	 * Allow users to give their review and adds to reviews database
@@ -370,7 +400,7 @@ public class MainMenuUI {
         Account tempMovieGoerAcc = accountMgr.getActiveAccount();
         String username = tempMovieGoerAcc.getUserName();
 
-        System.out.println("Search for movie to create review:\n Please enter title");
+        System.out.println("Search for movie to create review:\nPlease enter title");
         movieTitle = sc.nextLine();
         ArrayList<Movie> movie = moviesCtrl.readByAttribute(MoviesCtrl.TITLE,movieTitle);
         if (movie.size()==0){
@@ -384,7 +414,7 @@ public class MainMenuUI {
         if (numStars>5) numStars =5;
         if (numStars<0) numStars =0;
 
-        sc.nextLine();//clear buffer discard input value;
+        // sc.nextLine();//clear buffer discard input value;
         System.out.println("Input additional comment");
         userComment= sc.nextLine();
         Reviews newReview = new Reviews(username,userComment,numStars);

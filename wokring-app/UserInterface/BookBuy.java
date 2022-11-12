@@ -36,6 +36,7 @@ public class BookBuy {
         this.moviesCtrl = new  MoviesCtrl();
         this.priceCtrl = new PriceCtrl();
         this.sessionsCtrl = new SessionsCtrl();
+
     }
 
     /**
@@ -51,7 +52,7 @@ public class BookBuy {
 
         for (int i =0;i<cineplexList.size();i++){
             String cinplexString = cineplexList.get(i).getCineplexName();
-            System.out.println(i+1+")");
+            System.out.print(i+1+")");
             System.out.print(" "+cinplexString + "\n");
         } 
         System.out.println("Enter 0 to return to main menu page");
@@ -79,6 +80,7 @@ public class BookBuy {
             }
             else{
                 choseDateTime(tempCinemasList);
+                
                 calPriceUI();
             }
 
@@ -102,6 +104,8 @@ public class BookBuy {
         for (int i =1;i<=amountLeft;i++){
             System.out.println("Choose seat id for " + i + " ticket: ");
             id = sc.nextInt();
+            
+
             successSeat = sessionsCtrl.assignSeat(giveSeatPlan,id,chosenSession.getId());
             if(successSeat==false){
                 System.out.println("Unsuccessful booking due to seat booking error");
@@ -137,19 +141,21 @@ public class BookBuy {
          }
          int age;
          Price priceCurrent = priceCtrl.read();
-         double individualPrice;
+         double individualPrice =0;
          for (int i =1;i<=numTickets;i++){
             System.out.println("Ticket number "+i);
             boolean validInput = false;
             while(validInput==false){
                 System.out.println("Enter age  :");
                 age = sc.nextInt();
-                
+                if (chosenSession!= null)
                 individualPrice = priceCtrl.calPrice(chosenSession,age,priceCurrent);
+                
                 totalprice+=individualPrice;
                 System.out.println("Price of this ticket is :"+individualPrice);
             }
          }
+
          System.out.println("Total Price of tickets is :"+totalprice);
          int chooseOption = -1;
 
@@ -186,14 +192,15 @@ public class BookBuy {
             if (tempCode.equals(cinemaCode)){
                 for (int j = 0;j<curCinema.getShowtimes().size();j++){
                     tempSession = curCinema.getShowtimes().get(j);
-                    if(tempSession.getSessionDateTime().equals(localDateTime));
+                    if(tempSession.getSessionDateTime().equals(localDateTime)){
                     chosenSession = tempSession;
                     chosenCinema = curCinema;
                     giveSeatPlan = tempSession.getSeatsAvailability();
-                    return;
+                    break;}
                 }
             }
         }
+        System.out.println("Chosen session not avaliable");
 
     }
 
@@ -230,8 +237,12 @@ public class BookBuy {
 
             returnCinemasList.add(curCinema);
         }
-
+        if (returnCinemasList.size()==0){
+            System.out.println("Sorry no shows right now, returning..");
+        }
+        else 
         System.out.println("====All shows listed =====");
+        
         return returnCinemasList;
     }
 
