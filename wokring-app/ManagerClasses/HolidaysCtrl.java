@@ -25,7 +25,7 @@ public class HolidaysCtrl {
      * If attributes are not allowed, throw error and do nothing
      * If Database file exist, existing records are read and new holiday object is aopended before saving
      * If Database file does not exist, holiday object will be written to a new file and saved
-     * @param holidayDate   Date of this Holiday
+     * @param holidayDate   date of a holiday
      */
     public void create(LocalDate holidayDate) {
         Holiday holiday = new Holiday(holidayDate);
@@ -46,7 +46,7 @@ public class HolidaysCtrl {
 
     
     /** 
-     * READ and return every Cineplex in the Database file
+     * READ and return every Holidat in the Database file
      * If Database file not found, ignore error and return empty list
      * @return Model.{@link Holiday}   Return list of Holidays if any, else empty list
      */
@@ -83,9 +83,9 @@ public class HolidaysCtrl {
 
     
     /** 
-     * Check if a date is an holiday by checking against every records in the Database file
+     * Check if a date is an holiday by checking against every data in the Database file
      * @param valueToSearch     Date of Holiday to be check
-     * @return boolean          Return true if Date passed in is a holiday, else false
+     * @return boolean          Return true if valueToSearch is in database, else false
      */
     public boolean isHoliday(LocalDate valueToSearch) {
         ArrayList<Holiday> allData = read();
@@ -98,7 +98,7 @@ public class HolidaysCtrl {
 
     
     /** 
-     * Overwrite Database file with new data of list of Admin
+     * Overwrite Database file with new data of list of Holidays
      * @param filename      Filename to check for
      * @param data          New ArrayList of Holiday to be written to the file
      */
