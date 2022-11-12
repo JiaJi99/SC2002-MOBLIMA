@@ -64,7 +64,7 @@ public class MainMenuUI {
 		System.out.println("4. Update/Remove/Create Movie");//done
 		System.out.println("5. Update/Remove/Create Showtime");
 		System.out.println("6. Exit");//one
-		System.out.println("7. Configure Prices");//done
+		System.out.println("7. Configure Prices and Holidays");//done
 
 		System.out.println("==============================");	
 	}
