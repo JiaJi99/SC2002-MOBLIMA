@@ -112,6 +112,8 @@ public class PriceCtrl {
      */
     public double calPrice(Sessions session,int age,Price p) {
     	double finalprice=0;
+        HolidaysController holidaysController = new HolidaysController();
+        
     	if (session.getMovie().getType().equals(MovieType.IN_3D)) {
     		finalprice+= p.get3D();
     	}
@@ -124,6 +126,9 @@ public class PriceCtrl {
     	if (session.getStartTime().getHour()<18) {
     		return finalprice;
     	}
+        if (holidaysController.isHoliday(session.getSessionDateTime().toLocalDate())){
+            return finalprice+=p.getWeekend();
+        }
     	else {
     		return finalprice+p.getAfter6();   	
     	}
