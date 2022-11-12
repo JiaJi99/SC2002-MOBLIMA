@@ -117,8 +117,9 @@ public class PriceCtrl {
     	if (session.getMovie().getType().equals(MovieType.IN_3D)) {
     		finalprice+= p.get3D();
     	}
-    	if(session.isWeekend()) {
+    	if(session.isWeekend() || holidaysController.isHoliday(session.getSessionDateTime().toLocalDate())) {
     		finalprice+=p.getWeekend();
+		return finalprice;
     	}
     	else {
     		finalprice += getAgePrice(age,p);
@@ -126,9 +127,6 @@ public class PriceCtrl {
     	if (session.getStartTime().getHour()<18) {
     		return finalprice;
     	}
-        if (holidaysController.isHoliday(session.getSessionDateTime().toLocalDate())){
-            return finalprice+=p.getWeekend();
-        }
     	else {
     		return finalprice+p.getAfter6();   	
     	}
