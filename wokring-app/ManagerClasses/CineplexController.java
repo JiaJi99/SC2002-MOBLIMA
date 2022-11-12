@@ -15,7 +15,7 @@ public class CineplexController {
 	/**
      * File name of Database file to access
      */
-    public final static String FILENAME = "MOBLIMA/database/cineplexes.txt";
+    public final static String FILENAME = "./cineplexes.txt";
 
     /**
      * Declaring constant for better readability and easier referencing to attribute

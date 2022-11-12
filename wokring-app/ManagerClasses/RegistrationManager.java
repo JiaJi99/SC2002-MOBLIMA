@@ -39,6 +39,9 @@ public class RegistrationManager {
 			accountMgr.setActiveAccount(tempAccount);
 			accountMgr.setMovieGoerLoggedIn(true);
 			System.out.println("Account Successfully Created.");
+			System.out.println("Weclome to the user home screen.");
+
+
 		}
 		else System.out.println("Account already exists.");
 	}

@@ -18,7 +18,7 @@ public class MoviesCtrl {
 	/**
      * The file name of the database file that this controller will access
      */
-    public final static String FILENAME = "MOBLIMA/database/movies.txt";
+    public final static String FILENAME = "./movies.txt";
 
     /**
      * The Review Controller that this controller will reference
@@ -162,7 +162,11 @@ public class MoviesCtrl {
                     if (m.getEndDate().equals((LocalDate) valueToSearch))
                         returnData.add(m);
                     break;
+                case AGECATEGORY:
+                    if (m.getAgeCat().equals((MovieAgeCategory)valueToSearch))
+                        returnData.add(m);
                 default:   
+
                     System.out.println(".....readByAttribute NOT ALLOWED");
                     break;
             }

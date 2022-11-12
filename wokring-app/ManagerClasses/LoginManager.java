@@ -31,7 +31,7 @@ public class LoginManager {
 			}
 			else {
 				accountMgr.setActiveAccount(tempAccount);
-				System.out.printf("Welcome, %s\n", tempAccount.getUserName());
+				System.out.printf(" \nWelcome, %s\n", tempAccount.getUserName());
 				if (tempAccount.getAccountType() == AccountType.ADMIN)
 					accountMgr.setAdminLoggedIn(true);
 				else 
@@ -39,7 +39,7 @@ public class LoginManager {
 				return;
 			}
 			
-					
+			
 		}
 		
 		public Account accountMatch(String userName, String password) {

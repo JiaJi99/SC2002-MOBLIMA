@@ -10,7 +10,7 @@ import java.io.ObjectOutputStream;
 
 public class PriceCtrl {
 	
-   public final static String FILENAME = "MOBLIMA/database/price.txt";
+   public final static String FILENAME = "./price.txt";
 	
 	/**
 	 * Assigning constants to attributes for easy readability
@@ -117,9 +117,9 @@ public class PriceCtrl {
     	if (session.getMovie().getType().equals(MovieType.IN_3D)) {
     		finalprice+= p.get3D();
     	}
-    	if(session.isWeekend() || holidaysController.isHoliday(session.getSessionDateTime().toLocalDate())) {
+    	if(session.isWeekend()|| holidaysController.isHoliday(session.getSessionDateTime().toLocalDate())) {
     		finalprice+=p.getWeekend();
-		return finalprice;
+            return finalprice;
     	}
     	else {
     		finalprice += getAgePrice(age,p);

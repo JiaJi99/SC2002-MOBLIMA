@@ -16,7 +16,7 @@ public class TransactionsCtrl {
 	/**
 	 * File path to database of transaction that this controller will access
 	 */
-	public final static String FILENAME = "MOBLIMA/database/transactions.txt";
+	public final static String FILENAME = "./transactions.txt";
 	
 	/**
 	 * Create a new transaction and add it into database

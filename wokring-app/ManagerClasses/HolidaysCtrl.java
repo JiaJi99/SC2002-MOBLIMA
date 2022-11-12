@@ -16,7 +16,7 @@ public class HolidaysCtrl {
     /**
      * File name of Database file to access
      */
-    public final static String FILENAME = "MOBLIMA/database/holidays.txt";
+    public final static String FILENAME = "./holidays.txt";
 
     
     /** 
@@ -46,7 +46,7 @@ public class HolidaysCtrl {
 
     
     /** 
-     * READ and return every Holidat in the Database file
+     * READ and return every Holiday in the Database file
      * If Database file not found, ignore error and return empty list
      * @return Model.{@link Holiday}   Return list of Holidays if any, else empty list
      */
@@ -99,7 +99,7 @@ public class HolidaysCtrl {
     
     /** 
      * Overwrite Database file with new data of list of Holidays
-     * @param filename      Filename to check for
+s     * @param filename      Filename to check for
      * @param data          New ArrayList of Holiday to be written to the file
      */
     public void replaceExistingFile(String filename, ArrayList<Holiday> data){
