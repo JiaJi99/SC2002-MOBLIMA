@@ -14,7 +14,7 @@ public class MainMenuUI {
 	 * Main function to start the moblima program
 	 */
 	public MainMenuUI() {
-        start();
+        
     }
 	
 	/**
@@ -23,6 +23,7 @@ public class MainMenuUI {
 	 * Display moviegoer interface
 	 */
 	public void main() {
+		start();
          AccountManager accountMgr = new AccountManager();
         //  DataManager dataMgr = new DataManager();
 
@@ -117,6 +118,8 @@ public class MainMenuUI {
 			case 6: exit(accountMgr);
 					break;	
 		}
+
+		sc.close();
 	}
 	
 	/**
@@ -204,9 +207,10 @@ public class MainMenuUI {
 	public void login(AccountManager accountMgr) {
 
         DataManager dataMgr = new DataManager();
-
+		dataMgr.initialize();
 		LoginManager log_manager = new LoginManager(accountMgr, dataMgr);
 		log_manager.loginUser();
+		dataMgr.save();
 	}
 	
 	/**
@@ -215,7 +219,7 @@ public class MainMenuUI {
 	public void register(AccountManager accountMgr) {
 
         DataManager dataMgr = new DataManager();
-
+		dataMgr.initialize();
 		RegistrationManager reg_manager = new RegistrationManager(accountMgr, dataMgr);
 		reg_manager.createMovieGoerAccount();
         dataMgr.save();
@@ -227,6 +231,7 @@ public class MainMenuUI {
 	 */
 	public void logout(AccountManager accountMgr) {
         DataManager dataMgr = new DataManager();
+		dataMgr.initialize();
 		accountMgr.setActiveAccount(null);
 		accountMgr.setMovieGoerLoggedIn(false);
 		accountMgr.setAdminLoggedIn(false);
@@ -240,6 +245,7 @@ public class MainMenuUI {
 	 */ 
 	public void updateAccountSetting(AccountManager accountMgr) {
         DataManager dataMgr = new DataManager();
+		dataMgr.initialize();
 		AccountSettingUI ac_ui= new AccountSettingUI(accountMgr, dataMgr);
 		ac_ui.main();
         dataMgr.save();
@@ -250,6 +256,7 @@ public class MainMenuUI {
 	 */
 	public void exit(AccountManager accountManager) {
         DataManager dataMgr = new DataManager();
+		dataMgr.initialize();
 		System.out.println("Thank you for using MOBLIMA!");
 		System.exit(0);
         dataMgr.save();
@@ -262,9 +269,11 @@ public class MainMenuUI {
     private void start(){
          AccountManager accountMgr = new AccountManager();
 		 DataManager dataMgr = new DataManager();
+		 dataMgr.initialize();
          AdminAccount temp = new AdminAccount("firstuser","helloworld","anon@gmail.com", 1234,AccountType.ADMIN);
          dataMgr.addAdminAccount(temp);
          dataMgr.save();
+		 
     }
 
 	
