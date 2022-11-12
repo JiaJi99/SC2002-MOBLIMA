@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a Holiday for the system to referenced
- * Mainly used to determine any markup in the price of ticket(s)
+ * Holiday ticket price will share with weekend prices
  */
 @SuppressWarnings("serial")
 public class Holiday implements Serializable {
@@ -36,7 +36,7 @@ public class Holiday implements Serializable {
     
     
     /** 
-     * Change the date of this Holiday
+     * Set the date of this Holiday
      * @param holidayDate   this Holiday's new date
      */
     public void setHolidayDate(LocalDate holidayDate) {
@@ -45,7 +45,7 @@ public class Holiday implements Serializable {
 
     
     /** 
-     * Converting this Holiday's date to a string format for readability reason
+     * Get this Holiday's date in a string format for readability
      * @return String   another format of this Holiday's date
      */
     public String getHolidayDateToString(){
