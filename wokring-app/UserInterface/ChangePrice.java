@@ -12,7 +12,7 @@ public class ChangePrice {
     Scanner sc= new Scanner(System.in);
     /**
      * To display change price UI
-     * User to input agecategory to update
+     * User to input price parameter to update
      * User to input new price
      * If input are vaild write new price to database
      */
@@ -23,7 +23,7 @@ public class ChangePrice {
         
 
         System.out.println("Choose option to chagne price of category");
-        System.out.println("1. Student \n 2. Adult \n3. Senior \n 4.Weekend\n5.After 6 pm \n 6. 3D movies \n 7. Configure holiday dates");
+        System.out.println("1. Student \n 2. Adult \n3. Senior \n 4.Weekend & Holiday\n5.After 6 pm \n 6. 3D movies \n 7. Configure holiday dates");
         int option ;
         option = sc.nextInt();
         double  newPrice ;
