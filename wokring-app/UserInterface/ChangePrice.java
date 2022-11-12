@@ -1,11 +1,15 @@
 package UserInterface;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 import BaseClasses.Price;
+import ManagerClasses.HolidaysCtrl;
 import ManagerClasses.PriceCtrl;
 
 public class ChangePrice {
-    
+    Scanner sc= new Scanner(System.in);
     /**
      * To display change price UI
      * User to input agecategory to update
@@ -13,13 +17,13 @@ public class ChangePrice {
      * If input are vaild write new price to database
      */
         public void changePriceMethod(){
-        Scanner sc= new Scanner(System.in);
+        
         PriceCtrl priceCtrl = new PriceCtrl();
         Price oldPrice = priceCtrl.read();
         
 
         System.out.println("Choose option to chagne price of category");
-        System.out.println("1. Student \n 2. Adult \n3. Senior \n 4.Weekend/Holiday\n5.After 6 pm \n 6. 3D movies");
+        System.out.println("1. Student \n 2. Adult \n3. Senior \n 4.Weekend\n5.After 6 pm \n 6. 3D movies \n 7. Configure holiday dates");
         int option ;
         option = sc.nextInt();
         double  newPrice ;
@@ -64,7 +68,7 @@ public class ChangePrice {
             break;
 
             case 4 : 
-            System.out.println("Enter new weekend & holiday price");
+            System.out.println("Enter new weekend price");
             // double  newPrice ;
             newPrice = sc.nextDouble();
             if (newPrice<0){
@@ -102,7 +106,12 @@ public class ChangePrice {
                 priceCtrl.changePrice(oldPrice,PriceCtrl._3D,newPrice);
             }
             break;
-
+            case 7: // holiday date configure 
+            HolidaysCtrl holidaysCtrl = new HolidaysCtrl() ;
+            LocalDate inputDate = getDateFromUser(); 
+            holidaysCtrl.create(inputDate);
+            System.out.println("Holiday date recorded");
+            break;
             default : 
             System.out.println("Wrong option , terminating update, returning ");
             return;
@@ -110,4 +119,22 @@ public class ChangePrice {
 
         sc.close();
     }
+
+    public  LocalDate getDateFromUser(){
+        LocalDate result = null;
+        String date;
+        boolean validInput = false;
+        while(!validInput){
+            try{
+                date = sc.nextLine();
+                result = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                validInput = true;
+            }
+            catch(DateTimeParseException e){
+                System.out.println("Must be of pattern DD/MM/YYYY!");
+            }
+        }
+        return result;
+    }
+
 }
