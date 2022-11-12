@@ -19,7 +19,7 @@ public class ChangePrice {
         
 
         System.out.println("Choose option to chagne price of category");
-        System.out.println("1. Student \n 2. Adult \n3. Senior \n 4.Weekend\n5.After 6 pm \n 6. 3D movies");
+        System.out.println("1. Student \n 2. Adult \n3. Senior \n 4.Weekend/Holiday\n5.After 6 pm \n 6. 3D movies");
         int option ;
         option = sc.nextInt();
         double  newPrice ;
@@ -64,7 +64,7 @@ public class ChangePrice {
             break;
 
             case 4 : 
-            System.out.println("Enter new weekend price");
+            System.out.println("Enter new weekend & holiday price");
             // double  newPrice ;
             newPrice = sc.nextDouble();
             if (newPrice<0){
