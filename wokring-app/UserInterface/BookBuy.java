@@ -55,27 +55,41 @@ public class BookBuy {
             System.out.print(i+1+")");
             System.out.print(" "+cinplexString + "\n");
         } 
+        System.out.println("-------------------");
+
         System.out.println("Enter 0 to return to main menu page");
+        System.out.println("-------------------");
+
         // int option = -1;
         option= sc.nextInt();
 
-        switch(option){
-            case 0: System.out.print("Terminating book, retuning to main menu");
-                    return;
+        // switch(option){
+        //     case 0: System.out.print("Terminating book, retuning to main menu");
+        //             return;
 
 
-        }
+        // }
 
-        if (option<0 || option>cineplexList.size() ){
+        if (option<=0 || option>cineplexList.size() ){
             System.out.print("Terminating book, retuning to main menu");
+            System.out.println("-------------------");
+
             return;
         }
         else{
             Cineplex chosenCineplex = cineplexList.get(option-1);
             tempCinemasList = cinmeasWithActiveSession(chosenCineplex.getCineplexName());
             if (tempCinemasList.size()==0){
-                System.out.println("Sorry no shows running or planned in the chosen cinplex\n Please choose another option  ");
-                bookbuyMethod();
+                System.out.println("Sorry no shows right now");
+                System.out.println("Either all over for the above cinema");
+                System.out.println("Please check later again");
+
+
+
+
+                System.out.println("-------------------");
+                
+                // bookbuyMethod();
                 return;
             }
             else{
@@ -109,10 +123,12 @@ public class BookBuy {
             successSeat = sessionsCtrl.assignSeat(giveSeatPlan,id,chosenSession.getId());
             if(successSeat==false){
                 System.out.println("Unsuccessful booking due to seat booking error");
-                break;
+                return;
 
             }
         }
+
+
         // creating the transaction and saving it ;
         String name , emial , mobileNumber;
         System.out.println("Enter details to confirm and sotre stransaction\n Enter name");
@@ -144,20 +160,33 @@ public class BookBuy {
          double individualPrice =0;
          for (int i =1;i<=numTickets;i++){
             System.out.println("Ticket number "+i);
+            System.out.println("-----------");
+
             boolean validInput = false;
             while(validInput==false){
                 System.out.println("Enter age  :");
+                System.out.println("-----------");
+                
                 age = sc.nextInt();
+                if (age>0){
+                    validInput = true;
+                }
                 if (chosenSession!= null)
                 individualPrice = priceCtrl.calPrice(chosenSession,age,priceCurrent);
                 
                 totalprice+=individualPrice;
                 System.out.println("Price of this ticket is :"+individualPrice);
+                System.out.println("-----------");
+
+                
+
             }
          }
+         System.out.println("-----------");
 
          System.out.println("Total Price of tickets is :"+totalprice);
          int chooseOption = -1;
+         System.out.println("-----------");
 
          System.out.println("Enter 1 to procced to transaction");
          chooseOption = sc.nextInt();
@@ -165,6 +194,8 @@ public class BookBuy {
             createSeatStoreTrans();
          }
          else {
+            System.out.println("-----------");
+
             System.out.println("Terminating purchase, going back");
             return;
          }
@@ -200,7 +231,7 @@ public class BookBuy {
                 }
             }
         }
-        System.out.println("Chosen session not avaliable");
+      
 
     }
 
@@ -211,7 +242,13 @@ public class BookBuy {
         ArrayList<Cinemas> returnCinemasList= new ArrayList<Cinemas>();
         ArrayList<Cinemas> cinemaList  = cinemasController.readByCineplexName(nameCineplex);
         movieName ="";
-        System.out.println("\n\nSearch using movie name for active shows\n Enter movie name");
+        System.out.println("-------------------");
+
+        System.out.println("\nSearch using movie name for active shows");
+        System.out.println("-------------------");
+        System.out.println("Enter movie name :\n");
+
+
         movieName = getStringFromUser();
         
         Sessions tempSession;
@@ -225,23 +262,35 @@ public class BookBuy {
                 tempSession = curCinema.getShowtimes().get(i);
                 String moiveNameTemp = tempSession.getMovie().getTitle();
                 if (moiveNameTemp.equals(movieName) && (printedCinemaCode==false)){
-                    System.out.println(movieName+" shows available :");
+                    System.out.println(movieName+"  available :");
+                    System.out.println("-----------");
                     System.out.println("Cinema code :" +curCinema.getCinemaCode());
+                printedCinemaCode = true;
+                  
 
                 }
-                printedCinemaCode = true;
-                System.out.println("\nShow timing : "+tempSession.getSessionDateTime());
+
+                if (moiveNameTemp.equals(movieName) && (printedCinemaCode==false)){
                 
+                DateTimeFormatter tempformat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+                String tempDateString = tempSession.getSessionDateTime().format(tempformat);
+                // System.out.println("\nShow timing : "+tempSession.getSessionDateTime());
+                System.out.println("-----------");
+                System.out.println("\nShow timing :  "+tempDateString);
+                
+                returnCinemasList.add(curCinema);
+
+                // System.out.println("================================");
+                }
 
             }
 
-            returnCinemasList.add(curCinema);
         }
         if (returnCinemasList.size()==0){
             System.out.println("Sorry no shows right now, returning..");
         }
         else 
-        System.out.println("====All shows listed =====");
+        System.out.println("====All Shows Listed Above=====");
         
         return returnCinemasList;
     }

@@ -23,8 +23,14 @@ public class ChangePrice {
         
 
         System.out.println("Choose option to chagne price of category");
+        System.out.println("-----------------------");
+
+
         System.out.println("1. Student \n2. Adult \n3. Senior \n4. Weekend & Holiday\n5. After 6 pm \n6. 3D movies \n7. Configure holiday dates");
         int option ;
+
+        System.out.println("-----------------------");
+
         option = sc.nextInt();
         double  newPrice ;
         switch(option){

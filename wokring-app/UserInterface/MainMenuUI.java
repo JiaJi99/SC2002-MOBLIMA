@@ -10,16 +10,20 @@ import java.lang.System.*;
 
 public class MainMenuUI {
 	public static Scanner sc = new Scanner(System.in);
-	
+	private AccountManager accountMgr;
+	private DataManager dataMgr;
+
 
 	/**
 	 * Main function to start the moblima program
 	 */
 	public MainMenuUI() {
-		start();
-		firstRunDataInput();
 		
-        
+		firstRunDataInput();
+		this.accountMgr = new AccountManager();
+		this.dataMgr = new DataManager();
+		dataMgr.initialize();
+		start();
     }
 	
 	/**
@@ -28,16 +32,16 @@ public class MainMenuUI {
 	 * Display moviegoer interface
 	 */
 	public void main() {
-         AccountManager accountMgr = new AccountManager();
+        //  AccountManager accountMgr = new AccountManager();
         //  DataManager dataMgr = new DataManager();
 
 		do {
-			if (accountMgr.getMovieGoerLoggedIn() == false && accountMgr.getAdminLoggedIn() == false)
-				displayUI_Main(accountMgr);
-			else if (accountMgr.getMovieGoerLoggedIn() == true)
-				displayUI_MovieGoer( accountMgr);
+			if (this.accountMgr.getMovieGoerLoggedIn() == false && this.accountMgr.getAdminLoggedIn() == false)
+				displayUI_Main(this.accountMgr);
+			else if (this.accountMgr.getMovieGoerLoggedIn() == true)
+				displayUI_MovieGoer( this.accountMgr);
 			else 
-				displayUI_Admin( accountMgr);	
+				displayUI_Admin( this.accountMgr);	
 		} while (true);
 	}
 	
@@ -111,24 +115,27 @@ public class MainMenuUI {
 		}	while (choice<1 || choice>7);
 			
 		switch(choice) {
-			case 1: login(accountMgr);
+			case 1: login(this.accountMgr);
 					break;
-			case 2: register(accountMgr);
+			case 2: register(this.accountMgr);
 					break;
 			case 3: MoviesCtrl moviesCtrlTemp = new MoviesCtrl();
 					ArrayList<Movie> availableMovies = moviesCtrlTemp.readAvailableMovies();
+					System.out.println("--------------------");
+					
+					System.out.println("Currently Showing are :");
 					for (int mo = 0;mo<availableMovies.size();mo++){
 						System.out.println("Title : "+ availableMovies.get(mo).getTitle());
 					}
 					System.out.println("------------------------");
 					 break;
 			case 4: ViewMovieTop5UI tempNew = new ViewMovieTop5UI();
-                    tempNew.listTop5(accountMgr);
+                    tempNew.listTop5(this.accountMgr);
 					break;
 			case 5:	MovieSearchUI movieSearchUI = new MovieSearchUI();
 					movieSearchUI.main();
 					break;
-			case 6: exit(accountMgr);
+			case 6: exit(this.accountMgr);
 					break;	
 			case 7 : MovieBookingViewUI movieBookingViewUI = new MovieBookingViewUI();
 						movieBookingViewUI.main();
@@ -143,7 +150,7 @@ public class MainMenuUI {
 	public void displayUI_MovieGoer(AccountManager accountMgr) {
 		int choice;
 		// Scanner sc = new Scanner(System.in);
-		displayChoices_MovieGoer(accountMgr);
+		displayChoices_MovieGoer(this.accountMgr);
 		do {
 			System.out.println("Enter your choice.");
 			choice = getIntFromUser();
@@ -154,21 +161,24 @@ public class MainMenuUI {
 		}	while (choice<1 || choice>9);
 		
 		switch(choice) {
-		case 1: logout(accountMgr);
+		case 1: logout(this.accountMgr);
 				break;
-		case 2: updateAccountSetting(accountMgr);
+		case 2: updateAccountSetting(this.accountMgr);
 				break;
-		case 3: viewHistory(accountMgr);
+		case 3:
+		//  viewHistory(this.accountMgr);
+				MovieBookingViewUI tViewUI = new MovieBookingViewUI();
+				tViewUI.displayAllTransactions_MovieBooking(this.accountMgr.getActiveAccount().getEmail());
 				 break;
 		case 4: ViewMovieTop5UI tempNew = new ViewMovieTop5UI();
-                tempNew.listTop5(accountMgr);
+                tempNew.listTop5(this.accountMgr);
 				break;
-        case 5:	addReview(accountMgr);
+        case 5:	addReview(this.accountMgr);
 				break;                
         case 6: BookBuy tempBookBuy = new BookBuy();
 				tempBookBuy.bookbuyMethod();
 				break;		
-        case 7:	exit(accountMgr);
+        case 7:	exit(this.accountMgr);
 				break;
 		case 8: MovieDetailViewUI movieDetailViewUI = new MovieDetailViewUI();
 				movieDetailViewUI.main();
@@ -186,7 +196,7 @@ public class MainMenuUI {
 	public void displayUI_Admin(AccountManager accountMgr) {
 		int choice;
 		// Scanner sc = new Scanner(System.in);
-		displayChoices_Admin(accountMgr);
+		displayChoices_Admin(this.accountMgr);
 		do {
 			System.out.println("Enter your choice.");
 			choice = getIntFromUser();
@@ -197,12 +207,12 @@ public class MainMenuUI {
 		}	while (choice<1 || choice>9);
 		
 		switch(choice) {
-		case 1: logout(accountMgr);
+		case 1: logout(this.accountMgr);
 				break;
-		case 2: updateAccountSetting(accountMgr);
+		case 2: updateAccountSetting(this.accountMgr);
 				break;
 		case 3: ViewMovieTop5UI tempNew = new ViewMovieTop5UI();
-                 tempNew.listTop5(accountMgr);
+                 tempNew.listTop5(this.accountMgr);
 				 break;
 		case 4: UpdateRCMovie tempUpdateClass = new UpdateRCMovie();
                 tempUpdateClass.updateMovieFunction();
@@ -210,7 +220,7 @@ public class MainMenuUI {
 		case 5:	UpdateRCShowtimeUI updateRCShowtimeUI = new UpdateRCShowtimeUI();
 				updateRCShowtimeUI.displayUI_UpdateRCSession();
 				break;
-		case 6: exit(accountMgr);
+		case 6: exit(this.accountMgr);
 				break;	
 
         case 7: ChangePrice chnagePriceTemp = new ChangePrice();
@@ -250,11 +260,12 @@ public class MainMenuUI {
 	 */
 	public void login(AccountManager accountMgr) {
 
-        DataManager dataMgr = new DataManager();
-		dataMgr.initialize();
-		LoginManager log_manager = new LoginManager(accountMgr, dataMgr);
+        // DataManager dataMgr = new DataManager();
+		// dataMgr.initialize();
+		LoginManager log_manager = new LoginManager(accountMgr, this.dataMgr);
 		log_manager.loginUser();
-		dataMgr.save();
+		// dataMgr.save();
+
 	}
 	
 	/**
@@ -262,11 +273,11 @@ public class MainMenuUI {
 	 */
 	public void register(AccountManager accountMgr) {
 
-        DataManager dataMgr = new DataManager();
-		dataMgr.initialize();
-		RegistrationManager reg_manager = new RegistrationManager(accountMgr, dataMgr);
+        // DataManager dataMgr = new DataManager();
+		// dataMgr.initialize();
+		RegistrationManager reg_manager = new RegistrationManager(accountMgr, this.dataMgr);
 		reg_manager.createMovieGoerAccount();
-        dataMgr.save();
+        // dataMgr.save();
 
 	}
 	
@@ -274,13 +285,13 @@ public class MainMenuUI {
 	 * To logout
 	 */
 	public void logout(AccountManager accountMgr) {
-        DataManager dataMgr = new DataManager();
-		dataMgr.initialize();
-		accountMgr.setActiveAccount(null);
-		accountMgr.setMovieGoerLoggedIn(false);
-		accountMgr.setAdminLoggedIn(false);
+        // DataManager dataMgr = new DataManager();
+		// dataMgr.initialize();
+		this.accountMgr.setActiveAccount(null);
+		this.accountMgr.setMovieGoerLoggedIn(false);
+		this.accountMgr.setAdminLoggedIn(false);
 		System.out.println("Logged out successfully.");
-        dataMgr.save();
+        // dataMgr.save();
 
 	}
 	
@@ -288,22 +299,23 @@ public class MainMenuUI {
 	 * To update account setting 
 	 */ 
 	public void updateAccountSetting(AccountManager accountMgr) {
-        DataManager dataMgr = new DataManager();
-		dataMgr.initialize();
-		AccountSettingUI ac_ui= new AccountSettingUI(accountMgr, dataMgr);
+		// DataManager dataMgr = new DataManager();
+		// dataMgr.initialize();
+		AccountSettingUI ac_ui= new AccountSettingUI(this.accountMgr, this.dataMgr);
 		ac_ui.main();
-        dataMgr.save();
+        // dataMgr.save();
 	}
 	
 	/**
 	 * To exit and end moblima 
 	 */
 	public void exit(AccountManager accountManager) {
-        DataManager dataMgr = new DataManager();
-		dataMgr.initialize();
+        // DataManager dataMgr = new DataManager();
+		// dataMgr.initialize();
 		System.out.println("Thank you for using MOBLIMA!");
+        this.dataMgr.save();
+
 		System.exit(0);
-        dataMgr.save();
 	}
 
 
@@ -311,46 +323,46 @@ public class MainMenuUI {
 	 * To start moblima
 	 */
     private void start(){
-         AccountManager accountMgr = new AccountManager();
-		 DataManager dataMgr = new DataManager();
-		 dataMgr.initialize();
+        //  AccountManager accountMgr = new AccountManager();
+		//  DataManager dataMgr = new DataManager();
+		//  dataMgr.initialize();
          AdminAccount temp = new AdminAccount("firstuser","helloworld","anon@gmail.com", 1234,AccountType.ADMIN);
          dataMgr.addAdminAccount(temp);
-         dataMgr.save();
+        //  dataMgr.save();
 		 
     }
 
 	
-	/**
-	 * To view movie goer history of transcation
-	 */
-    public void viewHistory(AccountManager accountMgr){
+	// /**
+	//  * To view movie goer history of transcation
+	//  */
+    // public void viewHistory(AccountManager accountMgr){
     
-        Account viewAccount = accountMgr.getActiveAccount();
-        TransactionsCtrl transCtrl = new TransactionsCtrl();
-        String userEmail= viewAccount.getEmail();
-        System.out.println("Booking hisotry for account :\n");
-        ArrayList<Transaction> tList = transCtrl.readByMovieGoerUsername(userEmail);
-        if (tList.size()==0){
-            System.out.println("No history found for user :"+userEmail);
-        }   
-        else {
-            for (int i =0;i<tList.size();i++){
-                Transaction tempTransaction = tList.get(i);
-                System.out.print("\n");
-                tempTransaction.toString();
-            }
-        }    
-        int exitNum =-1;
-        // Scanner sc = new Scanner(System.in);
-         do {
-            System.out.println("Press 0 to exit ");
-            exitNum = getIntFromUser();
-         }
-        while (exitNum!=0);
+    //     Account viewAccount = this.accountMgr.getActiveAccount();
+    //     TransactionsCtrl transCtrl = new TransactionsCtrl();
+    //     String userEmail= viewAccount.getEmail();
+    //     System.out.println("Booking hisotry for account :\n");
+    //     ArrayList<Transaction> tList = transCtrl.readByMovieGoerUsername(userEmail);
+    //     if (tList.size()==0){
+    //         System.out.println("No history found for user :"+userEmail);
+    //     }   
+    //     else {
+    //         for (int i =0;i<tList.size();i++){
+    //             Transaction tempTransaction = tList.get(i);
+    //             System.out.print("\n");
+    //             tempTransaction.toString();
+    //         }
+    //     }    
+    //     int exitNum =-1;
+    //     // Scanner sc = new Scanner(System.in);
+    //      do {
+    //         System.out.println("Press 0 to exit ");
+    //         exitNum = getIntFromUser();
+    //      }
+    //     while (exitNum!=0);
 
 
-    }
+    // }
 	
 	/**
 	 * Calls update interface
@@ -369,16 +381,15 @@ public class MainMenuUI {
 		ArrayList<Cinemas> inputCinemasList3 = new ArrayList<Cinemas>();
 
 		CineplexController cineplexController = new CineplexController();
-		MoviesCtrl moviesCtrl = new MoviesCtrl();
-		inputCinemasList1.add(new Cinemas("CR", new SeatPlan(8, 8)));
-		inputCinemasList1.add(new Cinemas("KV", new SeatPlan(8, 8)));
-		inputCinemasList1.add(new Cinemas("LW", new SeatPlan(8, 8)));
-		inputCinemasList3.add(new Cinemas("DR", new SeatPlan(8, 8)));
-		inputCinemasList3.add(new Cinemas("PV", new SeatPlan(8, 8)));
-		inputCinemasList3.add(new Cinemas("OT", new SeatPlan(8, 8)));
-		inputCinemasList2.add(new Cinemas("EZ", new SeatPlan(8, 8)));
-		inputCinemasList2.add(new Cinemas("ID", new SeatPlan(8, 8)));
-		inputCinemasList2.add(new Cinemas("TI", new SeatPlan(8, 8)));
+		inputCinemasList1.add(new Cinemas("CR", new SeatPlan(10,10)));
+		inputCinemasList1.add(new Cinemas("KV", new SeatPlan(10,10)));
+		inputCinemasList1.add(new Cinemas("LW", new SeatPlan(10,10)));
+		inputCinemasList3.add(new Cinemas("DR", new SeatPlan(10,10)));
+		inputCinemasList3.add(new Cinemas("PV", new SeatPlan(10,10)));
+		inputCinemasList3.add(new Cinemas("OT", new SeatPlan(10,10)));
+		inputCinemasList2.add(new Cinemas("EZ", new SeatPlan(10,10)));
+		inputCinemasList2.add(new Cinemas("ID", new SeatPlan(10,10)));
+		inputCinemasList2.add(new Cinemas("TI", new SeatPlan(10,10)));
 
 		if(cineplexController.read().size()==0){
 			cineplexController.create("Jurong East Cineplex", inputCinemasList1);
@@ -397,7 +408,7 @@ public class MainMenuUI {
 
         String movieTitle;
         String userComment ;
-        Account tempMovieGoerAcc = accountMgr.getActiveAccount();
+        Account tempMovieGoerAcc = this.accountMgr.getActiveAccount();
         String username = tempMovieGoerAcc.getUserName();
 
         System.out.println("Search for movie to create review:\nPlease enter title");

@@ -93,13 +93,19 @@ public class UpdateRCShowtimeUI {
 		SessionsCtrl sessionsCtrl = new SessionsCtrl();
 		// Scanner sc = new Scanner(System.in);
 		ArrayList<Sessions> sessionsList =  sessionsCtrl.read();
+		System.out.println("-------------------");
+
 		if (sessionsList.size()==0)
 			System.out.println("Sorry, no sessions have been created yet.");
+
+
 		else {
 			for (int i=0; i<sessionsList.size(); i++)
-				System.out.println("\n\nID : "+sessionsList.get(i).getId()
-								  +"\n Movie Title : "+sessionsList.get(i).getMovie().getTitle()
-								  +"\n Date and Time : "+sessionsList.get(i).getSessionDateTimeToString());
+				System.out.println("\n\nSession ID : "+sessionsList.get(i).getId()
+								  +"\nMovie Title : "+sessionsList.get(i).getMovie().getTitle()
+								  +"\nDate and Time : "+sessionsList.get(i).getSessionDateTimeToString());
+								  System.out.println("-------------------");
+
 			System.out.println("Enter session ID to update/edit");
 			int sessionID = sc.nextInt();
 			Sessions s;
@@ -114,6 +120,8 @@ public class UpdateRCShowtimeUI {
                   System.out.println("Sorry, session not found. Returning to main menu");
                   return ; 
 			}
+			System.out.println("-------------------");
+
             System.out.printf("Choose option to update session by\n:" + 
             "1. Movie\n" +
             "2. Session Date and Time\n" +
@@ -165,7 +173,7 @@ public class UpdateRCShowtimeUI {
 			System.out.println("Sorry, no sessions have been created yet.");
 		else {
 			for (int i=0; i<sessionsList.size(); i++)
-				System.out.println("\n\nID : "+sessionsList.get(i).getId()
+				System.out.println("\n\nSession ID : "+sessionsList.get(i).getId()
 								  +"\n Movie Title : "+sessionsList.get(i).getMovie().getTitle()
 								  +"\n Movie ID : "+sessionsList.get(i).getMovie().getID()
 								  +"\n Date and Time : "+sessionsList.get(i).getSessionDateTimeToString());
