@@ -50,7 +50,9 @@ public class ViewMovieTop5UI {
                 int sales = 0;
                 Movie a = movieList.get(i);
                 for (int j =0;j<transList.size();j++){
-                    if (transList.get(j).getMovie().equals(a)) sales++;
+                    // if (transList.get(j).getMovie().equals(a)) sales++;
+					if (transList.get(i).getMovie().getTitle().equals(a.getTitle())) sales++;
+
 
                 }
                 
@@ -98,10 +100,10 @@ class SortBySales implements Comparator<Movie> {
 		ArrayList<Transaction> transList = transCtrl.read();
 		int salesA = 0, salesB = 0;
 		for (int i = 0; i < transList.size(); i++) {
-			if (transList.get(i).getMovie().equals(a)) salesA++;
-			if (transList.get(i).getMovie().equals(b)) salesB++;
+			if (transList.get(i).getMovie().getTitle().equals(a.getTitle())) salesA++;
+			if (transList.get(i).getMovie().getTitle().equals(b.getTitle())) salesB++;
 		}
-		return salesA - salesB;
+		return salesB - salesA;
 	}
 }
 

@@ -381,15 +381,15 @@ public class MainMenuUI {
 		ArrayList<Cinemas> inputCinemasList3 = new ArrayList<Cinemas>();
 
 		CineplexController cineplexController = new CineplexController();
-		inputCinemasList1.add(new Cinemas("CR", new SeatPlan(10,10)));
-		inputCinemasList1.add(new Cinemas("KV", new SeatPlan(10,10)));
-		inputCinemasList1.add(new Cinemas("LW", new SeatPlan(10,10)));
-		inputCinemasList3.add(new Cinemas("DR", new SeatPlan(10,10)));
-		inputCinemasList3.add(new Cinemas("PV", new SeatPlan(10,10)));
-		inputCinemasList3.add(new Cinemas("OT", new SeatPlan(10,10)));
-		inputCinemasList2.add(new Cinemas("EZ", new SeatPlan(10,10)));
-		inputCinemasList2.add(new Cinemas("ID", new SeatPlan(10,10)));
-		inputCinemasList2.add(new Cinemas("TI", new SeatPlan(10,10)));
+		inputCinemasList1.add(new Cinemas("CRQ", new SeatPlan(10,10)));
+		inputCinemasList1.add(new Cinemas("KVW", new SeatPlan(10,10)));
+		inputCinemasList1.add(new Cinemas("LWQ", new SeatPlan(10,10)));
+		inputCinemasList3.add(new Cinemas("DRD", new SeatPlan(10,10)));
+		inputCinemasList3.add(new Cinemas("PVC", new SeatPlan(10,10)));
+		inputCinemasList3.add(new Cinemas("OTF", new SeatPlan(10,10)));
+		inputCinemasList2.add(new Cinemas("EZF", new SeatPlan(10,10)));
+		inputCinemasList2.add(new Cinemas("IDF", new SeatPlan(10,10)));
+		inputCinemasList2.add(new Cinemas("TIS", new SeatPlan(10,10)));
 
 		if(cineplexController.read().size()==0){
 			cineplexController.create("Jurong East Cineplex", inputCinemasList1);

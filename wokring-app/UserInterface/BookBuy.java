@@ -241,12 +241,12 @@ public class BookBuy {
     public ArrayList<Cinemas> cinmeasWithActiveSession(String nameCineplex){
         ArrayList<Cinemas> returnCinemasList= new ArrayList<Cinemas>();
         ArrayList<Cinemas> cinemaList  = cinemasController.readByCineplexName(nameCineplex);
-        movieName ="";
+        // movieName ="";
         System.out.println("-------------------");
 
         System.out.println("\nSearch using movie name for active shows");
         System.out.println("-------------------");
-        System.out.println("Enter movie name :\n");
+        System.out.println("Enter movie name :");
 
 
         movieName = getStringFromUser();
@@ -259,7 +259,7 @@ public class BookBuy {
             printedCinemaCode = false;
             curCinema = cinemaList.get(i);
             for (int j = 0;j<curCinema.getShowtimes().size();j++){
-                tempSession = curCinema.getShowtimes().get(i);
+                tempSession = curCinema.getShowtimes().get(j);
                 String moiveNameTemp = tempSession.getMovie().getTitle();
                 if (moiveNameTemp.equals(movieName) && (printedCinemaCode==false)){
                     System.out.println(movieName+"  available :");
@@ -270,7 +270,7 @@ public class BookBuy {
 
                 }
 
-                if (moiveNameTemp.equals(movieName) && (printedCinemaCode==false)){
+                if (moiveNameTemp.equals(movieName)){
                 
                 DateTimeFormatter tempformat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
                 String tempDateString = tempSession.getSessionDateTime().format(tempformat);
@@ -280,7 +280,7 @@ public class BookBuy {
                 
                 returnCinemasList.add(curCinema);
 
-                // System.out.println("================================");
+                System.out.println("================================");
                 }
 
             }
