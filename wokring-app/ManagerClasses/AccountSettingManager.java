@@ -7,6 +7,7 @@ import BaseClasses.*;
 
 
 public class AccountSettingManager {
+	Scanner sc = new Scanner(System.in);
 	
 	/**
 	 * Manager that this manager will reference
@@ -37,7 +38,7 @@ public class AccountSettingManager {
 		Account currentAccount = accountMgr.getActiveAccount();
 		String existingUserName = currentAccount.getUserName();
 		String newUserName;
-		Scanner sc = new Scanner(System.in);
+		// Scanner sc = new Scanner(System.in);
 		System.out.println("Enter new username: ");
 		newUserName = sc.nextLine();
 		if (newUserName.equals(existingUserName)) {
@@ -60,8 +61,9 @@ public class AccountSettingManager {
 		Account currentAccount = accountMgr.getActiveAccount();
 		String existingPassword = currentAccount.getPassword();
 		String oldPassword, newPassword, re_newPassword;
-		Scanner sc = new Scanner(System.in);
+		// Scanner sc = new Scanner(System.in);
 		do {
+			// sc.nextLine();
 			System.out.println("Enter current password: ");
 			oldPassword = sc.nextLine();
 			if (!oldPassword.equals(existingPassword)) 
@@ -93,7 +95,7 @@ public class AccountSettingManager {
 		Account currentAccount = accountMgr.getActiveAccount();
 		String existingEmail = currentAccount.getEmail();
 		String newEmail;
-		Scanner sc = new Scanner(System.in);
+		// Scanner sc = new Scanner(System.in);
 		System.out.println("Enter new email: ");
 		newEmail = sc.nextLine();
 		if (newEmail.equals(existingEmail)) {
@@ -115,7 +117,7 @@ public class AccountSettingManager {
 		Account currentAccount = accountMgr.getActiveAccount();
 		int existingMobileNumber = currentAccount.getMobileNumber();
 		int newMobileNumber;
-		Scanner sc = new Scanner(System.in);
+		// Scanner sc = new Scanner(System.in);
 		System.out.println("Enter new phone number: ");
 		newMobileNumber = sc.nextInt();
 		if (newMobileNumber ==existingMobileNumber) {
@@ -135,9 +137,9 @@ public class AccountSettingManager {
 	 */
 	public void updateAge() {
 		MovieGoerAccount currentAccount = (MovieGoerAccount) accountMgr.getActiveAccount();
-		int existingAge = currentAccount.getMobileNumber();
+		int existingAge = currentAccount.getAge();
 		int newAge;
-		Scanner sc = new Scanner(System.in);
+		// Scanner sc = new Scanner(System.in);
 		System.out.println("Enter new age: ");
 		newAge = sc.nextInt();
 		if (newAge == existingAge) {
@@ -146,7 +148,7 @@ public class AccountSettingManager {
 			return;
 		}
 		else {
-			currentAccount.setMobileNumber(newAge);
+			currentAccount.setAge(newAge);
 			System.out.println("Age has been updated.");
 		}
 	}
